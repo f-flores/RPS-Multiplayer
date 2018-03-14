@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Multiplayer RPS</title>
+  <!-- jQuery -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+  <!-- jQuery -->
+  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <!-- more ajax and boostrap js libraries -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+  <link rel="stylesheet" href="./assets/css/style.css">
+</head>
+<body>
+  <header class="d-flex flex-row justify-content-center">
+    <h1>Rock Paper Scissors</h1>
+  </header>
+
+  <div class="d-flex flex-row justify-content-center">
+    <form id="topic-form" class="form-inline ">
+      <label for="player-name"></label>
+      <input id="player-name" class="form-control mr-sm-2" type="text" placeholder="Name..." aria-label="Start">
+      <button id="add-topic-btn" class="btn btn-outline-warning my-2 my-sm-0 mr-2" type="submit" value="Start">Start</button>
+    </form>
+  </div>
+  <br />
+
+  <div class="row">
+    <section class="offset-sm-2 col-sm-3">
+      <div class="card">
+        <div class="card-body">
+          <h5 class="card-title">Special title treatment</h5>
+          <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+        </div>
+      </div>
+    </section>
+    <section class="col-sm-3">
+      <div class="card">
+        <div class="card-body">
+          <h5 class="card-title">Special title treatment</h5>
+          <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+        </div>
+      </div>
+    </section>
+    <section class="col-sm-3">
+      <div class="card">
+        <div class="card-body">
+          <h5 class="card-title">Special title treatment</h5>
+          <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+        </div>
+      </div>
+    </section>
+  </div>
+  <p></p>
+
+  <div class="d-flex flex-row justify-content-center">
+    <section class="col-sm-8">
+      <div class="card">
+        <div class="card-body">
+          <h5 class="card-title">Chat section</h5>
+          <p class="card-text">content chat</p>
+        </div>
+      </div>
+    </section>
+  </div>
+  <p></p>
+
+
+  <form id="chat-form" class="form-inline justify-content-center">
+      <label for="send-chat"></label>
+      <input id="send-chat" class="form-control my-2 my-sm-1 mr-sm-1" type="text" placeholder="text..." aria-label="send-chat">
+    <button id="send-chat-btn" class="btn btn-outline-warning my-2 my-sm-0 mr-2" type="submit" value="Send">Send</button>
+  </form>
+
+ 
+  <!-- Firebase Reference -->
+  <script src="https://www.gstatic.com/firebasejs/3.7.1/firebase.js"></script>
+  <!-- Local Scripts -->
+  <script type="text/javascript" src="./assets/js/globals.js"></script>
+  <script type="text/javascript" src="./assets/js/multi-rps.js"></script>
+</body>
+</html>
