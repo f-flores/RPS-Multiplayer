@@ -22,17 +22,20 @@
   <div class="d-flex flex-row justify-content-center">
     <form id="player-form" class="form-inline ">
       <label for="player-name"></label>
-      <input id="player-name" class="form-control mr-sm-2" type="text" placeholder="Name..." aria-label="Start">
+      <input id="player-name" class="form-control mr-sm-2" type="text" placeholder="Enter name..." aria-label="Start">
       <button id="start-btn" class="btn btn-outline-warning my-2 my-sm-0 mr-2" type="submit">Start</button>
     </form>
   </div>
   <br />
 
+  <span id="player-welcome-message"></span>
+  <span id="player-state-message"></span>
+
   <div class="row">
     <section class="offset-sm-2 col-sm-3">
       <div class="card">
         <div class="card-body">
-          <h5 class="card-title">Special title treatment</h5>
+          <h5 class="card-title" id="player1">Waiting for Player 1...</h5>
           <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
         </div>
       </div>
@@ -48,7 +51,7 @@
     <section class="col-sm-3">
       <div class="card">
         <div class="card-body">
-          <h5 class="card-title">Special title treatment</h5>
+          <h5 class="card-title" id="player2">Waiting for Player 2...</h5>
           <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
         </div>
       </div>
