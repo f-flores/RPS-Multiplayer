@@ -15,11 +15,14 @@ var rpsGame = {
   "losses": 0,
   "wins": 0,
   isPlayer1selected() {
-    var dbPath = "/players/1";
+    var dbPath = "/players/";
 
     database.ref(dbPath).once("value").
       then((snapshot) => {
+        var player1Bool = snapshot.child("1").exists();
+
         console.log("isPlayer1selected: " + JSON.stringify(snapshot));
+        console.log("player1Bool: " + player1Bool);
         this.player1selected = snapshot.exists();
         console.log("this.player1selected: " + this.player1selected);
     });
@@ -27,11 +30,14 @@ var rpsGame = {
     return this.player1selected;
   },
   isPlayer2selected() {
-    var dbPath = "/players/2";
+    var dbPath = "/players/";
 
     database.ref(dbPath).once("value").
       then((snapshot) => {
+        var player2Bool = snapshot.child("2").exists();
+
         console.log("isPlayer2selected: " + JSON.stringify(snapshot));
+        console.log("player2Bool: " + player2Bool);
         this.player2selected = snapshot.exists();
         console.log("this.player2selected: " + this.player2selected);
     });
