@@ -16,6 +16,8 @@ $(document).ready(() => {
   // initializes rpsGame
   function initGame() {
     console.log("in initGame()");
+    rpsGame.isPlayer1selected = rpsGame.isPlayer1selected();
+    rpsGame.isPlayer2selected = rpsGame.isPlayer2selected();
  // database.ref().push({
  // "players": "",
  // "dateAdded": firebase.database.ServerValue.TIMESTAMP
@@ -113,6 +115,7 @@ $(document).ready(() => {
                                     trim();
     console.log("playerName: " + playerName);
     rpsGame.isPlayer1selected = rpsGame.isPlayer1selected();
+    rpsGame.isPlayer2selected = rpsGame.isPlayer2selected();
     console.log("isPlayer1selected() in #start-btn: " + rpsGame.isPlayer1selected());
 
     if (rpsGame.areBothPlayersSelected()) {
