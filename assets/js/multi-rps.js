@@ -123,10 +123,10 @@ $(document).ready(() => {
         // setup player1screen
         setupPlayer1(playerName);
     } else if (rpsGame.isPlayer1selected() && !rpsGame.isPlayer2selected()) {
-        firebase.auth().signInAnonymously().
-          then((user) => {
-          user.updateProfile({"displayName": playerName});
-        });
+       //  firebase.auth().signInAnonymously().
+       //   then((user) => {
+       //   user.updateProfile({"displayName": playerName});
+       // });
 
         // setup player2screen
         setupPlayer2(playerName);
