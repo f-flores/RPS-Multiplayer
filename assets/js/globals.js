@@ -23,7 +23,7 @@ var rpsGame = {
 
         console.log("isPlayer1selected: " + JSON.stringify(snapshot));
         console.log("player1Bool: " + player1Bool);
-        this.player1selected = snapshot.exists();
+        this.player1selected = snapshot.child("1").exists();
         console.log("this.player1selected: " + this.player1selected);
     });
 
@@ -38,7 +38,7 @@ var rpsGame = {
 
         console.log("isPlayer2selected: " + JSON.stringify(snapshot));
         console.log("player2Bool: " + player2Bool);
-        this.player2selected = snapshot.exists();
+        this.player2selected = snapshot.child("2").exists();
         console.log("this.player2selected: " + this.player2selected);
     });
 
