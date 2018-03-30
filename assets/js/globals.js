@@ -45,29 +45,6 @@ var rpsGame = {
   }
 };
 
-var player1console = {
-  "item1": "",
-  "item2": "",
-  welcomeMsg(msg) {
-    $("#player-welcome-message").html(msg);
-  },
-  playerEventMsg(msg) {
-    $("#player-state-message").html(msg);
-  },
-  startSection(display) {
-    if (display === "on") {
-      $("#player-form").show();
-    } else if (display === "off") {
-      $("#player-form").hide();
-    }
-  }
-};
-
-var player2console = {
-  "item1": "",
-  "item2": ""
-};
-
 
 // Initialize Firebase
 var config = {
@@ -79,6 +56,28 @@ var config = {
   "messagingSenderId": "682358558557"
 };
 var database;
+
+function PlayerConsole(name, num) {
+  this.name = name;
+  this.playerNum = num;
+  // showP1Name() get player 1 name from database and display
+  // showP2Name() get player 2 name from database and display
+  this.displayName = () => {
+    $("#player1").text(this.name);
+  };
+  this.welcomeMsg = (msg) => {
+    $("#player-welcome-message").html("<p class=\"text-center\">" + msg + "</p>");
+  };
+  this.playerEventMsg = (msg) => {
+    $("#player-state-message").html(msg);
+  };
+  this.hideNameBtn = () => {
+    $("#player-form").hide();
+  };
+  this.showNameBtn = () => {
+    $("#player-form").show();
+  };
+}
 
 firebase.initializeApp(config);
 
