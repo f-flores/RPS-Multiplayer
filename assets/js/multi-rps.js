@@ -127,7 +127,7 @@ $(document).ready(() => {
     } else {
       // user signed out
       $("#btn-logout-player1").addClass("d-none");
-      window.location.reload();
+      // window.location.reload();
     }
   });
 
