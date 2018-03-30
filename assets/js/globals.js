@@ -15,7 +15,7 @@ var rpsGame = {
   "losses": 0,
   "wins": 0,
   isPlayer1selected() {
-    var dbPath = "/players/";
+    var dbPath = "players/";
 
     database.ref(dbPath).once("value").
       then((snapshot) => {
