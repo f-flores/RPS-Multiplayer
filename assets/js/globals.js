@@ -8,7 +8,7 @@ var rpsGame = {
   "opponent": "Waiting...",
   "choice": ["r", "p", "s"],
   "choiceVisible": false,
- // "player1selected": false,
+  "player1selected": this.isPlayer1selected(),
  //  "player2selected": false,
  // "bothPlayersSelected": false,
   "turn": 0,
