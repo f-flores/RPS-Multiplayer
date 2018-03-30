@@ -64,14 +64,40 @@ $(document).ready(() => {
           console.log("Errors handled: " + JSON.stringify(errorObject));
         }
       );
-      console.log("player1 at end of SetupPlayer1(): " + console.log(JSON.stringify(player1)));
+      console.log("player1 at end of SetupPlayer1(): " + JSON.stringify(player1));
     }
 
   // -----------------------------------------------------------------------------------------
-  // setupPlayer2Screen() displays player1 console
+  // setupPlayer2() displays player2 console
   //
-    function setupPlayer2Screen() {
+    function setupPlayer2(playerName) {
+      var dbPath;
+
       console.log("Player 2 screen");
+      player2 = new PlayerConsole(playerName, "2");
+      dbPath = "/players/2";
+      // $("#player1").text(playerName);
+      player2.displayName();
+
+      player2.hideNameBtn();
+      player2.welcomeMsg("Hi " + playerName + ", you are player " + player1.playerNum);
+      rpsGame.player2selected = true;
+
+
+      // setup player information
+      database.ref(dbPath).update(
+        {
+          "choice": "",
+          "losses": player2.losses,
+          playerName,
+          "wins": player2.wins
+        },
+        (errorObject) => {
+          console.log("Errors handled: " + JSON.stringify(errorObject));
+        }
+      );
+      console.log("player2 at end of SetupPlayer2(): " + JSON.stringify(player2));
+
     }
 
   // Capture Button Click
@@ -94,17 +120,16 @@ $(document).ready(() => {
                 then((user) => {
                 user.updateProfile({"displayName": playerName});
         });
-
         // setup player1screen
         setupPlayer1(playerName);
     } else if (rpsGame.isPlayer1selected() && !rpsGame.isPlayer2selected()) {
-        player2 = new PlayerConsole(playerName, "2");
-        // dbPath = "/players/2";
-        // player2.displayName();
-        // player2.hideNameBtn();
-        rpsGame.player2selected = true;
+        firebase.auth().signInAnonymously().
+          then((user) => {
+          user.updateProfile({"displayName": playerName});
+        });
+
         // setup player2screen
-        // setupPlayer2Screen();
+        setupPlayer2(playerName);
     }
 
 
