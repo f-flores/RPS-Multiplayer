@@ -80,7 +80,7 @@ $(document).ready(() => {
       player2.displayName();
 
       player2.hideNameBtn();
-      player2.welcomeMsg("Hi " + playerName + ", you are player " + player1.playerNum);
+      player2.welcomeMsg("Hi " + playerName + ", you are player " + player2.playerNum);
       rpsGame.player2selected = true;
 
 

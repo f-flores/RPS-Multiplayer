@@ -42,10 +42,11 @@ var rpsGame = {
         console.log("this.player2selected: " + this.player2selected);
     });
 
-    return this.player2selected;
+   // return this.player2selected;
+   return true;
   },
   areBothPlayersSelected() {
-    this.bothPlayersSelected = this.player1selected && this.player2selected;
+    this.bothPlayersSelected = this.isPlayer1selected() && this.isPlayer2selected();
 
     return this.bothPlayersSelected;
   }
@@ -71,7 +72,7 @@ function PlayerConsole(name, num) {
   // showP1Name() get player 1 name from database and display
   // showP2Name() get player 2 name from database and display
   this.displayName = () => {
-    $("#player1").text(this.name);
+    $("#player" + num.toString()).text(this.name);
   };
   this.welcomeMsg = (msg) => {
     $("#player-welcome-message").html("<p class=\"text-center\">" + msg + "</p>");
