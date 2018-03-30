@@ -8,7 +8,8 @@ var rpsGame = {
   "opponent": "Waiting...",
   "choice": ["r", "p", "s"],
   "choiceVisible": false,
-  "player1selected": this.isPlayer1selected(),
+  // "player1selected": undefined,
+  // "player2selected": undefined,
  //  "player2selected": false,
  // "bothPlayersSelected": false,
   "turn": 0,
@@ -19,10 +20,8 @@ var rpsGame = {
 
     database.ref(dbPath).once("value").
       then((snapshot) => {
-        var player1Bool = snapshot.child("1").exists();
 
         console.log("isPlayer1selected: " + JSON.stringify(snapshot));
-        console.log("player1Bool: " + player1Bool);
         this.player1selected = snapshot.child("1").exists();
         console.log("this.player1selected: " + this.player1selected);
     });
