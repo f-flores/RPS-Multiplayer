@@ -37,10 +37,34 @@ $(document).ready(() => {
   // }
 
   // -----------------------------------------------------------------------------------------
-  // setupPlayer1Screen() displays player1 console
+  // setupPlayer1() displays player1 console
   //
-    function setupPlayer1Screen() {
+    function setupPlayer1(playerName) {
+      var dbPath;
+
       console.log("Player 1 screen");
+      player1 = new PlayerConsole(playerName, "1");
+      dbPath = "/players/1";
+      // $("#player1").text(playerName);
+      player1.displayName();
+
+      player1.hideNameBtn();
+      player1.welcomeMsg("Hi " + playerName + ", you are player " + player1.playerNum);
+      rpsGame.player1selected = true;
+
+      // setup player information
+      database.ref(dbPath).update(
+        {
+          "choice": "",
+          "losses": player1.losses,
+          playerName,
+          "wins": player1.wins
+        },
+        (errorObject) => {
+          console.log("Errors handled: " + JSON.stringify(errorObject));
+        }
+      );
+      console.log("player1 at end of SetupPlayer1(): " + console.log(JSON.stringify(player1)));
     }
 
   // -----------------------------------------------------------------------------------------
@@ -54,24 +78,14 @@ $(document).ready(() => {
   initGame();
 
   $("#start-btn").on("click", (event) => {
-    var playerName,
-        dbPath,
-        losses = 0,
-        wins = 0;
+    var playerName;
 
     console.log("in #start-btn");
-
     event.preventDefault();
 
     playerName = $("#player-name").val().
                                     trim();
     console.log("playerName: " + playerName);
-
-
-    // .
-      // then((user) => {
-        // user.updateProfile({"displayName": playerName});
-      // });
 
     if (rpsGame.areBothPlayersSelected()) {
       console.log("Game can start.");
@@ -80,19 +94,12 @@ $(document).ready(() => {
                 then((user) => {
                 user.updateProfile({"displayName": playerName});
         });
-        player1 = new PlayerConsole(playerName, "1");
-        dbPath = "/players/1";
-        // $("#player1").text(playerName);
-        player1.displayName();
 
-        player1.hideNameBtn();
-        player1.welcomeMsg("Hi " + playerName + ", you are player " + player1.playerNum);
-        rpsGame.player1selected = true;
         // setup player1screen
-        setupPlayer1Screen();
+        setupPlayer1(playerName);
     } else if (rpsGame.isPlayer1selected() && !rpsGame.isPlayer2selected()) {
         player2 = new PlayerConsole(playerName, "2");
-        dbPath = "/players/2";
+        // dbPath = "/players/2";
         // player2.displayName();
         // player2.hideNameBtn();
         rpsGame.player2selected = true;
@@ -100,18 +107,6 @@ $(document).ready(() => {
         // setupPlayer2Screen();
     }
 
-    // setup layer information
-    database.ref(dbPath).update(
-      {
-        "choice": "",
-        losses,
-        playerName,
-        wins
-      },
-      (errorObject) => {
-        console.log("Errors handled: " + JSON.stringify(errorObject));
-      }
-    );
 
     $("#player-name").val("");
 

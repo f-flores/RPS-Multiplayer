@@ -60,6 +60,8 @@ var database;
 function PlayerConsole(name, num) {
   this.name = name;
   this.playerNum = num;
+  this.losses = 0;
+  this.wins = 0;
   // showP1Name() get player 1 name from database and display
   // showP2Name() get player 2 name from database and display
   this.displayName = () => {
