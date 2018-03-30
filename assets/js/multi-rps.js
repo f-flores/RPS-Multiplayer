@@ -67,7 +67,7 @@ $(document).ready(() => {
                                     trim();
     console.log("playerName: " + playerName);
 
-    firebase.auth().signInAnonymously();
+
     // .
       // then((user) => {
         // user.updateProfile({"displayName": playerName});
@@ -76,10 +76,15 @@ $(document).ready(() => {
     if (rpsGame.areBothPlayersSelected()) {
       console.log("Game can start.");
     } else if (!rpsGame.isPlayer1selected()) {
+        firebase.auth().signInAnonymously().
+                then((user) => {
+                user.updateProfile({"displayName": playerName});
+        });
         player1 = new PlayerConsole(playerName, "1");
         dbPath = "/players/1";
         // $("#player1").text(playerName);
         player1.displayName();
+
         player1.hideNameBtn();
         player1.welcomeMsg("Hi " + playerName + ", you are player " + player1.playerNum);
         rpsGame.player1selected = true;
