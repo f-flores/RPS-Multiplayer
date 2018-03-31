@@ -16,8 +16,8 @@ $(document).ready(() => {
   // initializes rpsGame
   function initGame() {
     console.log("in initGame()");
-    rpsGame.isPlayer1selected = rpsGame.isPlayer1selected();
-    rpsGame.isPlayer2selected = rpsGame.isPlayer2selected();
+    rpsGame.player1selected = rpsGame.isPlayer1selected();
+    rpsGame.player2selected = rpsGame.isPlayer2selected();
  // database.ref().push({
  // "players": "",
  // "dateAdded": firebase.database.ServerValue.TIMESTAMP
