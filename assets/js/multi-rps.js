@@ -24,6 +24,7 @@ $(document).ready(() => {
     console.log("isPlayer2loggedin() in initGame(): " + rpsGame.isPlayer2loggedin());
     // if both players present, display game full, please wait
     console.log("areBothPlayersLoggedin() in initGame(): " + rpsGame.areBothPlayersLoggedin());
+    console.log("Game state: " + rpsGame.getState());
   }
 
   // -----------------------------------------------------------------------------------------

@@ -15,13 +15,14 @@ var rpsGame = {
   "turn": 0,
   "losses": 0,
   "wins": 0,
+  "gameState": "none",
   isPlayer1loggedin() {
     var dbPath = "players/";
 
     database.ref(dbPath).once("value").
       then((snapshot) => {
 
-        console.log("isPlayer1loggedin: " + JSON.stringify(snapshot));
+        console.log("isPlayer1loggedin fn: " + JSON.stringify(snapshot));
         this.player1loggedin = snapshot.child("1").exists();
         console.log("this.player1loggedin: " + this.player1loggedin);
     });
@@ -35,7 +36,7 @@ var rpsGame = {
       then((snapshot) => {
         var player2Bool = snapshot.child("2").exists();
 
-        console.log("isPlayer2loggedin: " + JSON.stringify(snapshot));
+        console.log("isPlayer2loggedin fn: " + JSON.stringify(snapshot));
         console.log("player2Bool: " + player2Bool);
         this.player2loggedin = snapshot.child("2").exists();
         console.log("this.player2loggedin: " + this.player2loggedin);
@@ -48,6 +49,18 @@ var rpsGame = {
     this.bothPlayersSelected = this.isPlayer1loggedin() && this.isPlayer2loggedin();
 
     return this.bothPlayersSelected;
+  },
+  getState() {
+    var state = "none";
+
+    if (this.player1loggedin && this.player2loggedin) {
+      state = "fulfilled";
+    } else if (this.player1loggedin) {
+      state = "created";
+    }
+    this.gameState = state;
+
+    return state;
   }
 };
 
