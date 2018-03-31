@@ -52,7 +52,6 @@ $(document).ready(() => {
 
       player1.hideNameBtn();
       player1.welcomeMsg("Hi " + playerName + ", you are player " + player1.playerNum);
-      rpsGame.player1selected = true;
 
       // setup player information
       database.ref(dbPath).update(
@@ -83,8 +82,6 @@ $(document).ready(() => {
 
       player2.hideNameBtn();
       player2.welcomeMsg("Hi " + playerName + ", you are player " + player2.playerNum);
-      rpsGame.player2selected = true;
-
 
       // setup player information
       database.ref(dbPath).update(
