@@ -42,7 +42,7 @@ var rpsGame = {
     });
 
    // return this.player2selected;
-   return true;
+   return this.player2selected;
   },
   areBothPlayersSelected() {
     this.bothPlayersSelected = this.isPlayer1selected() && this.isPlayer2selected();
