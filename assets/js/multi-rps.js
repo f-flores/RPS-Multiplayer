@@ -16,12 +16,12 @@ $(document).ready(() => {
   // initializes rpsGame
   function initGame() {
     console.log("in initGame()");
-  //  rpsGame.player1selected = rpsGame.isPlayer1selected();
-  //  rpsGame.player2selected = rpsGame.isPlayer2selected();
- // database.ref().push({
- // "players": "",
- // "dateAdded": firebase.database.ServerValue.TIMESTAMP
- // });
+    // is user1 present?
+    console.log("isPlayer1selected() in initGame(): " + rpsGame.isPlayer1selected());
+    // is user2 present?
+    console.log("isPlayer2selected() in initGame(): " + rpsGame.isPlayer2selected());
+    // if both players present, display game full, please wait
+    console.log("areBothPlayersSelected() in initGame(): " + rpsGame.areBothPlayersSelected());
   }
 
   // -----------------------------------------------------------------------------------------
@@ -99,7 +99,7 @@ $(document).ready(() => {
 
     }
 
-  // Capture Button Click
+  // Initialize Game
   initGame();
 
   $("#start-btn").on("click", (event) => {
