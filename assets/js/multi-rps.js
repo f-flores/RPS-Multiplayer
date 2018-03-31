@@ -62,6 +62,7 @@ $(document).ready(() => {
           "choice": "",
           "losses": player1.losses,
           playerName,
+          "state": "created",
           "wins": player1.wins
         },
         (errorObject) => {
