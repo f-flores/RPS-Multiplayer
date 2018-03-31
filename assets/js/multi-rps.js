@@ -17,11 +17,11 @@ $(document).ready(() => {
   function initGame() {
     console.log("in initGame()");
     // is user1 present?
-    console.log("isPlayer1selected() in initGame(): " + rpsGame.isPlayer1selected());
+    console.log("isPlayer1loggedin() in initGame(): " + rpsGame.isPlayer1loggedin());
     // is user2 present?
-    console.log("isPlayer2selected() in initGame(): " + rpsGame.isPlayer2selected());
+    console.log("isPlayer2loggedin() in initGame(): " + rpsGame.isPlayer2loggedin());
     // if both players present, display game full, please wait
-    console.log("areBothPlayersSelected() in initGame(): " + rpsGame.areBothPlayersSelected());
+    console.log("areBothPlayersLoggedin() in initGame(): " + rpsGame.areBothPlayersLoggedin());
   }
 
   // -----------------------------------------------------------------------------------------
@@ -111,20 +111,20 @@ $(document).ready(() => {
     playerName = $("#player-name").val().
                                     trim();
     console.log("playerName: " + playerName);
-    // rpsGame.player1selected = rpsGame.isPlayer1selected();
-    // rpsGame.player2selected = rpsGame.isPlayer2selected();
-    console.log("isPlayer1selected() in #start-btn: " + rpsGame.isPlayer1selected());
+    // rpsGame.player1selected = rpsGame.isPlayer1loggedin();
+    // rpsGame.player2selected = rpsGame.isPlayer2loggedin();
+    console.log("isPlayer1loggedin() in #start-btn: " + rpsGame.isPlayer1loggedin());
 
-    if (rpsGame.areBothPlayersSelected()) {
+    if (rpsGame.areBothPlayersLoggedin()) {
       console.log("Game can start.");
-    } else if (!rpsGame.isPlayer1selected()) {
+    } else if (!rpsGame.isPlayer1loggedin()) {
         firebase.auth().signInAnonymously().
                 then((user) => {
                 user.updateProfile({"displayName": playerName});
         });
         // setup player1screen
         setupPlayer1(playerName);
-    } else if (rpsGame.isPlayer1selected() && !rpsGame.isPlayer2selected()) {
+    } else if (rpsGame.isPlayer1loggedin() && !rpsGame.isPlayer2loggedin()) {
        //  firebase.auth().signInAnonymously().
        //   then((user) => {
        //   user.updateProfile({"displayName": playerName});
@@ -138,7 +138,7 @@ $(document).ready(() => {
     $("#player-name").val("");
 
     // disable start button if both players are selected
-    // if (rpsGame.areBothPlayersSelected()) {
+    // if (rpsGame.areBothPlayersLoggedin()) {
     //  $("#player-form").hide();
     // } else {
     //  $("#player-form").show();
