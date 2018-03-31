@@ -53,9 +53,9 @@ var rpsGame = {
   getState() {
     var state = "none";
 
-    if (this.player1loggedin && this.player2loggedin) {
+    if (this.isPlayer1loggedin() && this.isPlayer2loggedin()) {
       state = "fulfilled";
-    } else if (this.player1loggedin) {
+    } else if (this.isPlayer1loggedin()) {
       state = "created";
     }
     this.gameState = state;
