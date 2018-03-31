@@ -111,8 +111,8 @@ $(document).ready(() => {
     playerName = $("#player-name").val().
                                     trim();
     console.log("playerName: " + playerName);
-    rpsGame.player1selected = rpsGame.isPlayer1selected();
-    rpsGame.player2selected = rpsGame.isPlayer2selected();
+    // rpsGame.player1selected = rpsGame.isPlayer1selected();
+    // rpsGame.player2selected = rpsGame.isPlayer2selected();
     console.log("isPlayer1selected() in #start-btn: " + rpsGame.isPlayer1selected());
 
     if (rpsGame.areBothPlayersSelected()) {
