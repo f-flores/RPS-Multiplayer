@@ -8,44 +8,44 @@ var rpsGame = {
   "opponent": "Waiting...",
   "choice": ["r", "p", "s"],
   "choiceVisible": false,
-  // "player1selected": undefined,
-  // "player2selected": undefined,
- //  "player2selected": false,
+  // "player1loggedin": undefined,
+  // "player2loggedin": undefined,
+ //  "player2loggedin": false,
  // "bothPlayersSelected": false,
   "turn": 0,
   "losses": 0,
   "wins": 0,
-  isPlayer1selected() {
+  isPlayer1loggedin() {
     var dbPath = "players/";
 
     database.ref(dbPath).once("value").
       then((snapshot) => {
 
-        console.log("isPlayer1selected: " + JSON.stringify(snapshot));
-        this.player1selected = snapshot.child("1").exists();
-        console.log("this.player1selected: " + this.player1selected);
+        console.log("isPlayer1loggedin: " + JSON.stringify(snapshot));
+        this.player1loggedin = snapshot.child("1").exists();
+        console.log("this.player1loggedin: " + this.player1loggedin);
     });
 
-    return this.player1selected;
+    return this.player1loggedin;
   },
-  isPlayer2selected() {
+  isPlayer2loggedin() {
     var dbPath = "/players/";
 
     database.ref(dbPath).once("value").
       then((snapshot) => {
         var player2Bool = snapshot.child("2").exists();
 
-        console.log("isPlayer2selected: " + JSON.stringify(snapshot));
+        console.log("isPlayer2loggedin: " + JSON.stringify(snapshot));
         console.log("player2Bool: " + player2Bool);
-        this.player2selected = snapshot.child("2").exists();
-        console.log("this.player2selected: " + this.player2selected);
+        this.player2loggedin = snapshot.child("2").exists();
+        console.log("this.player2loggedin: " + this.player2loggedin);
     });
 
-   // return this.player2selected;
-   return this.player2selected;
+   // return this.player2loggedin;
+   return this.player2loggedin;
   },
-  areBothPlayersSelected() {
-    this.bothPlayersSelected = this.isPlayer1selected() && this.isPlayer2selected();
+  areBothPlayersLoggedin() {
+    this.bothPlayersSelected = this.isPlayer1loggedin() && this.isPlayer2loggedin();
 
     return this.bothPlayersSelected;
   }
