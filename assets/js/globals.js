@@ -129,7 +129,12 @@ function getGameState() {
     console.log("getGameState childSnapshot: " + JSON.stringify(childSnapshot));
     console.log("getGameState ref: " + childSnapshot.ref.key);
     console.log("getGameState parent of ref: " + childSnapshot.ref.parent.key);
-    gState = childsv.gameState;
+    if (childSnapshot.ref.key === "1") {
+      gState = "created";
+    } else if (childSnapshot.ref.key === "2") {
+      gState = "fulfilled";
+    }
+    childsv.gameState = gState;
   });
 
  return gState;
