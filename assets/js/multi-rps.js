@@ -20,6 +20,7 @@ $(document).ready(() => {
     console.log("in initGame()");
     rpsGame.isPlayer1loggedin();
     rpsGame.isPlayer2loggedin();
+    setGameState("none");
     // is user1 present?
     console.log("isPlayer1loggedin() in initGame(): " + rpsGame.isPlayer1loggedin());
     // is user2 present?
