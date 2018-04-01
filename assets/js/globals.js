@@ -133,6 +133,7 @@ function getGameState() {
       gState = "created";
     } else if (childSnapshot.ref.key === "2") {
       gState = "fulfilled";
+      // set turn = 0
     }
     childsv.gameState = gState;
   });

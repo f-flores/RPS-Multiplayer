@@ -137,8 +137,8 @@ $(document).ready(() => {
     //            user.updateProfile({"displayName": playerName});
     //    });
         // setup player1screen
-        setGameState("created");
         setupPlayer1(playerName);
+        setGameState("created");
     } else if (rpsGame.isPlayer1loggedin() && !rpsGame.isPlayer2loggedin()) {
        //  firebase.auth().signInAnonymously().
        //   then((user) => {
