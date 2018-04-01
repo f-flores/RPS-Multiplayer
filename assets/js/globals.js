@@ -77,14 +77,25 @@ var config = {
 var database;
 
 function PlayerConsole(name, num) {
+
   this.name = name;
   this.playerNum = num;
   this.losses = 0;
   this.wins = 0;
+
+  // determine opponent 'num' by choosing 'other' number
+  if (this.playerNum === "1") {
+    this.otherPlayer = "2";
+  } else {
+    this.otherPlayer = "1";
+  }
   // showP1Name() get player 1 name from database and display
   // showP2Name() get player 2 name from database and display
   this.displayName = () => {
     $("#player" + num.toString()).text(this.name);
+  };
+  this.showOpponentName = () => {
+    $("#player" + this.otherPlayer).text(this.name);
   };
   this.welcomeMsg = (msg) => {
     $("#player-welcome-message").html("<p class=\"text-center\">" + msg + "</p>");
