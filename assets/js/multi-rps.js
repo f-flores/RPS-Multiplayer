@@ -120,14 +120,15 @@ $(document).ready(() => {
     // rpsGame.player1selected = rpsGame.isPlayer1loggedin();
     // rpsGame.player2selected = rpsGame.isPlayer2loggedin();
     console.log("isPlayer1loggedin() in #start-btn: " + rpsGame.isPlayer1loggedin());
-
+    console.log("in #start-btn getGameState call");
+    getGameState();
     if (rpsGame.areBothPlayersLoggedin()) {
       console.log("Game can start.");
     } else if (!rpsGame.isPlayer1loggedin()) {
-        firebase.auth().signInAnonymously().
-                then((user) => {
-                user.updateProfile({"displayName": playerName});
-        });
+    //    firebase.auth().signInAnonymously().
+    //            then((user) => {
+    //            user.updateProfile({"displayName": playerName});
+    //    });
         // setup player1screen
         setupPlayer1(playerName);
     } else if (rpsGame.isPlayer1loggedin() && !rpsGame.isPlayer2loggedin()) {
