@@ -118,12 +118,14 @@ database = firebase.database();
 // database.ref();
 
 function getGameState() {
-  var gState = "";
+  var gState = "",
+      childsv;
 
   database.ref("players/").on("child_added", (childSnapshot) => {
+    childsv = childSnapshot.val();
     // do stuff with snapshot
     console.log("childSnapshot: " + JSON.stringify(childSnapshot));
-    gState = childSnapshot.val().gameState;
+    gState = childsv.gameState;
   });
 
  return gState;
