@@ -8,7 +8,6 @@
 /* global rpsGame:true */
 /* global firebase:true */
 /* global PlayerConsole:true */
-/* global getGameState:true */
 
 var player1, player2;
 
@@ -106,7 +105,6 @@ $(document).ready(() => {
 
   // Initialize Game
   initGame();
-  getGameState();
 
   $("#start-btn").on("click", (event) => {
     var playerName;

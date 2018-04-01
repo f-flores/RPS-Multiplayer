@@ -105,10 +105,3 @@ firebase.initializeApp(config);
 // Create a variable to reference the database
 database = firebase.database();
 // database.ref();
-
-function getGameState() {
-  database.ref("players/").on("child_added", (childSnapshot) => {
-  // do stuff with snapshot
-  console.log("childSnapshot: " + JSON.stringify(childSnapshot));
- });
-}
