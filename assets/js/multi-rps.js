@@ -107,7 +107,13 @@ $(document).ready(() => {
 
   // Initialize Game
   initGame();
-  getGameState();
+  console.log("current game state: " + getGameState());
+  if (getGameState() === "fulfilled") {
+    console.log("GAME CONDITIONS ARE FULFILLED.");
+    console.log("RPS GAME CAN START");
+  } else {
+    console.log("GAME CANNOT START YET");
+  }
 
   $("#start-btn").on("click", (event) => {
     var playerName;
@@ -169,10 +175,3 @@ $(document).ready(() => {
 
   // End of document.ready(function)
 });
-
-
-    // Code for handling the push
-    // database.ref().push({
-    //  "playerName": player1Name,
-    //  "dateAdded": firebase.database.ServerValue.TIMESTAMP
-    // });

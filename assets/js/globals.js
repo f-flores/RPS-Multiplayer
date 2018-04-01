@@ -118,14 +118,19 @@ database = firebase.database();
 // database.ref();
 
 function getGameState() {
+  var gState = "";
+
   database.ref("players/").on("child_added", (childSnapshot) => {
-  // do stuff with snapshot
-  console.log("childSnapshot: " + JSON.stringify(childSnapshot));
- });
+    // do stuff with snapshot
+    console.log("childSnapshot: " + JSON.stringify(childSnapshot));
+    gState = childSnapshot.val().gameState;
+  });
+
+ return gState;
 }
 
 function setGameState(state) {
-  database.ref("state").update(
+  database.ref("state/").update(
     {"gameState": "created"},
     (errorObject) => {
       console.log("Errors handled: " + JSON.stringify(errorObject));
