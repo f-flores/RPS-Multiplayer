@@ -161,7 +161,7 @@ $(document).ready(() => {
   });
 
   firebase.auth().onAuthStateChanged((firebaseUser) => {
-    console.log(firebaseUser);
+    // console.log(firebaseUser);
     if (firebaseUser) {
       $("#btn-logout-player1").removeClass("d-none");
       // chat.onlogin()

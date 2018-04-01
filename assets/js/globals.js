@@ -53,11 +53,11 @@ var rpsGame = {
   getState() {
     var state = "none";
 
-    if (this.isPlayer1loggedin() && this.isPlayer2loggedin()) {
-      state = "fulfilled";
-    } else if (this.isPlayer1loggedin()) {
-      state = "created";
-    }
+    // if (this.isPlayer1loggedin() && this.isPlayer2loggedin()) {
+    //  state = "fulfilled";
+    // } else if (this.isPlayer1loggedin()) {
+    //  state = "created";
+    // }
     this.gameState = state;
 
     return state;
@@ -119,12 +119,16 @@ database = firebase.database();
 
 function getGameState() {
   var gState = "",
+      ref,
       childsv;
 
   database.ref("players/").on("child_added", (childSnapshot) => {
     childsv = childSnapshot.val();
+    ref = childSnapshot.ref();
     // do stuff with snapshot
-    console.log("childSnapshot: " + JSON.stringify(childSnapshot));
+    console.log("getGameState childSnapshot: " + JSON.stringify(childSnapshot));
+    console.log("getGameState ref: " + JSON.stringify(ref));
+    console.log("getGameState parent of ref: " + JSON.stringify(ref.parent()));
     gState = childsv.gameState;
   });
 
