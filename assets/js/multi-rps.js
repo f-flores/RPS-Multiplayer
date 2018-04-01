@@ -9,6 +9,7 @@
 /* global firebase:true */
 /* global PlayerConsole:true */
 /* global getGameState:true */
+/* global setGameState:true */
 
 var player1, player2;
 
@@ -63,7 +64,6 @@ $(document).ready(() => {
           "choice": "",
           "losses": player1.losses,
           playerName,
-          "gameState": "created",
           "wins": player1.wins
         },
         (errorObject) => {
@@ -130,6 +130,7 @@ $(document).ready(() => {
     //            user.updateProfile({"displayName": playerName});
     //    });
         // setup player1screen
+        setGameState("created");
         setupPlayer1(playerName);
     } else if (rpsGame.isPlayer1loggedin() && !rpsGame.isPlayer2loggedin()) {
        //  firebase.auth().signInAnonymously().

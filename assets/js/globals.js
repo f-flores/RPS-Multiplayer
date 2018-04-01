@@ -123,3 +123,12 @@ function getGameState() {
   console.log("childSnapshot: " + JSON.stringify(childSnapshot));
  });
 }
+
+function setGameState(state) {
+  database.ref("state").update(
+    {"gameState": "created"},
+    (errorObject) => {
+      console.log("Errors handled: " + JSON.stringify(errorObject));
+    }
+  );
+}
