@@ -124,11 +124,11 @@ function getGameState() {
 
   database.ref("players/").on("child_added", (childSnapshot) => {
     childsv = childSnapshot.val();
-    refChild = childSnapshot.ref;
+    refChild = childSnapshot.key;
     // do stuff with snapshot
     console.log("getGameState childSnapshot: " + JSON.stringify(childSnapshot));
-    console.log("getGameState ref: " + JSON.stringify(refChild));
-    console.log("getGameState parent of ref: " + JSON.stringify(refChild.parent));
+    console.log("getGameState ref: " + childSnapshot.ref.key);
+    console.log("getGameState parent of ref: " + childSnapshot.ref.parent.key);
     gState = childsv.gameState;
   });
 
