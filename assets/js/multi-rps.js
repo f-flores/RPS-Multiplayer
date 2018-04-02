@@ -121,7 +121,7 @@ function getGameState() {
     "value", (snapshot) => {
       var sn = snapshot.val();
 
-      console.log("snapshot: " + sn);
+      console.log("snapshot getGameState(): " + JSON.stringify(sn));
 
       gState = sn.gameState;
   },
@@ -244,8 +244,8 @@ $(document).ready(() => {
         setupPlayer1(playerName);
         // setGameState("created");
     } else if (rpsGame.isPlayer1loggedin() && !rpsGame.isPlayer2loggedin()) {
-
-        setupPlayer2(playerName);
+        console.log("player1 and player2 logged in successfully.");
+       // setupPlayer2(playerName);
     }
 
     $("#player-name").val("");
