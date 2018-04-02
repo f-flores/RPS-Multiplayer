@@ -117,7 +117,7 @@ function PlayerConsole(name, num) {
 function getGameState() {
   var gState;
 
-  database.ref("state/").on(
+  database.ref("state/").once(
     "value", (snapshot) => {
       var sn = snapshot.val();
 
