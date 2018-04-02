@@ -121,6 +121,8 @@ function getGameState() {
     "value", (snapshot) => {
       var sn = snapshot.val();
 
+      console.log("snapshot: " + sn);
+
       gState = sn.gameState;
   },
     (errorObject) => {
