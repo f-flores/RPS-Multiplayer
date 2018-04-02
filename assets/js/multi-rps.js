@@ -115,10 +115,21 @@ function PlayerConsole(name, num) {
 
 
 function getGameState() {
-  var childsv;
+  var gState;
+
+  database.ref("state/").once(
+    "value", (snapshot) => {
+      var sn = snapshot.val();
+
+      gState = sn.gameState;
+  },
+    (errorObject) => {
+      console.log("Errors handled: " + JSON.stringify(errorObject));
+    }
+  );
 
     // refChild,
-  return GAMESTATE;
+  return gState;
 }
 
 function setGameState(state) {
