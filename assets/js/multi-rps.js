@@ -101,7 +101,11 @@ function PlayerConsole(name, num) {
     }
   };
   this.showOpponentName = () => {
-    $("#player" + this.otherPlayer).text(this.name);
+    if (this.name === "undefined") {
+      $("#player" + this.otherPlayer).text(this.name);
+    } else {
+      $("#player" + this.otherPlayer).text("HELLO SHOW OPPONENT");  
+    }
   };
   this.welcomeMsg = (msg) => {
     $("#player-welcome-message").html("<p class=\"text-center\">" + msg + "</p>");
@@ -275,7 +279,8 @@ $(document).ready(() => {
       if (childSnapshot.ref.key === "1") {
         setGameState("created");
         console.log("getGameState if loop game has been created");
-        setupPlayer2("PLAYER1");
+        player2.displayName();
+        // setupPlayer2("PLAYER1");
       } else if (childSnapshot.ref.key === "2") {
         setGameState("fulfilled");
         // set turn = 0
