@@ -3,6 +3,8 @@
 
 // an object for rock, paper scissors game
 //
+var GAMESTATE = "none";
+
 var rpsGame = {
   "activePlayer": "Waiting...",
   "opponent": "Waiting...",
@@ -118,27 +120,29 @@ database = firebase.database();
 // database.ref();
 
 function getGameState() {
-  var gState = "",
-      // refChild,
-      childsv;
+  var childsv;
 
-  database.ref("players/").on("child_added", (childSnapshot) => {
-    childsv = childSnapshot.val();
-    // refChild = childSnapshot.key;
-    // do stuff with snapshot
-    console.log("getGameState childSnapshot: " + JSON.stringify(childSnapshot));
-    console.log("getGameState ref: " + childSnapshot.ref.key);
-    console.log("getGameState parent of ref: " + childSnapshot.ref.parent.key);
-    if (childSnapshot.ref.key === "1") {
-      gState = "created";
-    } else if (childSnapshot.ref.key === "2") {
-      gState = "fulfilled";
-      // set turn = 0
-    }
-    childsv.gameState = gState;
-  });
+    // refChild,
 
- return gState;
+  if (GAMESTATE !== "fulfilled") {
+    database.ref("players/").on("child_added", (childSnapshot) => {
+      childsv = childSnapshot.val();
+      // refChild = childSnapshot.key;
+      // do stuff with snapshot
+      console.log("getGameState childSnapshot: " + JSON.stringify(childSnapshot));
+      console.log("getGameState ref: " + childSnapshot.ref.key);
+      console.log("getGameState parent of ref: " + childSnapshot.ref.parent.key);
+      if (childSnapshot.ref.key === "1") {
+        GAMESTATE = "created";
+      } else if (childSnapshot.ref.key === "2") {
+        GAMESTATE = "fulfilled";
+        // set turn = 0
+      }
+      childsv.gameState = GAMESTATE;
+    });
+  }
+
+ return GAMESTATE;
 }
 
 function setGameState(state) {

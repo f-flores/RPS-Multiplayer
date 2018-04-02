@@ -38,7 +38,6 @@ $(document).ready(() => {
 
       console.log("Player 1 screen");
       player1 = new PlayerConsole(playerName, "1");
-      player2 = new PlayerConsole(playerName, "2");
 
       dbPath = "/players/1";
       // $("#player1").text(playerName);
@@ -94,15 +93,6 @@ $(document).ready(() => {
 
     }
 
-  // Initialize Game
-  initGame();
-  console.log("current game state: " + getGameState());
-  if (getGameState() === "fulfilled") {
-    console.log("GAME CONDITIONS ARE FULFILLED.");
-    console.log("RPS GAME CAN START");
-  } else {
-    console.log("GAME CANNOT START YET");
-  }
 
   $("#start-btn").on("click", (event) => {
     var playerName;
@@ -129,13 +119,24 @@ $(document).ready(() => {
         setupPlayer2(playerName);
     }
 
-
     $("#player-name").val("");
-
-    if (getGameState() === "fulfilled") {
-      console.log("from #START-BTN: GAME CAN BEGIN!!!");
-    }
+    // End of "#start-btn"
   });
+      // Main Game Loop
+  initGame();
+  console.log("current game state: " + getGameState());
+  if (getGameState() === "fulfilled") {
+    console.log("GAME CONDITIONS ARE FULFILLED.");
+    console.log("RPS GAME CAN START");
+  } else if (getGameState() === "created") {
+    // create player
+    player2 = new PlayerConsole("Waiting for player2...", "2");
+    player2.showOpponentName();
+    // show opponents name on active player's screen
+    console.log("GAME CREATED BUT CANNOT START YET");
+  } else {
+    console.log("GAME CANNOT START YET");
+  }
 
   // End of document.ready(function)
 });
