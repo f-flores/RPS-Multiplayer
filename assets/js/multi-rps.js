@@ -57,7 +57,7 @@ var rpsGame = {
     return this.bothPlayersSelected;
   },
   getState() {
-    return GAMESTATE;
+    return getGameState();
   }
 };
 
@@ -231,8 +231,7 @@ $(document).ready(() => {
     playerName = $("#player-name").val().
                                     trim();
     console.log("playerName: " + playerName);
-    // rpsGame.player1selected = rpsGame.isPlayer1loggedin();
-    // rpsGame.player2selected = rpsGame.isPlayer2loggedin();
+
     console.log("isPlayer1loggedin() in #start-btn: " + rpsGame.isPlayer1loggedin());
     console.log("in #start-btn getGameState call");
     getGameState();
@@ -257,7 +256,7 @@ $(document).ready(() => {
   console.log("current game state: " + getGameState());
 
   // wait for game to start
-  if (GAMESTATE !== "fulfilled") {
+  if (getGameState() !== "fulfilled") {
     database.ref("players/").on("child_added", (childSnapshot) => {
       var childsv;
 
@@ -268,21 +267,21 @@ $(document).ready(() => {
       console.log("getGameState ref: " + childSnapshot.ref.key);
       console.log("getGameState parent of ref: " + childSnapshot.ref.parent.key);
       if (childSnapshot.ref.key === "1") {
-        GAMESTATE = "created";
+        setGameState("created");
       } else if (childSnapshot.ref.key === "2") {
-        GAMESTATE = "fulfilled";
+        setGameState("fulfilled");
         // set turn = 0
       }
-      childsv.gameState = GAMESTATE;
+      // childsv.gameState = GAMESTATE;
     });
   }
 // Create a variable to reference the database
 database = firebase.database();
 // database.ref();
-  if (GAMESTATE === "fulfilled") {
+  if (getGameState() === "fulfilled") {
     console.log("GAME CONDITIONS ARE FULFILLED.");
     console.log("RPS GAME CAN START");
-  } else if (GAMESTATE === "created") {
+  } else if (getGameState() === "created") {
     // create player
     player2 = new PlayerConsole("Waiting for player2...", "2");
     player2.showOpponentName();
