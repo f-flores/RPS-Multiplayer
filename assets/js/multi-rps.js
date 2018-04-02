@@ -5,6 +5,7 @@
 // --------------------------------------------------------------------------------------------
 
 var player1, player2;
+var database, firebase;
 
 // an object for rock, paper scissors game
 //
@@ -81,7 +82,9 @@ var config = {
   "storageBucket": "multi-rps-88d44.appspot.com",
   "messagingSenderId": "682358558557"
 };
-var database;
+
+firebase.initializeApp(config);
+
 
 function PlayerConsole(name, num) {
 
@@ -118,7 +121,6 @@ function PlayerConsole(name, num) {
   };
 }
 
-firebase.initializeApp(config);
 
 // Create a variable to reference the database
 database = firebase.database();
