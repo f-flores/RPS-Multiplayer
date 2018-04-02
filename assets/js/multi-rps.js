@@ -287,6 +287,7 @@ database = firebase.database();
     // create player
     player2 = new PlayerConsole("Waiting for player2...", "2");
     player2.showOpponentName();
+    setupPlayer2("Waiting for player2...");
     // show opponents name on active player's screen
     console.log("GAME CREATED BUT CANNOT START YET");
   } else {
