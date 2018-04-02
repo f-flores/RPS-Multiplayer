@@ -4,18 +4,7 @@
 //
 // --------------------------------------------------------------------------------------------
 
-/* global database:true */
-/* global GAMESTATE:true */
-/* global rpsGame:true */
-/* global firebase:true */
-/* global PlayerConsole:true */
-/* global getGameState:true */
-/* global setGameState:true */
-
 var player1, player2;
-
-/* global firebase:true */
-/* export rpsGame */
 
 // an object for rock, paper scissors game
 //
@@ -69,16 +58,16 @@ var rpsGame = {
     return this.bothPlayersSelected;
   },
   getState() {
-    var state = "none";
+    // var state = "none";
 
     // if (this.isPlayer1loggedin() && this.isPlayer2loggedin()) {
     //  state = "fulfilled";
     // } else if (this.isPlayer1loggedin()) {
     //  state = "created";
     // }
-    this.gameState = state;
+    // this.gameState = state;
 
-    return state;
+    return GAMESTATE;
   }
 };
 
