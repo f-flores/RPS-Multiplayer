@@ -274,6 +274,7 @@ $(document).ready(() => {
       console.log("getGameState parent of ref: " + childSnapshot.ref.parent.key);
       if (childSnapshot.ref.key === "1") {
         setGameState("created");
+        console.log("getGameState if loop game has been created");
         setupPlayer2("PLAYER1");
       } else if (childSnapshot.ref.key === "2") {
         setGameState("fulfilled");
