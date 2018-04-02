@@ -94,7 +94,11 @@ function PlayerConsole(name, num) {
   // showP1Name() get player 1 name from database and display
   // showP2Name() get player 2 name from database and display
   this.displayName = () => {
-    $("#player" + num.toString()).text(this.name);
+    if (this.name === "undefined") {
+      $("#player" + num.toString()).text("WAITING OTHER");
+    } else {
+      $("#player" + num.toString()).text(this.name);
+    }
   };
   this.showOpponentName = () => {
     $("#player" + this.otherPlayer).text(this.name);
