@@ -31,20 +31,6 @@ $(document).ready(() => {
   }
 
   // -----------------------------------------------------------------------------------------
-  // initPlayer1Screen() initializes player1 console
-  //
-  // function initPlayer1Screen() {
-  //    initialize Player 1 screen
-  // }
-
-  // -----------------------------------------------------------------------------------------
-  // function initPlayer2Screen() displays player2 console
-  //
-  // function initPlayer2Screen() {
-  //    initialize Player 2 screen
-  // }
-
-  // -----------------------------------------------------------------------------------------
   // setupPlayer1() displays player1 console
   //
     function setupPlayer1(playerName) {
@@ -52,12 +38,15 @@ $(document).ready(() => {
 
       console.log("Player 1 screen");
       player1 = new PlayerConsole(playerName, "1");
+      player2 = new PlayerConsole(playerName, "2");
+
       dbPath = "/players/1";
       // $("#player1").text(playerName);
       player1.displayName();
 
       player1.hideNameBtn();
       player1.welcomeMsg("Hi " + playerName + ", you are player " + player1.playerNum);
+      player2.showOpponentName();
 
       // setup player information
       database.ref(dbPath).update(
@@ -81,7 +70,7 @@ $(document).ready(() => {
       var dbPath;
 
       console.log("Player 2 screen");
-      player2 = new PlayerConsole(playerName, "2");
+
       dbPath = "/players/2";
       // $("#player1").text(playerName);
       player2.displayName();
@@ -132,25 +121,33 @@ $(document).ready(() => {
     if (rpsGame.areBothPlayersLoggedin()) {
       console.log("Game can start.");
     } else if (!rpsGame.isPlayer1loggedin()) {
-    //    firebase.auth().signInAnonymously().
-    //            then((user) => {
-    //            user.updateProfile({"displayName": playerName});
-    //    });
-        // setup player1screen
+
         setupPlayer1(playerName);
         setGameState("created");
     } else if (rpsGame.isPlayer1loggedin() && !rpsGame.isPlayer2loggedin()) {
-       //  firebase.auth().signInAnonymously().
-       //   then((user) => {
-       //   user.updateProfile({"displayName": playerName});
-       // });
 
-        // setup player2screen
         setupPlayer2(playerName);
     }
 
 
     $("#player-name").val("");
+
+    if (getGameState() === "fulfilled") {
+      console.log("from #START-BTN: GAME CAN BEGIN!!!");
+    }
+  });
+
+  // End of document.ready(function)
+});
+
+// ----------------------------------------------------------------------------------------------------
+// --------------------- SUPERFLUOUS CODE -------------------------------------------------------------
+
+    //    firebase.auth().signInAnonymously().
+    //            then((user) => {
+    //            user.updateProfile({"displayName": playerName});
+    //    });
+    // setup player1screen
 
     // disable start button if both players are selected
     // if (rpsGame.areBothPlayersLoggedin()) {
@@ -158,20 +155,39 @@ $(document).ready(() => {
     // } else {
     //  $("#player-form").show();
     // }
-  });
 
-  firebase.auth().onAuthStateChanged((firebaseUser) => {
+           //  firebase.auth().signInAnonymously().
+       //   then((user) => {
+       //   user.updateProfile({"displayName": playerName});
+       // });
+
+        // setup player2screen
+
+          // firebase.auth().onAuthStateChanged((firebaseUser) => {
     // console.log(firebaseUser);
-    if (firebaseUser) {
-      $("#btn-logout-player1").removeClass("d-none");
+    // if (firebaseUser) {
+    //  $("#btn-logout-player1").removeClass("d-none");
       // chat.onlogin()
       // game.onlogin()
-    } else {
+    // } else {
       // user signed out
-      $("#btn-logout-player1").addClass("d-none");
+      // $("#btn-logout-player1").addClass("d-none");
       // window.location.reload();
-    }
-  });
+    // }
+  // });
 
-  // End of document.ready(function)
-});
+    // -----------------------------------------------------------------------------------------
+  // initPlayer1Screen() initializes player1 console
+  //
+  // function initPlayer1Screen() {
+  //    initialize Player 1 screen
+  // }
+
+  // -----------------------------------------------------------------------------------------
+  // function initPlayer2Screen() displays player2 console
+  //
+  // function initPlayer2Screen() {
+  //    initialize Player 2 screen
+  // }
+
+  // ----------------------------------------------------------------------------------------------------
