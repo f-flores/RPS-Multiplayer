@@ -7,10 +7,10 @@
 var player1, player2;
 var database, firebase;
 
-// an object for rock, paper scissors game
-//
+
 var GAMESTATE = "none";
 
+// an object for rock, paper scissors game
 var rpsGame = {
   "activePlayer": "Waiting...",
   "opponent": "Waiting...",
@@ -18,8 +18,6 @@ var rpsGame = {
   "choiceVisible": false,
   "player1loggedin": "",
   "player2loggedin": "",
- //  "player2loggedin": false,
- // "bothPlayersSelected": false,
   "turn": 0,
   "losses": 0,
   "wins": 0,
@@ -59,15 +57,6 @@ var rpsGame = {
     return this.bothPlayersSelected;
   },
   getState() {
-    // var state = "none";
-
-    // if (this.isPlayer1loggedin() && this.isPlayer2loggedin()) {
-    //  state = "fulfilled";
-    // } else if (this.isPlayer1loggedin()) {
-    //  state = "created";
-    // }
-    // this.gameState = state;
-
     return GAMESTATE;
   }
 };
@@ -76,7 +65,7 @@ var rpsGame = {
 // Initialize Firebase
 var config = {
   "apiKey": "AIzaSyDZN1lB6rw7fFBpObj49tSNQfW2yXyJzz4",
-  "authDomain": "multi-rps-88d44.firebaseapp.com",
+  "authDomain": "30",
   "databaseURL": "https://multi-rps-88d44.firebaseio.com",
   "projectId": "multi-rps-88d44",
   "storageBucket": "multi-rps-88d44.appspot.com",
@@ -85,6 +74,9 @@ var config = {
 
 firebase.initializeApp(config);
 
+// Create a variable to reference the database
+database = firebase.database();
+// database.ref();
 
 function PlayerConsole(name, num) {
 
@@ -121,10 +113,6 @@ function PlayerConsole(name, num) {
   };
 }
 
-
-// Create a variable to reference the database
-database = firebase.database();
-// database.ref();
 
 function getGameState() {
   var childsv;
@@ -242,7 +230,7 @@ $(document).ready(() => {
     } else if (!rpsGame.isPlayer1loggedin()) {
 
         setupPlayer1(playerName);
-        setGameState("created");
+        // setGameState("created");
     } else if (rpsGame.isPlayer1loggedin() && !rpsGame.isPlayer2loggedin()) {
 
         setupPlayer2(playerName);
@@ -277,7 +265,9 @@ $(document).ready(() => {
       childsv.gameState = GAMESTATE;
     });
   }
-
+// Create a variable to reference the database
+database = firebase.database();
+// database.ref();
   if (GAMESTATE === "fulfilled") {
     console.log("GAME CONDITIONS ARE FULFILLED.");
     console.log("RPS GAME CAN START");
@@ -343,5 +333,14 @@ $(document).ready(() => {
   // function initPlayer2Screen() {
   //    initialize Player 2 screen
   // }
+
+      // var state = "none";
+
+    // if (this.isPlayer1loggedin() && this.isPlayer2loggedin()) {
+    //  state = "fulfilled";
+    // } else if (this.isPlayer1loggedin()) {
+    //  state = "created";
+    // }
+    // this.gameState = state;
 
   // ----------------------------------------------------------------------------------------------------
