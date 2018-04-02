@@ -278,7 +278,7 @@ $(document).ready(() => {
       console.log("getGameState parent of ref: " + childSnapshot.ref.parent.key);
       if (childSnapshot.ref.key === "1") {
         setGameState("created");
-        if (player1.isPlayer1loggedin()) {
+        if (rpsGame.isPlayer1loggedin()) {
           console.log("in player2 screen");
           console.log("getGameState if loop game has been created");
         }
