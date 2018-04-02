@@ -173,7 +173,7 @@ $(document).ready(() => {
 
       player1.hideNameBtn();
       player1.welcomeMsg("Hi " + playerName + ", you are player " + player1.playerNum);
-      player2.showOpponentName();
+      // player2.showOpponentName();
 
       // setup player information
       database.ref(dbPath).update(
