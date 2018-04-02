@@ -123,7 +123,7 @@ function getGameState() {
 
 function setGameState(state) {
   database.ref("state/").update(
-    {"gameState": "created"},
+    {"gameState": state},
     (errorObject) => {
       console.log("Errors handled: " + JSON.stringify(errorObject));
     }
