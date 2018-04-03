@@ -8,17 +8,6 @@
 // --------------------------------------------------------------------------------------------
 
 /* global firebase: true */
-
-$(document).ready(() => {
-// -----------------------------------------------------------------------------------------
-// initializes rpsGame
-
-// ---------------------------------------------------------------------------------------------
-// VARIABLES
-//
-var player1, player2;
-var firebase, database, players;
-
 // Initialize Firebase
 var config = {
   "apiKey": "AIzaSyDZN1lB6rw7fFBpObj49tSNQfW2yXyJzz4",
@@ -30,6 +19,16 @@ var config = {
 };
 
 firebase.initializeApp(config);
+
+$(document).ready(() => {
+// -----------------------------------------------------------------------------------------
+// initializes rpsGame
+
+// ---------------------------------------------------------------------------------------------
+// VARIABLES
+//
+var player1, player2;
+var database, players;
 
 var GAMESTATE = "none";
 
