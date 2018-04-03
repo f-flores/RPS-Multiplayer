@@ -64,7 +64,7 @@ var rpsGame = {
       } else if (numPlayers === 1) {
         console.log("Second player signed in");
         // rpsGame.assignPlayer("2");
-        rpsTurnRef.set(1);
+        // rpsTurnRef.set(1);
       } else if (numPlayers === 0) {
         console.log("First players signed in.");
         // rpsGame.assignPlayer("1");
