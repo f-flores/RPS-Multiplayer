@@ -30,7 +30,7 @@ $(document).ready(() => {
 // VARIABLES
 //
 var player1, player2;
-var database, players;
+var database, rpsPlayersRef, rpsTurnRef;
 
 var GAMESTATE = "none";
 
@@ -89,10 +89,18 @@ var rpsGame = {
 //
 // Create a variable to reference the database
 database = firebase.database();
-// Create players branch
-players = database.ref("/players");
+
+// Players branch
+rpsPlayersRef = database.ref("/players");
+
+// Turns branch
+rpsTurnRef = database.ref("/turn");
 
 // database.ref();
+
+// cancel player events and remove player on disconnect
+// rpsPlayersRef.onDisconnect.cancel();
+rpsPlayersRef.onDisconnect.remove();
 
 function PlayerConsole(name, num) {
 
