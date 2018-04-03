@@ -50,6 +50,12 @@ var rpsGame = {
     console.log("in setPlayer(): " + name);
     $("#player-form").hide();
     $("#start-btn").hide();
+    rpsPlayersRef.once("value", (snapshot) => {
+      // var playerObj = snapshot.child('playersRef');
+      var numPlayers = snapshot.numChildren();
+
+      console.log("in rpsGame.setPlayer(): numPlayers: " + numPlayers);
+    });
   },
   isPlayer1loggedin() {
     var dbPath = "players/";
@@ -90,6 +96,7 @@ var rpsGame = {
   }
 };
 
+// database.ref();
 // firebase.initializeApp(config);
 //
 // Create a variable to reference the database
@@ -100,8 +107,6 @@ rpsPlayersRef = database.ref("/players");
 
 // Turns branch
 rpsTurnRef = database.ref("/turn");
-
-// database.ref();
 
 // cancel player events and remove player on disconnect
 // rpsPlayersRef.onDisconnect.cancel();
