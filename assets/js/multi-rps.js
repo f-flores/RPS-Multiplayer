@@ -1,7 +1,7 @@
 // --------------------------------------------------------------------------------------------
 // File name: multi-rps.js
 // Description: This is an implementation of a two player rock, paper, scissor game, using
-//  firebase. 
+//  firebase.
 // Date: April, 2018
 // Author: Fabian Flores
 //
@@ -16,8 +16,17 @@ $(document).ready(() => {
 // VARIABLES
 //
 var player1, player2;
-var database, firebase, players;
+var database, players;
 
+// Initialize Firebase
+var config = {
+  "apiKey": "AIzaSyDZN1lB6rw7fFBpObj49tSNQfW2yXyJzz4",
+  "authDomain": "30",
+  "databaseURL": "https://multi-rps-88d44.firebaseio.com",
+  "projectId": "multi-rps-88d44",
+  "storageBucket": "multi-rps-88d44.appspot.com",
+  "messagingSenderId": "682358558557"
+};
 
 var GAMESTATE = "none";
 
@@ -71,19 +80,6 @@ var rpsGame = {
     return getGameState();
   }
 };
-
-
-// Initialize Firebase
-var config = {
-  "apiKey": "AIzaSyDZN1lB6rw7fFBpObj49tSNQfW2yXyJzz4",
-  "authDomain": "30",
-  "databaseURL": "https://multi-rps-88d44.firebaseio.com",
-  "projectId": "multi-rps-88d44",
-  "storageBucket": "multi-rps-88d44.appspot.com",
-  "messagingSenderId": "682358558557"
-};
-
-// var database2 = new Firebase("https://f-flores.github.io/RPS-Multiplayer");
 
 firebase.initializeApp(config);
 
