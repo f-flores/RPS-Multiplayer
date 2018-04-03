@@ -46,21 +46,37 @@ var rpsGame = {
   "losses": 0,
   "wins": 0,
   "gameState": "none",
-  setPlayer(name) {
-    console.log("in setPlayer(): " + name);
+  setupPlayer(name) {
+    console.log("in setupPlayer(): " + name);
     $("#player-form").hide();
     $("#start-btn").hide();
     database.ref("players/").once("value", (snapshot) => {
-      // var playerObj = snapshot.child('playersRef');
+      var sv = snapshot.val();
       var numPlayers = snapshot.numChildren();
 
-      console.log("in rpsGame.setPlayer(): numPlayers: " + numPlayers);
+      console.log("in setupPlayer(): snapshot val: " + JSON.stringify(sv));
+      // assigns either player1 or player2
+      if (numPlayers === 2) {
+        console.log("Game condition of two players is fulfilled. Game can begin.");
+        // rpsGame.assignPlayer("2");
+        // Start turn by setting turn to 1
+        // rpsTurnRef.set(1);
+      } else if (numPlayers === 1) {
+        console.log("First player signed in");
+        // rpsGame.assignPlayer("1");
+        rpsTurnRef.set(1);
+      } else if (numPlayers === 0) {
+        console.log("First players signed in.");
+        // rpsGame.assignPlayer("1");
+      }
+      console.log("in rpsGame.setupPlayer(): numPlayers: " + numPlayers);
     });
   },
+  // assignPlayer(num) {
+    // add num player to game
+  // }
   isPlayer1loggedin() {
-    var dbPath = "players/";
-
-    database.ref(dbPath).once("value").
+    database.ref("players/").once("value").
       then((snapshot) => {
 
         console.log("isPlayer1loggedin fn: " + JSON.stringify(snapshot));
@@ -269,7 +285,7 @@ function setGameState(state) {
     playerName = $("#player-name").val().
                                     trim();
     // console.log("playerName: " + playerName);
-    rpsGame.setPlayer(playerName);
+    rpsGame.setupPlayer(playerName);
     getGameState();
 
     $("#player-name").val("");
