@@ -95,6 +95,7 @@ var rpsGame = {
     database.ref(playerPath).onDisconnect().
                         remove();
     // setup html player greeting and name using player objects
+    console.log("numPlayer, typeof " + numPlayer + typeof numPlayer);
     if (numPlayer === "1") {
       console.log("call to new PlayerConsole(), player 1");
       player1 = new PlayerConsole(name, "1");
