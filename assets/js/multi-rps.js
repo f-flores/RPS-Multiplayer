@@ -46,6 +46,10 @@ var rpsGame = {
   "losses": 0,
   "wins": 0,
   "gameState": "none",
+  // ------------------------------------------------------------------------------------------
+  // setupPlayer() takes in numPlayer as a parameter and adds the numPlayer leaf to the
+  // players branch
+  //
   setupPlayer(name) {
     console.log("in setupPlayer(): " + name);
     $("#player-form").hide();
@@ -58,19 +62,40 @@ var rpsGame = {
       // assigns either player1 or player2
       if (numPlayers === 2) {
         console.log("Game condition of two players is fulfilled. Game can begin.");
-        // rpsGame.assignPlayer("2");
+        rpsGame.assignPlayer("2", name);
         // Start turn by setting turn to 1
         // rpsTurnRef.set(1);
       } else if (numPlayers === 1) {
         console.log("Second player signed in");
-        // rpsGame.assignPlayer("2");
+        rpsGame.assignPlayer("2", name);
         // rpsTurnRef.set(1);
       } else if (numPlayers === 0) {
         console.log("First players signed in.");
-        // rpsGame.assignPlayer("1");
+        rpsGame.assignPlayer("1", name);
       }
       console.log("in rpsGame.setupPlayer(): numPlayers: " + numPlayers);
     });
+  },
+  // ------------------------------------------------------------------------------------------
+  // assignPlayer() takes in numPlayer as a parameter and adds the numPlayer leaf to the
+  // players branch
+  //
+  assignPlayer(numPlayer, pName) {
+    var dbPath = "players/" + numPlayer.toString();
+    // var userRef = playersRef.child(numPlayer);
+
+    // sets up player information
+    database.ref(dbPath).set({
+      "choice": "",
+      "losses": 0,
+      "playerName": pName,
+      "wins": 0
+    });
+
+    // disconnect player
+    database.ref(dbPath).onDisconnect().
+                        remove();
+    // setup html player greeting and name
   },
   // assignPlayer(num) {
     // add num player to game
