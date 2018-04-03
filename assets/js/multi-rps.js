@@ -62,8 +62,8 @@ var rpsGame = {
         // Start turn by setting turn to 1
         // rpsTurnRef.set(1);
       } else if (numPlayers === 1) {
-        console.log("First player signed in");
-        // rpsGame.assignPlayer("1");
+        console.log("Second player signed in");
+        // rpsGame.assignPlayer("2");
         rpsTurnRef.set(1);
       } else if (numPlayers === 0) {
         console.log("First players signed in.");
@@ -213,69 +213,6 @@ function setGameState(state) {
     console.log("Game state: " + rpsGame.getState());
   }
 
-  // -----------------------------------------------------------------------------------------
-  // setupPlayer1() displays player1 console
-  //
-    function setupPlayer1(playerName) {
-      var dbPath;
-
-      console.log("Player 1 screen");
-      player1 = new PlayerConsole(playerName, "1");
-
-      dbPath = "/players/1";
-      // $("#player1").text(playerName);
-      player1.displayName();
-
-      player1.hideNameBtn();
-      player1.welcomeMsg("Hi " + playerName + ", you are player " + player1.playerNum);
-      // player2.showOpponentName();
-
-      // setup player information
-      database.ref(dbPath).update(
-        {
-          "choice": "",
-          "losses": player1.losses,
-          playerName,
-          "wins": player1.wins
-        },
-        (errorObject) => {
-          console.log("Errors handled: " + JSON.stringify(errorObject));
-        }
-      );
-      console.log("player1 at end of SetupPlayer1(): " + JSON.stringify(player1));
-    }
-
-  // -----------------------------------------------------------------------------------------
-  // setupPlayer2() displays player2 console
-  //
-    function setupPlayer2(playerName) {
-      var dbPath;
-
-      console.log("Player 2 screen");
-
-      dbPath = "/players/2";
-      // $("#player1").text(playerName);
-      player2.displayName();
-
-      player2.hideNameBtn();
-      player2.welcomeMsg("Hi " + playerName + ", you are player " + player2.playerNum);
-
-      // setup player information
-      database.ref(dbPath).update(
-        {
-          "choice": "",
-          "losses": player2.losses,
-          playerName,
-          "wins": player2.wins
-        },
-        (errorObject) => {
-          console.log("Errors handled: " + JSON.stringify(errorObject));
-        }
-      );
-      console.log("player2 at end of SetupPlayer2(): " + JSON.stringify(player2));
-
-    }
-
 
   $("#start-btn").on("click", (event) => {
     var playerName;
@@ -295,15 +232,78 @@ function setGameState(state) {
 
   // Main Game Loop
   initGame();
- 
-  if (getGameState() === "fulfilled") {
-    console.log("GAME CONDITIONS ARE FULFILLED.");
-    console.log("RPS GAME CAN START");
-  } else if (getGameState() === "created") {
-    console.log("GAME CREATED BUT CANNOT START YET");
-  } else {
-    console.log("GAME CANNOT START YET");
-  }
 
   // End of document.ready(function)
 });
+
+ // -----------------------------------------------------------------------------------------
+  // setupPlayer1() displays player1 console
+  //
+ // function setupPlayer1(playerName) {
+ //   var dbPath;
+
+ //   console.log("Player 1 screen");
+ //   player1 = new PlayerConsole(playerName, "1");
+
+ //   dbPath = "/players/1";
+    // $("#player1").text(playerName);
+   // player1.displayName();
+
+   // player1.hideNameBtn();
+   // player1.welcomeMsg("Hi " + playerName + ", you are player " + player1.playerNum);
+    // player2.showOpponentName();
+
+    // setup player information
+   // database.ref(dbPath).update(
+   //   {
+   //     "choice": "",
+   //     "losses": player1.losses,
+   //     playerName,
+   //     "wins": player1.wins
+   //   },
+   //   (errorObject) => {
+   //     console.log("Errors handled: " + JSON.stringify(errorObject));
+   //   }
+   // );
+   // console.log("player1 at end of SetupPlayer1(): " + JSON.stringify(player1));
+ // }
+
+// -----------------------------------------------------------------------------------------
+// setupPlayer2() displays player2 console
+//
+  // function setupPlayer2(playerName) {
+   // var dbPath;
+
+   // console.log("Player 2 screen");
+
+   // dbPath = "/players/2";
+    // $("#player1").text(playerName);
+   // player2.displayName();
+
+   // player2.hideNameBtn();
+   // player2.welcomeMsg("Hi " + playerName + ", you are player " + player2.playerNum);
+
+    // setup player information
+   // database.ref(dbPath).update(
+   //   {
+   //     "choice": "",
+   //     "losses": player2.losses,
+   //     playerName,
+   //     "wins": player2.wins
+   //   },
+   //   (errorObject) => {
+   //     console.log("Errors handled: " + JSON.stringify(errorObject));
+   //   }
+   // );
+   // console.log("player2 at end of SetupPlayer2(): " + JSON.stringify(player2));
+
+  // }
+
+   // if (getGameState() === "fulfilled") {
+ //   console.log("GAME CONDITIONS ARE FULFILLED.");
+ //   console.log("RPS GAME CAN START");
+ // } else if (getGameState() === "created") {
+ //   console.log("GAME CREATED BUT CANNOT START YET");
+ // } else {
+ //   console.log("GAME CANNOT START YET");
+ // }
