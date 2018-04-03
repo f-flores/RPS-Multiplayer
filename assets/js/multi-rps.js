@@ -17,7 +17,7 @@ $(document).ready(() => {
 // VARIABLES
 //
 var player1, player2;
-var database, players;
+var firebase, database, players;
 
 // Initialize Firebase
 var config = {
