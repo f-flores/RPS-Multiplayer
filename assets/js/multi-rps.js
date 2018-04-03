@@ -290,32 +290,32 @@ function setGameState(state) {
 
   // Main Game Loop
   initGame();
-  console.log("current game state: " + getGameState());
+  // console.log("current game state: " + getGameState());
 
   // wait for game to start
-  if (getGameState() !== "fulfilled") {
-    database.ref("players/").on("child_added", (childSnapshot) => {
-      var childsv;
+  // if (getGameState() !== "fulfilled") {
+  //  database.ref("players/").on("child_added", (childSnapshot) => {
+  //    var childsv;
 
-      childsv = childSnapshot.val();
-      console.log("getGameState childSnapshot: " + JSON.stringify(childSnapshot));
-      console.log("getGameState ref: " + childSnapshot.ref.key);
-      console.log("getGameState parent of ref: " + childSnapshot.ref.parent.key);
-      if (childSnapshot.ref.key === "1") {
-        setGameState("created");
-        if (rpsGame.isPlayer1loggedin()) {
-          console.log("in player2 screen");
-          console.log("getGameState if loop game has been created");
-        }
+  //    childsv = childSnapshot.val();
+  //    console.log("getGameState childSnapshot: " + JSON.stringify(childSnapshot));
+  //    console.log("getGameState ref: " + childSnapshot.ref.key);
+  //    console.log("getGameState parent of ref: " + childSnapshot.ref.parent.key);
+  //    if (childSnapshot.ref.key === "1") {
+  //      setGameState("created");
+  //      if (rpsGame.isPlayer1loggedin()) {
+  //        console.log("in player2 screen");
+  //        console.log("getGameState if loop game has been created");
+  //      }
         // player2.displayName();
         // setupPlayer2("PLAYER1");
-      } else if (childSnapshot.ref.key === "2") {
-        setGameState("fulfilled");
+  //    } else if (childSnapshot.ref.key === "2") {
+  //      setGameState("fulfilled");
         // set turn = 0
-      }
+  //    }
       // childsv.gameState = GAMESTATE;
-    });
-  }
+  //  });
+  // }
 // Create a variable to reference the database
 // database = firebase.database();
 // database.ref();
@@ -324,8 +324,8 @@ function setGameState(state) {
     console.log("RPS GAME CAN START");
   } else if (getGameState() === "created") {
     // create player
-    player2 = new PlayerConsole("Waiting for player2...", "2");
-    player2.showOpponentName();
+    // player2 = new PlayerConsole("Waiting for player2...", "2");
+    // player2.showOpponentName();
     // setupPlayer2("Waiting for player2...");
     // show opponents name on active player's screen
     console.log("GAME CREATED BUT CANNOT START YET");
