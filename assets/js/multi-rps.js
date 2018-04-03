@@ -30,7 +30,7 @@ $(document).ready(() => {
 // VARIABLES
 //
 var player1, player2;
-var database, rpsPlayersRef, rpsTurnRef;
+var database, rpsTurnRef;
 
 var GAMESTATE = "none";
 
@@ -50,7 +50,7 @@ var rpsGame = {
     console.log("in setPlayer(): " + name);
     $("#player-form").hide();
     $("#start-btn").hide();
-    rpsPlayersRef.once("value", (snapshot) => {
+    database.ref("players/").once("value", (snapshot) => {
       // var playerObj = snapshot.child('playersRef');
       var numPlayers = snapshot.numChildren();
 
@@ -101,9 +101,6 @@ var rpsGame = {
 //
 // Create a variable to reference the database
 database = firebase.database();
-
-// Players branch
-rpsPlayersRef = database.ref("/players");
 
 // Turns branch
 rpsTurnRef = database.ref("/turn");
