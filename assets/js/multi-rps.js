@@ -17,17 +17,19 @@ $(document).ready(() => {
 // VARIABLES
 //
 var player1, player2;
-var firebase, database, players;
+var database, players;
 
 // Initialize Firebase
 var config = {
   "apiKey": "AIzaSyDZN1lB6rw7fFBpObj49tSNQfW2yXyJzz4",
-  "authDomain": "30",
+  "authDomain": "multi-rps-88d44.firebaseapp.com",
   "databaseURL": "https://multi-rps-88d44.firebaseio.com",
   "projectId": "multi-rps-88d44",
   "storageBucket": "multi-rps-88d44.appspot.com",
   "messagingSenderId": "682358558557"
 };
+
+firebase.initializeApp(config);
 
 var GAMESTATE = "none";
 
@@ -82,7 +84,7 @@ var rpsGame = {
   }
 };
 
-firebase.initializeApp(config);
+// firebase.initializeApp(config);
 
 // Create a variable to reference the database
 database = firebase.database();
