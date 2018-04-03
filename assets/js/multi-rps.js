@@ -260,7 +260,7 @@ function setGameState(state) {
         numPlayer = childSnapshot.ref.key,
         parentKey = childSnapshot.ref.parent.key;
 
-    console.log("on players child added, numPlayer, parentKey" + numPlayer, parentKey);
+    console.log("on players child added, childsv, numPlayer, parentKey" + JSON.stringify(childsv), numPlayer, parentKey);
   });
 
 
