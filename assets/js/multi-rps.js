@@ -1,9 +1,20 @@
 // --------------------------------------------------------------------------------------------
 // File name: multi-rps.js
-// Description: Contains rps variables.
+// Description: This is an implementation of a two player rock, paper, scissor game, using
+//  firebase. 
+// Date: April, 2018
+// Author: Fabian Flores
 //
 // --------------------------------------------------------------------------------------------
 
+
+$(document).ready(() => {
+// -----------------------------------------------------------------------------------------
+// initializes rpsGame
+
+// ---------------------------------------------------------------------------------------------
+// VARIABLES
+//
 var player1, player2;
 var database, firebase, players;
 
@@ -156,9 +167,7 @@ function setGameState(state) {
   );
 }
 
-$(document).ready(() => {
-  // -----------------------------------------------------------------------------------------
-  // initializes rpsGame
+
   function initGame() {
     console.log("in initGame()");
     rpsGame.isPlayer1loggedin();
