@@ -62,12 +62,9 @@ var rpsGame = {
       console.log("in setupPlayer(): snapshot val: " + JSON.stringify(sv));
       // assigns either player1 or player2
       if (numPlayers === 2) {
-        msg = "Game condition of two players is already fulfilled. Sorry, you will have to wait.";
+        msg = "Game condition of two players is already fulfilled. Sorry, please try later.";
         console.log();
         $("#player-welcome-message").html("<p class=\"text-center\">" + msg + "</p>");
-        // rpsGame.assignPlayer("2", name);
-        // Start turn by setting turn to 1
-        // rpsTurnRef.set(1);
       } else if (numPlayers === 1) {
         console.log("Second player signed in");
         rpsGame.assignPlayer("2", name);
@@ -97,7 +94,12 @@ var rpsGame = {
     // disconnect player
     database.ref(playerPath).onDisconnect().
                         remove();
-    // setup html player greeting and name
+    // setup html player greeting and name using player objects
+    if (numPlayer === 1) {
+      player1 = new PlayerConsole(name, "1");
+    } else if (numPlayer === 2) {
+      player2 = new PlayerConsole(name, "2");
+    }
   },
   // assignPlayer(num) {
     // add num player to game
