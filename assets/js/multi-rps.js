@@ -7,7 +7,7 @@
 //
 // --------------------------------------------------------------------------------------------
 
-/* global firebase: true */
+// /* global firebase: true */
 
 // Initialize Firebase
 var config = {
@@ -85,7 +85,7 @@ var rpsGame = {
 };
 
 // firebase.initializeApp(config);
-
+//
 // Create a variable to reference the database
 database = firebase.database();
 // Create players branch
