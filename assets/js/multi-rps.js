@@ -258,7 +258,7 @@ function setGameState(state) {
   database.ref("players/").on("child_added", (childSnapshot) => {
     var childsv = childSnapshot.val(),
         // numPlayer = childSnapshot.ref.key,
-        parent = childSnapshot.ref.parent.key;
+        parent = childSnapshot.key;
 
     console.log("on players child added, childsv, parent" + JSON.stringify(childsv), parent);
   });
