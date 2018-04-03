@@ -48,7 +48,7 @@ var rpsGame = {
   "gameState": "none",
   setPlayer(name) {
     console.log("in setPlayer(): " + name);
-    $("#start-btn").hide();
+    $("#player-form").hide();
   },
   isPlayer1loggedin() {
     var dbPath = "players/";
