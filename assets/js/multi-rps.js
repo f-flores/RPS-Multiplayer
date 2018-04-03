@@ -84,11 +84,10 @@ var rpsGame = {
   // players branch
   //
   assignPlayer(numPlayer, pName) {
-    var dbPath = "players/" + numPlayer.toString();
-    // var userRef = playersRef.child(numPlayer);
+    var playerPath = "players/" + numPlayer.toString();
 
     // sets up player information
-    database.ref(dbPath).set({
+    database.ref(playerPath).set({
       "choice": "",
       "losses": 0,
       "playerName": pName,
@@ -96,7 +95,7 @@ var rpsGame = {
     });
 
     // disconnect player
-    database.ref(dbPath).onDisconnect().
+    database.ref(playerPath).onDisconnect().
                         remove();
     // setup html player greeting and name
   },
