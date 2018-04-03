@@ -186,7 +186,9 @@ function PlayerConsole(name, num) {
 
     database.ref("players/" + this.otherPlayer).once("value", (snapshot) => {
       sv = snapshot.val();
-      otherName = sv.playerName;
+      if (sv !== null) {
+        otherName = sv.playerName;
+      }
     });
 
     return otherName;
