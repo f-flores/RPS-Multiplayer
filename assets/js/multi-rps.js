@@ -101,20 +101,17 @@ var rpsGame = {
       player1 = new PlayerConsole(pName, "1");
       console.log("player1: " + JSON.stringify(player1));
       player1.displayName();
-      player1.showOpponentName();
+      // player1.showOpponentName();
       player1.welcomeMsg("Hi, " + pName + "! You are player " + numPlayer + ".");
     } else if (numPlayer === "2") {
       console.log("call to new PlayerConsole(), player 2");
       player2 = new PlayerConsole(pName, "2");
       console.log("player2: " + JSON.stringify(player2));
       player2.displayName();
-      player2.showOpponentName();
+      // player2.showOpponentName();
       player2.welcomeMsg("Hi, " + pName + "! You are player " + numPlayer + ".");
     }
   },
-  // assignPlayer(num) {
-    // add num player to game
-  // }
   isPlayer1loggedin() {
     database.ref("players/").once("value").
       then((snapshot) => {
@@ -182,20 +179,33 @@ function PlayerConsole(name, num) {
   } else {
     this.otherPlayer = "1";
   }
+
+  this.otherPlayerName = () => {
+    var otherName = "",
+        sv;
+
+    database.ref("players/" + this.otherPlayer).once("value", (snapshot) => {
+      sv = snapshot.val();
+      otherName = sv.playerName;
+    });
+
+    return otherName;
+  };
+  console.log("this.otherPlayerName: " + this.otherPlayerName());
   // showP1Name() get player 1 name from database and display
   // showP2Name() get player 2 name from database and display
   this.displayName = () => {
     if (this.name === "undefined") {
-      $("#player" + num.toString()).text("WAITING OTHER");
+      $("#player" + num.toString()).text("Waiting for player " + this.otherPlayer + "...");
     } else {
       $("#player" + num.toString()).text(this.name);
     }
   };
   this.showOpponentName = () => {
     if (this.name === "undefined") {
-      $("#player" + this.otherPlayer).text("HELLO SHOW OPPONENT");
+      $("#player" + this.otherPlayer).text("Waiting for player " + this.otherPlayer + "...");
     } else {
-      $("#player" + this.otherPlayer).text(this.name);
+      $("#player" + this.otherPlayer).text(this.otherPlayerName);
     }
   };
   this.welcomeMsg = (msg) => {
@@ -242,20 +252,10 @@ function setGameState(state) {
   );
 }
 
-
-  function initGame() {
-    console.log("in initGame()");
-    rpsGame.isPlayer1loggedin();
-    rpsGame.isPlayer2loggedin();
-    setGameState("none");
-    // is user1 present?
-    console.log("isPlayer1loggedin() in initGame(): " + rpsGame.isPlayer1loggedin());
-    // is user2 present?
-    console.log("isPlayer2loggedin() in initGame(): " + rpsGame.isPlayer2loggedin());
-    // if both players present, display game full, please wait
-    console.log("areBothPlayersLoggedin() in initGame(): " + rpsGame.areBothPlayersLoggedin());
-    console.log("Game state: " + rpsGame.getState());
-  }
+  // Show player name in box
+  database.ref("players/").on("child_added", (childSnapshot) => {
+    console.log("on players child added");
+  });
 
 
   $("#start-btn").on("click", (event) => {
@@ -275,7 +275,7 @@ function setGameState(state) {
 
 
   // Main Game Loop
-  initGame();
+  // initGame();
 
   // End of document.ready(function)
 });
@@ -351,3 +351,17 @@ function setGameState(state) {
  // } else {
  //   console.log("GAME CANNOT START YET");
  // }
+
+ // function initGame() {
+ // console.log("in initGame()");
+ // rpsGame.isPlayer1loggedin();
+ // rpsGame.isPlayer2loggedin();
+ // setGameState("none");
+  // is user1 present?
+ // console.log("isPlayer1loggedin() in initGame(): " + rpsGame.isPlayer1loggedin());
+  // is user2 present?
+ // console.log("isPlayer2loggedin() in initGame(): " + rpsGame.isPlayer2loggedin());
+  // if both players present, display game full, please wait
+ // console.log("areBothPlayersLoggedin() in initGame(): " + rpsGame.areBothPlayersLoggedin());
+ // console.log("Game state: " + rpsGame.getState());
+// }
