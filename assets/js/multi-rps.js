@@ -193,9 +193,9 @@ function PlayerConsole(name, num) {
   };
   this.showOpponentName = () => {
     if (this.name === "undefined") {
-      $("#player" + this.otherPlayer).text(this.name);
-    } else {
       $("#player" + this.otherPlayer).text("HELLO SHOW OPPONENT");
+    } else {
+      $("#player" + this.otherPlayer).text(this.name);
     }
   };
   this.welcomeMsg = (msg) => {
