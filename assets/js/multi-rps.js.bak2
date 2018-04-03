@@ -46,10 +46,6 @@ var rpsGame = {
   "losses": 0,
   "wins": 0,
   "gameState": "none",
-  setPlayer(name) {
-    console.log("in setPlayer(): " + name);
-    $("#start-btn").hide();
-  },
   isPlayer1loggedin() {
     var dbPath = "players/";
 
@@ -266,22 +262,21 @@ function setGameState(state) {
 
     playerName = $("#player-name").val().
                                     trim();
-    // console.log("playerName: " + playerName);
-    rpsGame.setPlayer(playerName);
+    console.log("playerName: " + playerName);
 
-    // console.log("isPlayer1loggedin() in #start-btn: " + rpsGame.isPlayer1loggedin());
-    // console.log("in #start-btn getGameState call");
+    console.log("isPlayer1loggedin() in #start-btn: " + rpsGame.isPlayer1loggedin());
+    console.log("in #start-btn getGameState call");
     getGameState();
-    // if (rpsGame.areBothPlayersLoggedin()) {
-    //  console.log("Game can start.");
-    // } else if (!rpsGame.isPlayer1loggedin()) {
+    if (rpsGame.areBothPlayersLoggedin()) {
+      console.log("Game can start.");
+    } else if (!rpsGame.isPlayer1loggedin()) {
 
-    //    setupPlayer1(playerName);
+        setupPlayer1(playerName);
         // setGameState("created");
-    // } else if (rpsGame.isPlayer1loggedin() && !rpsGame.isPlayer2loggedin()) {
-    //    console.log("player1 and player2 logged in successfully.");
+    } else if (rpsGame.isPlayer1loggedin() && !rpsGame.isPlayer2loggedin()) {
+        console.log("player1 and player2 logged in successfully.");
        // setupPlayer2(playerName);
-    // }
+    }
 
     $("#player-name").val("");
     // End of "#start-btn"
