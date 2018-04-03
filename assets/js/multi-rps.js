@@ -8,6 +8,7 @@
 // --------------------------------------------------------------------------------------------
 
 /* global firebase: true */
+
 // Initialize Firebase
 var config = {
   "apiKey": "AIzaSyDZN1lB6rw7fFBpObj49tSNQfW2yXyJzz4",
@@ -302,7 +303,7 @@ function setGameState(state) {
     });
   }
 // Create a variable to reference the database
-database = firebase.database();
+// database = firebase.database();
 // database.ref();
   if (getGameState() === "fulfilled") {
     console.log("GAME CONDITIONS ARE FULFILLED.");
