@@ -5,7 +5,7 @@
 // --------------------------------------------------------------------------------------------
 
 var player1, player2;
-var database, firebase;
+var database, firebase, players;
 
 
 var GAMESTATE = "none";
@@ -72,12 +72,14 @@ var config = {
   "messagingSenderId": "682358558557"
 };
 
-var database2 = new Firebase("https://f-flores.github.io/RPS-Multiplayer");
+// var database2 = new Firebase("https://f-flores.github.io/RPS-Multiplayer");
 
 firebase.initializeApp(config);
 
 // Create a variable to reference the database
 database = firebase.database();
+// Create players branch
+players = database.ref("/players");
 
 // database.ref();
 
