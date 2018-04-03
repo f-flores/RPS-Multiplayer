@@ -257,8 +257,8 @@ function setGameState(state) {
   // Show player name in box
   database.ref("players/").on("child_added", (childSnapshot) => {
     var childsv = childSnapshot.val(),
-        numPlayer = childsv.key,
-        parentKey = childsv.parent.key;
+        numPlayer = childSnapshot.ref.key,
+        parentKey = childSnapshot.ref.parent.key;
 
     console.log("on players child added, numPlayer, parentKey" + numPlayer, parentKey);
   });
