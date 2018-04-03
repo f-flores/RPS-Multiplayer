@@ -55,14 +55,17 @@ var rpsGame = {
     $("#player-form").hide();
     $("#start-btn").hide();
     database.ref("players/").once("value", (snapshot) => {
-      var sv = snapshot.val();
-      var numPlayers = snapshot.numChildren();
+      var sv = snapshot.val(),
+          numPlayers = snapshot.numChildren(),
+          msg = "";
 
       console.log("in setupPlayer(): snapshot val: " + JSON.stringify(sv));
       // assigns either player1 or player2
       if (numPlayers === 2) {
-        console.log("Game condition of two players is fulfilled. Game can begin.");
-        rpsGame.assignPlayer("2", name);
+        msg = "Game condition of two players is already fulfilled. Sorry, you will have to wait.";
+        console.log();
+        $("#player-welcome-message").html("<p class=\"text-center\">" + msg + "</p>");
+        // rpsGame.assignPlayer("2", name);
         // Start turn by setting turn to 1
         // rpsTurnRef.set(1);
       } else if (numPlayers === 1) {
