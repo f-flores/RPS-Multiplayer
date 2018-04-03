@@ -99,9 +99,15 @@ var rpsGame = {
     if (numPlayer === "1") {
       console.log("call to new PlayerConsole(), player 1");
       player1 = new PlayerConsole(name, "1");
+      player1.displayName();
+      player1.showOpponentName();
+      player1.welcomeMsg("Hi, " + name + "! You are player " + numPlayer + ".");
     } else if (numPlayer === "2") {
       console.log("call to new PlayerConsole(), player 2");
       player2 = new PlayerConsole(name, "2");
+      player2.displayName();
+      player2.showOpponentName();
+      player2.welcomeMsg("Hi, " + name + "! You are player " + numPlayer + ".");
     }
   },
   // assignPlayer(num) {
