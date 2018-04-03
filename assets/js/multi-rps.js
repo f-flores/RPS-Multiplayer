@@ -8,6 +8,7 @@
 // --------------------------------------------------------------------------------------------
 
 // /* global firebase: true */
+var firebase;
 
 // Initialize Firebase
 var config = {
