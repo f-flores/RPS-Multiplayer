@@ -72,10 +72,13 @@ var config = {
   "messagingSenderId": "682358558557"
 };
 
+var database2 = new Firebase("https://f-flores.github.io/RPS-Multiplayer");
+
 firebase.initializeApp(config);
 
 // Create a variable to reference the database
 database = firebase.database();
+
 // database.ref();
 
 function PlayerConsole(name, num) {
@@ -104,7 +107,7 @@ function PlayerConsole(name, num) {
     if (this.name === "undefined") {
       $("#player" + this.otherPlayer).text(this.name);
     } else {
-      $("#player" + this.otherPlayer).text("HELLO SHOW OPPONENT");  
+      $("#player" + this.otherPlayer).text("HELLO SHOW OPPONENT");
     }
   };
   this.welcomeMsg = (msg) => {
@@ -271,8 +274,6 @@ $(document).ready(() => {
       var childsv;
 
       childsv = childSnapshot.val();
-      // refChild = childSnapshot.key;
-      // do stuff with snapshot
       console.log("getGameState childSnapshot: " + JSON.stringify(childSnapshot));
       console.log("getGameState ref: " + childSnapshot.ref.key);
       console.log("getGameState parent of ref: " + childSnapshot.ref.parent.key);
@@ -310,64 +311,3 @@ database = firebase.database();
 
   // End of document.ready(function)
 });
-
-// ----------------------------------------------------------------------------------------------------
-// --------------------- SUPERFLUOUS CODE -------------------------------------------------------------
-
-    //    firebase.auth().signInAnonymously().
-    //            then((user) => {
-    //            user.updateProfile({"displayName": playerName});
-    //    });
-    // setup player1screen
-
-    // disable start button if both players are selected
-    // if (rpsGame.areBothPlayersLoggedin()) {
-    //  $("#player-form").hide();
-    // } else {
-    //  $("#player-form").show();
-    // }
-
-           //  firebase.auth().signInAnonymously().
-       //   then((user) => {
-       //   user.updateProfile({"displayName": playerName});
-       // });
-
-        // setup player2screen
-
-          // firebase.auth().onAuthStateChanged((firebaseUser) => {
-    // console.log(firebaseUser);
-    // if (firebaseUser) {
-    //  $("#btn-logout-player1").removeClass("d-none");
-      // chat.onlogin()
-      // game.onlogin()
-    // } else {
-      // user signed out
-      // $("#btn-logout-player1").addClass("d-none");
-      // window.location.reload();
-    // }
-  // });
-
-    // -----------------------------------------------------------------------------------------
-  // initPlayer1Screen() initializes player1 console
-  //
-  // function initPlayer1Screen() {
-  //    initialize Player 1 screen
-  // }
-
-  // -----------------------------------------------------------------------------------------
-  // function initPlayer2Screen() displays player2 console
-  //
-  // function initPlayer2Screen() {
-  //    initialize Player 2 screen
-  // }
-
-      // var state = "none";
-
-    // if (this.isPlayer1loggedin() && this.isPlayer2loggedin()) {
-    //  state = "fulfilled";
-    // } else if (this.isPlayer1loggedin()) {
-    //  state = "created";
-    // }
-    // this.gameState = state;
-
-  // ----------------------------------------------------------------------------------------------------
