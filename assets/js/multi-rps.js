@@ -98,18 +98,18 @@ var rpsGame = {
     console.log("numPlayer, typeof " + numPlayer + typeof numPlayer);
     if (numPlayer === "1") {
       console.log("call to new PlayerConsole(), player 1");
-      player1 = new PlayerConsole(name, "1");
+      player1 = new PlayerConsole(pName, "1");
       console.log("player1: " + JSON.stringify(player1));
       player1.displayName();
       player1.showOpponentName();
-      player1.welcomeMsg("Hi, " + name + "! You are player " + numPlayer + ".");
+      player1.welcomeMsg("Hi, " + pName + "! You are player " + numPlayer + ".");
     } else if (numPlayer === "2") {
       console.log("call to new PlayerConsole(), player 2");
-      player2 = new PlayerConsole(name, "2");
+      player2 = new PlayerConsole(pName, "2");
       console.log("player2: " + JSON.stringify(player2));
       player2.displayName();
       player2.showOpponentName();
-      player2.welcomeMsg("Hi, " + name + "! You are player " + numPlayer + ".");
+      player2.welcomeMsg("Hi, " + pName + "! You are player " + numPlayer + ".");
     }
   },
   // assignPlayer(num) {
