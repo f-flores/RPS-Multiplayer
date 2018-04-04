@@ -103,18 +103,18 @@ var rpsGame = {
     if (numPlayer === "1") {
       player1 = new PlayerConsole(pName, "1");
       player1.welcomeMsg("Hi, " + pName + "! You are player " + numPlayer + ".");
-      currentPlayer = player1.numPlayer;
+      currentPlayer = parseInt(player1.numPlayer, 10);
     } else if (numPlayer === "2") {
       player2 = new PlayerConsole(pName, "2");
       player2.welcomeMsg("Hi, " + pName + "! You are player " + numPlayer + ".");
-      currentPlayer = player2.numPlayer;
+      currentPlayer = parseInt(player2.numPlayer, 10);
     }
   },
   setTurn(turn) {
     database.ref("turn/").set(turn);
 
     // remove turn from database on disconnect
-    database.ref("turn/").onDisconnect.remove();
+    // database.ref("turn/").onDisconnect.remove();
   }
 };
 
@@ -217,7 +217,7 @@ function PlayerConsole(name, num) {
         currPlayerObj,
         otherPlayerObj;
 
-    if (currentPlayer === "1") {
+    if (currentPlayer === 1) {
       otherPlayer = 2;
       currPlayerObj = player1;
       otherPlayerObj = player2;
