@@ -64,13 +64,9 @@ var rpsGame = {
           // reassign player1 and do NOT rewrite player 2
           this.assignPlayer("1", name);
           this.setTurn(1);
-          // remove turn from database on disconnect
-          database.ref("turn/").onDisconnect.remove();
         } else if (numPlayers === 1) {
           this.assignPlayer("2", name);
           this.setTurn(1);
-          // remove turn from database on disconnect
-          database.ref("turn/").onDisconnect.remove();
         } else if (numPlayers === 0) {
           this.assignPlayer("1", name);
         }
@@ -116,6 +112,9 @@ var rpsGame = {
   },
   setTurn(turn) {
     database.ref("turn/").set(turn);
+
+    // remove turn from database on disconnect
+    database.ref("turn/").onDisconnect.remove();
   }
 };
 
