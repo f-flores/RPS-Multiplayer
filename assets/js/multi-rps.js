@@ -32,8 +32,6 @@ $(document).ready(() => {
 var player1, player2;
 var database;
 
-// var GAMESTATE = "none";
-
 // a game object for rock, paper scissors game
 var rpsGame = {
   "activePlayer": "Waiting...",
@@ -45,7 +43,6 @@ var rpsGame = {
   "turn": 0,
   "losses": 0,
   "wins": 0,
-  // "gameState": "none",
   // ------------------------------------------------------------------------------------------
   // setupPlayer() takes in numPlayer as a parameter and adds the numPlayer leaf to the
   // players branch
@@ -61,28 +58,20 @@ var rpsGame = {
             player2Exists = snapshot.child("2").exists(),
             msg = "";
 
-        console.log("in setupPlayer(): snapshot val: " + JSON.stringify(sv));
-        console.log("in setupPlayer(): player2Exists: " + player2Exists);
-        // assigns either player1 or player2
+        // game is full, player is not allowed to join game
         if (numPlayers === 2) {
           msg = "Game condition of two players is already fulfilled. Sorry, please try later.";
-          console.log();
           $("#player-welcome-message").html("<p class=\"text-center\">" + msg + "</p>");
         } else if (numPlayers === 1 && player2Exists) {
           // reassign player1 and do NOT rewrite player 2
-          console.log("First player reassigned");
           this.assignPlayer("1", name);
           this.setTurn(1);
-          // rpsTurnRef.set(1);
         } else if (numPlayers === 1) {
-          console.log("Second player signed in");
           this.assignPlayer("2", name);
           this.setTurn(1);
         } else if (numPlayers === 0) {
-          console.log("First players signed in.");
           this.assignPlayer("1", name);
         }
-        console.log("in rpsGame.setupPlayer(): numPlayers: " + numPlayers);
       },
       (errorObject) => {
             console.log("Errors handled: " + JSON.stringify(errorObject));
@@ -109,20 +98,15 @@ var rpsGame = {
       }
     );
 
-    // disconnect player
+    // disconnects player if player reloads page
     database.ref(playerPath).onDisconnect().
                         remove();
     // setup html player greeting and name using PlayerConsole prototype
-    console.log("numPlayer, typeof " + numPlayer + typeof numPlayer);
     if (numPlayer === "1") {
-      console.log("call to new PlayerConsole(), player 1");
       player1 = new PlayerConsole(pName, "1");
-      // console.log("player1: " + JSON.stringify(player1));
       player1.welcomeMsg("Hi, " + pName + "! You are player " + numPlayer + ".");
     } else if (numPlayer === "2") {
-      console.log("call to new PlayerConsole(), player 2");
       player2 = new PlayerConsole(pName, "2");
-      // console.log("player2: " + JSON.stringify(player2));
       player2.welcomeMsg("Hi, " + pName + "! You are player " + numPlayer + ".");
     }
   },
@@ -150,7 +134,6 @@ var rpsGame = {
         console.log("this.player2loggedin: " + this.player2loggedin);
     });
 
-   // return this.player2loggedin;
    return this.player2loggedin;
   },
   areBothPlayersLoggedin() {
@@ -158,22 +141,13 @@ var rpsGame = {
 
     return this.bothPlayersSelected;
   },
-  // getState() {
-  //  return getGameState();
-  // },
   setTurn(turn) {
     database.ref("turn/").set(turn);
   }
 };
 
-// database.ref();
-// firebase.initializeApp(config);
-//
 // Create a variable to reference the database
 database = firebase.database();
-
-// Turns branch
-// rpsTurnRef = database.ref("/turn");
 
 // cancel player events and remove player on disconnect
 // rpsPlayersRef.onDisconnect.cancel();
@@ -211,8 +185,7 @@ function PlayerConsole(name, num) {
     return otherName;
   };
   console.log("this.otherPlayerName: " + this.otherPlayerName());
-  // showP1Name() get player 1 name from database and display
-  // showP2Name() get player 2 name from database and display
+
   this.displayName = () => {
     if (this.name === "undefined") {
       $("#player" + num.toString()).text("Waiting for player " + this.otherPlayer + "...");
@@ -261,7 +234,8 @@ function PlayerConsole(name, num) {
     }
   );
 
-
+  // Main Game Loop
+  // initGame();
   $("#start-btn").on("click", (event) => {
     var playerName;
 
@@ -269,17 +243,10 @@ function PlayerConsole(name, num) {
     event.preventDefault();
     playerName = $("#player-name").val().
                                     trim();
-    // console.log("playerName: " + playerName);
     rpsGame.setupPlayer(playerName);
-    // getGameState();
 
     $("#player-name").val("");
-    // End of "#start-btn"
   });
-
-
-  // Main Game Loop
-  // initGame();
 
   // End of document.ready(function)
 });
