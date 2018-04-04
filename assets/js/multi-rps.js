@@ -217,26 +217,26 @@ function PlayerConsole(name, num) {
   //
   database.ref("turn/").on(
     "value", (snapshot) => {
-    var turnNumber = snapshot.val(),
+    var numberTurn = snapshot.val(),
         otherPlayer,
         currPlayerObj,
         otherPlayerObj;
 
-    console.log("in ref 'turn', turn value: , currPlayer, otherPlayer:  " + turnNumber, currentPlayer, otherPlayer);
     console.log("player1: " + JSON.stringify(player1));
     console.log("player2: " + JSON.stringify(player2));
 
-    if (turnNumber === 1) {
+    if (numberTurn === 1) {
       // empty both player's game consoles
       emptyConsole();
       otherPlayer = currentPlayer === 1
       ? 2
       : 1;
+      console.log("in ref 'turn', turn value: , currentPlayer, otherPlayer:  " + numberTurn, currentPlayer, otherPlayer);
       // messages on turn1;
-      if (currentPlayer === 1) {
+      if (numberTurn === currentPlayer) {
         $("#player-state-message").html("It is your turn to choose.");
         // show choices
-      } else {
+      } else if (numberTurn === otherPlayer) {
         $("#player-state-message").html("Waiting for other player to choose.");
       }
       // Show choices to player1, show wait for player2
