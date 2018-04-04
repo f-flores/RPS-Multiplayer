@@ -53,7 +53,7 @@ var rpsGame = {
       "value", (snapshot) => {
         var sv = snapshot.val(),
             numPlayers = snapshot.numChildren(),
-            player2Exists = snapshot.child("2").exists(),
+            player2Exists = snapshot.child(2).exists(),
             msg = "";
 
         // game is full, player is not allowed to join game
