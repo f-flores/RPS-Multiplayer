@@ -29,7 +29,7 @@ $(document).ready(() => {
 // ---------------------------------------------------------------------------------------------
 // VARIABLES
 //
-var player1, player2;
+var player1, player2, currentPlayer;
 var database;
 
 // a game object for rock, paper scissors game
@@ -105,9 +105,11 @@ var rpsGame = {
     if (numPlayer === "1") {
       player1 = new PlayerConsole(pName, "1");
       player1.welcomeMsg("Hi, " + pName + "! You are player " + numPlayer + ".");
+      currentPlayer = player1.numPlayer;
     } else if (numPlayer === "2") {
       player2 = new PlayerConsole(pName, "2");
       player2.welcomeMsg("Hi, " + pName + "! You are player " + numPlayer + ".");
+      currentPlayer = player2.numPlayer;
     }
   },
   isPlayer1loggedin() {
@@ -145,6 +147,12 @@ var rpsGame = {
     database.ref("turn/").set(turn);
   }
 };
+
+function emptyConsole() {
+  console.log("in emptyConsole()");
+  $("#choices1, #game-results, #choices-2").empty();
+  console.log("end emptyConsole()");
+}
 
 // ------------------------------------------------------------------------------------------
 // PlayerConsole() is a prototype to assist in dynamically changing a player's html elements.
@@ -212,6 +220,7 @@ function PlayerConsole(name, num) {
   // ------------------------------------------------------------------------------------------
   // When a player is added to the game, display that player's initial information:
   // Name, Number of wins (0), Number of losses (0)
+  //
   database.ref("players/").on(
     "child_added", (childSnapshot) => {
       var childsv = childSnapshot.val(),
@@ -223,6 +232,51 @@ function PlayerConsole(name, num) {
       scoreText = "Wins: " + childsv.wins + "  Losses: " + childsv.losses;
       $("#score" + numPlayer.toString()).html(scoreText);
     },
+    (errorObject) => {
+          console.log("Errors handled: " + JSON.stringify(errorObject));
+    }
+  );
+
+  // ------------------------------------------------------------------------------------------
+  // When turn is set, determine which player's turn it is and wait for that players choice
+  //
+  database.ref("turn/").on(
+    "value", (snapshot) => {
+    var turnNumber = snapshot.val(),
+        otherPlayer,
+        currPlayerObj,
+        otherPlayerObj;
+
+    if (currentPlayer === 1) {
+      otherPlayer = 2;
+      currPlayerObj = player1;
+      otherPlayerObj = player2;
+    } else {
+      otherPlayer = 1;
+      currPlayerObj = player2;
+      otherPlayerObj = player1;
+    }
+
+    console.log("in ref 'turn', turn value: , currPlayer, otherPlayer" + turnNumber, currentPlayer, otherPlayer);
+
+    if (turnNumber === 1) {
+      // empty both player's game consoles
+      emptyConsole();
+      // messages on turn1;
+      // Show choices to player1, show wait for player2
+      if (currentPlayer === 1) {
+        currPlayerObj.playerEventMsg("It is your turn to choose.");
+        // show choices
+      } else {
+        otherPlayerObj.playerEventMsg("Please wait for your turn.");
+      }
+    }
+    // else if (sv === 2) {
+     //  handle secondPlayerTurn
+   // } else if (sv === 3){
+      // handle outcome;
+    // }
+  },
     (errorObject) => {
           console.log("Errors handled: " + JSON.stringify(errorObject));
     }
