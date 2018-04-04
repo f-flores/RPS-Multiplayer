@@ -104,11 +104,13 @@ var rpsGame = {
       player1 = new PlayerConsole(pName, 1);
       player1.welcomeMsg("Hi, " + pName + "! You are player " + numPlayer + ".");
       currentPlayer = parseInt(player1.numPlayer, 10);
+      console.log("player1: " + JSON.stringify(player1));
       console.log("assignPlayer case 1: currentPlayer: " + currentPlayer);
     } else if (numPlayer === 2) {
       player2 = new PlayerConsole(pName, 2);
       player2.welcomeMsg("Hi, " + pName + "! You are player " + numPlayer + ".");
       currentPlayer = parseInt(player2.numPlayer, 10);
+      console.log("player2: " + JSON.stringify(player2));
       console.log("assignPlayer case 2: currentPlayer: " + currentPlayer);
     }
   },
@@ -137,10 +139,10 @@ function PlayerConsole(name, num) {
   this.wins = 0;
 
   // determine opponent 'num' by choosing 'other' number
-  if (this.playerNum === "1") {
-    this.otherPlayer = "2";
+  if (this.playerNum === 1) {
+    this.otherPlayer = 2;
   } else {
-    this.otherPlayer = "1";
+    this.otherPlayer = 1;
   }
 
   this.otherPlayerName = () => {
