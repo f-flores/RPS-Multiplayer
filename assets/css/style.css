@@ -7,5 +7,7 @@ html body {
   margin: 5px 20px;
   height: 100%;
   width: 99%; }
+  html body .rps-card {
+    height: 400px; }
   html body #send-chat {
     width: 60%; }
