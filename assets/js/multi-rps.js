@@ -64,9 +64,11 @@ var rpsGame = {
           // reassign player1 and do NOT rewrite player 2
           this.assignPlayer(1, name);
           this.setTurn(1);
+          currentPlayer = 1;
         } else if (numPlayers === 1) {
           this.assignPlayer(2, name);
           this.setTurn(1);
+          currentPlayer = 2;
         } else if (numPlayers === 0) {
           this.assignPlayer(1, name);
         }
@@ -103,13 +105,12 @@ var rpsGame = {
     if (numPlayer === 1) {
       player1 = new PlayerConsole(pName, 1);
       player1.welcomeMsg("Hi, " + pName + "! You are player " + numPlayer + ".");
-      currentPlayer = parseInt(player1.playerNum, 10);
       console.log("player1: " + JSON.stringify(player1));
       console.log("assignPlayer case 1: currentPlayer: " + currentPlayer);
     } else if (numPlayer === 2) {
       player2 = new PlayerConsole(pName, 2);
       player2.welcomeMsg("Hi, " + pName + "! You are player " + numPlayer + ".");
-      currentPlayer = parseInt(player2.playerNum, 10);
+      // currentPlayer = parseInt(player2.playerNum, 10);
       console.log("player2: " + JSON.stringify(player2));
       console.log("assignPlayer case 2: currentPlayer: " + currentPlayer);
     }
