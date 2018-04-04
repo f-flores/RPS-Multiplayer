@@ -233,7 +233,7 @@ function PlayerConsole(name, num) {
     }
 
     console.log("in ref 'turn', turn value: , currPlayer, otherPlayer:  " + turnNumber, currentPlayer, otherPlayer);
-    console.log("currPlayerObj: " + JSON.stringify(currPlayerObj));
+    console.log("currPlayerObj: " + JSON.stringify(player1));
     console.log("otherPlayerObj: " + JSON.stringify(player2));
 
     if (turnNumber === 1) {
@@ -242,7 +242,7 @@ function PlayerConsole(name, num) {
       // messages on turn1;
       // Show choices to player1, show wait for player2
       if (currentPlayer === 1) {
-        currPlayerObj.playerEventMsg("It is your turn to choose.");
+        player1.playerEventMsg("It is your turn to choose.");
         // show choices
       } else {
         player2.playerEventMsg("Please wait for your turn.");
