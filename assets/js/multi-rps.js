@@ -68,8 +68,8 @@ var rpsGame = {
         $("#player-welcome-message").html("<p class=\"text-center\">" + msg + "</p>");
       } else if (numPlayers === 1 && this.isPlayer2loggedin()) {
         // reassign player1 and do NOT rewrite player 2
-        console.log("Second player signed in");
-        rpsGame.assignPlayer("2", name);
+        console.log("First player reassigned");
+        rpsGame.assignPlayer("1", name);
         // rpsTurnRef.set(1);
       } else if (numPlayers === 1) {
         console.log("Second player signed in");
