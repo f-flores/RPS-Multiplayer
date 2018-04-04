@@ -230,7 +230,7 @@ function PlayerConsole(name, num) {
 
 
   // remove turn from database on disconnect
-  database.ref("turn/").onDisconnect.remove();
+  // database.ref("turn/").onDisconnect.remove();
 
   // cancel player events and remove player on disconnect
   // rpsPlayersRef.onDisconnect.cancel();
