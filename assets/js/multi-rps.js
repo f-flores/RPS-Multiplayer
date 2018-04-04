@@ -60,13 +60,13 @@ var rpsGame = {
           msg = "";
 
       console.log("in setupPlayer(): snapshot val: " + JSON.stringify(sv));
-      console.log("in setupPlayer(): !this.isPlayer2loggedin(): " + !this.isPlayer2loggedin());
+      console.log("in setupPlayer(): !this.isPlayer2loggedin(): " + this.isPlayer2loggedin());
       // assigns either player1 or player2
       if (numPlayers === 2) {
         msg = "Game condition of two players is already fulfilled. Sorry, please try later.";
         console.log();
         $("#player-welcome-message").html("<p class=\"text-center\">" + msg + "</p>");
-      } else if (numPlayers === 1 && !this.isPlayer2loggedin()) {
+      } else if (numPlayers === 1 && this.isPlayer2loggedin()) {
         console.log("Second player signed in");
         rpsGame.assignPlayer("2", name);
         // rpsTurnRef.set(1);
