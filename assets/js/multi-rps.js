@@ -145,6 +145,8 @@ var rpsGame = {
   },
   setTurn(turn) {
     database.ref("turn/").set(turn);
+    // remove turn from database on disconnect
+    database.ref("turn/").onDisconnect.remove();
   }
 };
 
@@ -247,7 +249,7 @@ function PlayerConsole(name, num) {
         currPlayerObj,
         otherPlayerObj;
 
-    if (currentPlayer === 1) {
+    if (currentPlayer === "1") {
       otherPlayer = 2;
       currPlayerObj = player1;
       otherPlayerObj = player2;
@@ -259,12 +261,12 @@ function PlayerConsole(name, num) {
 
     console.log("in ref 'turn', turn value: , currPlayer, otherPlayer" + turnNumber, currentPlayer, otherPlayer);
 
-    if (turnNumber === 1) {
+    if (turnNumber === "1") {
       // empty both player's game consoles
       emptyConsole();
       // messages on turn1;
       // Show choices to player1, show wait for player2
-      if (currentPlayer === 1) {
+      if (currentPlayer === "1") {
         currPlayerObj.playerEventMsg("It is your turn to choose.");
         // show choices
       } else {
