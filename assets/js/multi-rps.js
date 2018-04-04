@@ -97,6 +97,7 @@ var rpsGame = {
             console.log("Errors handled: " + JSON.stringify(errorObject));
       }
     );
+    currentPlayer = numPlayer;
 
     // disconnects player if player reloads page
     database.ref(playerPath).onDisconnect().
@@ -243,9 +244,9 @@ function PlayerConsole(name, num) {
       }
       // Show choices to player1, show wait for player2
     }
-    // else if (sv === 2) {
+    // else if (numberTurn === 2) {
      //  handle secondPlayerTurn
-   // } else if (sv === 3){
+   // } else if (numberTurn === 3){
       // handle outcome;
     // }
   },
