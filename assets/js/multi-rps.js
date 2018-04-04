@@ -103,13 +103,13 @@ var rpsGame = {
     if (numPlayer === 1) {
       player1 = new PlayerConsole(pName, 1);
       player1.welcomeMsg("Hi, " + pName + "! You are player " + numPlayer + ".");
-      currentPlayer = parseInt(player1.numPlayer, 10);
+      currentPlayer = parseInt(player1.playerNum, 10);
       console.log("player1: " + JSON.stringify(player1));
       console.log("assignPlayer case 1: currentPlayer: " + currentPlayer);
     } else if (numPlayer === 2) {
       player2 = new PlayerConsole(pName, 2);
       player2.welcomeMsg("Hi, " + pName + "! You are player " + numPlayer + ".");
-      currentPlayer = parseInt(player2.numPlayer, 10);
+      currentPlayer = parseInt(player2.playerNum, 10);
       console.log("player2: " + JSON.stringify(player2));
       console.log("assignPlayer case 2: currentPlayer: " + currentPlayer);
     }
