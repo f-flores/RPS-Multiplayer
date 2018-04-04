@@ -238,6 +238,8 @@ function PlayerConsole(name, num) {
         // show choices
       } else if (numberTurn === otherPlayer) {
         $("#player-state-message").html("Waiting for other player to choose.");
+      } else {
+        $("#player-state-message").html("");
       }
       // Show choices to player1, show wait for player2
     }
