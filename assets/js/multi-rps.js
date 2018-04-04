@@ -228,6 +228,8 @@ function PlayerConsole(name, num) {
     }
 
     console.log("in ref 'turn', turn value: , currPlayer, otherPlayer" + turnNumber, currentPlayer, otherPlayer);
+    console.log("currPlayerObj: " + JSON.stringify(currPlayerObj));
+    console.log("otherPlayerObj: " + JSON.stringify(otherPlayerObj));
 
     if (turnNumber === 1) {
       // empty both player's game consoles
