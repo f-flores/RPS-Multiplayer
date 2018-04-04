@@ -38,8 +38,6 @@ var rpsGame = {
   "opponent": "Waiting...",
   "choice": ["r", "p", "s"],
   "choiceVisible": false,
-  "player1loggedin": "",
-  "player2loggedin": "",
   "turn": 0,
   "losses": 0,
   "wins": 0,
@@ -115,37 +113,6 @@ var rpsGame = {
       player2.welcomeMsg("Hi, " + pName + "! You are player " + numPlayer + ".");
       currentPlayer = player2.numPlayer;
     }
-  },
-  isPlayer1loggedin() {
-    database.ref("players/").once("value").
-      then((snapshot) => {
-
-        console.log("isPlayer1loggedin fn: " + JSON.stringify(snapshot));
-        this.player1loggedin = snapshot.child("1").exists();
-        console.log("this.player1loggedin: " + this.player1loggedin);
-    });
-
-    return this.player1loggedin;
-  },
-  isPlayer2loggedin() {
-    var dbPath = "/players/";
-
-    database.ref(dbPath).once("value").
-      then((snapshot) => {
-        var player2Bool = snapshot.child("2").exists();
-
-        console.log("isPlayer2loggedin fn: " + JSON.stringify(snapshot));
-        console.log("player2Bool: " + player2Bool);
-        this.player2loggedin = snapshot.child("2").exists();
-        console.log("this.player2loggedin: " + this.player2loggedin);
-    });
-
-   return this.player2loggedin;
-  },
-  areBothPlayersLoggedin() {
-    this.bothPlayersSelected = this.isPlayer1loggedin() && this.isPlayer2loggedin();
-
-    return this.bothPlayersSelected;
   },
   setTurn(turn) {
     database.ref("turn/").set(turn);
