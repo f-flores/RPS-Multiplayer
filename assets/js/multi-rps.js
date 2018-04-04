@@ -71,6 +71,7 @@ var rpsGame = {
           currentPlayer = 2;
         } else if (numPlayers === 0) {
           this.assignPlayer(1, name);
+          currentPlayer = 1;
         }
       },
       (errorObject) => {
@@ -97,7 +98,6 @@ var rpsGame = {
             console.log("Errors handled: " + JSON.stringify(errorObject));
       }
     );
-    currentPlayer = numPlayer;
 
     // disconnects player if player reloads page
     database.ref(playerPath).onDisconnect().
