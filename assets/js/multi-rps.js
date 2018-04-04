@@ -206,6 +206,8 @@ function PlayerConsole(name, num) {
   };
 }
 
+  // Create a variable to reference the database
+  database = firebase.database();
 
   // ------------------------------------------------------------------------------------------
   // When a player is added to the game, display that player's initial information:
@@ -226,8 +228,6 @@ function PlayerConsole(name, num) {
     }
   );
 
-  // Create a variable to reference the database
-  database = firebase.database();
 
   // remove turn from database on disconnect
   database.ref("turn/").onDisconnect.remove();
