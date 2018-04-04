@@ -62,13 +62,13 @@ var rpsGame = {
           $("#player-welcome-message").html("<p class=\"text-center\">" + msg + "</p>");
         } else if (numPlayers === 1 && player2Exists) {
           // reassign player1 and do NOT rewrite player 2
-          this.assignPlayer("1", name);
+          this.assignPlayer(1, name);
           this.setTurn(1);
         } else if (numPlayers === 1) {
-          this.assignPlayer("2", name);
+          this.assignPlayer(2, name);
           this.setTurn(1);
         } else if (numPlayers === 0) {
-          this.assignPlayer("1", name);
+          this.assignPlayer(1, name);
         }
       },
       (errorObject) => {
@@ -101,13 +101,15 @@ var rpsGame = {
                         remove();
     // setup html player greeting and name using PlayerConsole prototype
     if (numPlayer === "1") {
-      player1 = new PlayerConsole(pName, "1");
+      player1 = new PlayerConsole(pName, 1);
       player1.welcomeMsg("Hi, " + pName + "! You are player " + numPlayer + ".");
       currentPlayer = parseInt(player1.numPlayer, 10);
+      console.log("assignPlayer case 1: currentPlayer: " + currentPlayer);
     } else if (numPlayer === "2") {
-      player2 = new PlayerConsole(pName, "2");
+      player2 = new PlayerConsole(pName, 2);
       player2.welcomeMsg("Hi, " + pName + "! You are player " + numPlayer + ".");
       currentPlayer = parseInt(player2.numPlayer, 10);
+      console.log("assignPlayer case 2: currentPlayer: " + currentPlayer);
     }
   },
   setTurn(turn) {
@@ -227,7 +229,7 @@ function PlayerConsole(name, num) {
       otherPlayerObj = player1;
     }
 
-    console.log("in ref 'turn', turn value: , currPlayer, otherPlayer" + turnNumber, currentPlayer, otherPlayer);
+    console.log("in ref 'turn', turn value: , currPlayer, otherPlayer " + turnNumber, currentPlayer, otherPlayer);
     console.log("currPlayerObj: " + JSON.stringify(currPlayerObj));
     console.log("otherPlayerObj: " + JSON.stringify(otherPlayerObj));
 
