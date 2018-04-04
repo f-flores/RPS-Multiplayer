@@ -30,9 +30,9 @@ $(document).ready(() => {
 // VARIABLES
 //
 var player1, player2;
-var database, rpsTurnRef;
+var database;
 
-var GAMESTATE = "none";
+// var GAMESTATE = "none";
 
 // a game object for rock, paper scissors game
 var rpsGame = {
@@ -45,7 +45,7 @@ var rpsGame = {
   "turn": 0,
   "losses": 0,
   "wins": 0,
-  "gameState": "none",
+  // "gameState": "none",
   // ------------------------------------------------------------------------------------------
   // setupPlayer() takes in numPlayer as a parameter and adds the numPlayer leaf to the
   // players branch
@@ -54,34 +54,40 @@ var rpsGame = {
     console.log("in setupPlayer(): " + name);
     $("#player-form").hide();
     $("#start-btn").hide();
-    database.ref("players/").once("value", (snapshot) => {
-      var sv = snapshot.val(),
-          numPlayers = snapshot.numChildren(),
-          player2Exists = snapshot.child("2").exists(),
-          msg = "";
+    database.ref("players/").once(
+      "value", (snapshot) => {
+        var sv = snapshot.val(),
+            numPlayers = snapshot.numChildren(),
+            player2Exists = snapshot.child("2").exists(),
+            msg = "";
 
-      console.log("in setupPlayer(): snapshot val: " + JSON.stringify(sv));
-      console.log("in setupPlayer(): player2Exists: " + player2Exists);
-      // assigns either player1 or player2
-      if (numPlayers === 2) {
-        msg = "Game condition of two players is already fulfilled. Sorry, please try later.";
-        console.log();
-        $("#player-welcome-message").html("<p class=\"text-center\">" + msg + "</p>");
-      } else if (numPlayers === 1 && player2Exists) {
-        // reassign player1 and do NOT rewrite player 2
-        console.log("First player reassigned");
-        rpsGame.assignPlayer("1", name);
-        // rpsTurnRef.set(1);
-      } else if (numPlayers === 1) {
-        console.log("Second player signed in");
-        rpsGame.assignPlayer("2", name);
-        // rpsTurnRef.set(1);
-      } else if (numPlayers === 0) {
-        console.log("First players signed in.");
-        rpsGame.assignPlayer("1", name);
+        console.log("in setupPlayer(): snapshot val: " + JSON.stringify(sv));
+        console.log("in setupPlayer(): player2Exists: " + player2Exists);
+        // assigns either player1 or player2
+        if (numPlayers === 2) {
+          msg = "Game condition of two players is already fulfilled. Sorry, please try later.";
+          console.log();
+          $("#player-welcome-message").html("<p class=\"text-center\">" + msg + "</p>");
+        } else if (numPlayers === 1 && player2Exists) {
+          // reassign player1 and do NOT rewrite player 2
+          console.log("First player reassigned");
+          this.assignPlayer("1", name);
+          this.setTurn(1);
+          // rpsTurnRef.set(1);
+        } else if (numPlayers === 1) {
+          console.log("Second player signed in");
+          this.assignPlayer("2", name);
+          this.setTurn(1);
+        } else if (numPlayers === 0) {
+          console.log("First players signed in.");
+          this.assignPlayer("1", name);
+        }
+        console.log("in rpsGame.setupPlayer(): numPlayers: " + numPlayers);
+      },
+      (errorObject) => {
+            console.log("Errors handled: " + JSON.stringify(errorObject));
       }
-      console.log("in rpsGame.setupPlayer(): numPlayers: " + numPlayers);
-    });
+    );
   },
   // ------------------------------------------------------------------------------------------
   // assignPlayer() takes in numPlayer as a parameter and adds the numPlayer leaf to the
@@ -91,31 +97,32 @@ var rpsGame = {
     var playerPath = "players/" + numPlayer.toString();
 
     // sets up player information
-    database.ref(playerPath).set({
-      "choice": "",
-      "losses": 0,
-      "playerName": pName,
-      "wins": 0
-    });
+    database.ref(playerPath).set(
+      {
+        "choice": "",
+        "losses": 0,
+        "playerName": pName,
+        "wins": 0
+      },
+      (errorObject) => {
+            console.log("Errors handled: " + JSON.stringify(errorObject));
+      }
+    );
 
     // disconnect player
     database.ref(playerPath).onDisconnect().
                         remove();
-    // setup html player greeting and name using player objects
+    // setup html player greeting and name using PlayerConsole prototype
     console.log("numPlayer, typeof " + numPlayer + typeof numPlayer);
     if (numPlayer === "1") {
       console.log("call to new PlayerConsole(), player 1");
       player1 = new PlayerConsole(pName, "1");
-      console.log("player1: " + JSON.stringify(player1));
-      // player1.displayName();
-      // player1.showOpponentName();
+      // console.log("player1: " + JSON.stringify(player1));
       player1.welcomeMsg("Hi, " + pName + "! You are player " + numPlayer + ".");
     } else if (numPlayer === "2") {
       console.log("call to new PlayerConsole(), player 2");
       player2 = new PlayerConsole(pName, "2");
-      console.log("player2: " + JSON.stringify(player2));
-      // player2.displayName();
-      // player2.showOpponentName();
+      // console.log("player2: " + JSON.stringify(player2));
       player2.welcomeMsg("Hi, " + pName + "! You are player " + numPlayer + ".");
     }
   },
@@ -151,8 +158,11 @@ var rpsGame = {
 
     return this.bothPlayersSelected;
   },
-  getState() {
-    return getGameState();
+  // getState() {
+  //  return getGameState();
+  // },
+  setTurn(turn) {
+    database.ref("turn/").set(turn);
   }
 };
 
@@ -163,7 +173,7 @@ var rpsGame = {
 database = firebase.database();
 
 // Turns branch
-rpsTurnRef = database.ref("/turn");
+// rpsTurnRef = database.ref("/turn");
 
 // cancel player events and remove player on disconnect
 // rpsPlayersRef.onDisconnect.cancel();
@@ -232,48 +242,24 @@ function PlayerConsole(name, num) {
 }
 
 
-function getGameState() {
-  var gState;
-
-  database.ref("state/").on(
-    "value", (snapshot) => {
-      var sn = snapshot.val();
-
-      console.log("snapshot getGameState(): " + JSON.stringify(sn));
-
-      gState = sn.gameState;
-  },
-    (errorObject) => {
-      console.log("Errors handled: " + JSON.stringify(errorObject));
-    }
-  );
-
-    // refChild,
-  return gState;
-}
-
-function setGameState(state) {
-  database.ref("state/").update(
-    {"gameState": state},
-    (errorObject) => {
-      console.log("Errors handled: " + JSON.stringify(errorObject));
-    }
-  );
-}
-
   // ------------------------------------------------------------------------------------------
   // When a player is added to the game, display that player's initial information:
   // Name, Number of wins (0), Number of losses (0)
-  database.ref("players/").on("child_added", (childSnapshot) => {
-    var childsv = childSnapshot.val(),
-        numPlayer = childSnapshot.key,
-        scoreText = "";
+  database.ref("players/").on(
+    "child_added", (childSnapshot) => {
+      var childsv = childSnapshot.val(),
+          numPlayer = childSnapshot.key,
+          scoreText = "";
 
-    console.log("on players child added, childsv, parent" + JSON.stringify(childsv), numPlayer);
-    $("#player" + numPlayer.toString()).html(childsv.playerName);
-    scoreText = "Wins: " + childsv.wins + "  Losses: " + childsv.losses;
-    $("#score" + numPlayer.toString()).html(scoreText);
-  });
+      console.log("on players child added, childsv, parent" + JSON.stringify(childsv), numPlayer);
+      $("#player" + numPlayer.toString()).html(childsv.playerName);
+      scoreText = "Wins: " + childsv.wins + "  Losses: " + childsv.losses;
+      $("#score" + numPlayer.toString()).html(scoreText);
+    },
+    (errorObject) => {
+          console.log("Errors handled: " + JSON.stringify(errorObject));
+    }
+  );
 
 
   $("#start-btn").on("click", (event) => {
@@ -285,7 +271,7 @@ function setGameState(state) {
                                     trim();
     // console.log("playerName: " + playerName);
     rpsGame.setupPlayer(playerName);
-    getGameState();
+    // getGameState();
 
     $("#player-name").val("");
     // End of "#start-btn"
@@ -382,4 +368,33 @@ function setGameState(state) {
   // if both players present, display game full, please wait
  // console.log("areBothPlayersLoggedin() in initGame(): " + rpsGame.areBothPlayersLoggedin());
  // console.log("Game state: " + rpsGame.getState());
+// }
+
+// function getGameState() {
+//  var gState;
+
+//  database.ref("state/").on(
+//    "value", (snapshot) => {
+//      var sn = snapshot.val();
+
+//      console.log("snapshot getGameState(): " + JSON.stringify(sn));
+
+//      gState = sn.gameState;
+//  },
+//    (errorObject) => {
+//      console.log("Errors handled: " + JSON.stringify(errorObject));
+//    }
+//  );
+
+    // refChild,
+//  return gState;
+// }
+
+ // function setGameState(state) {
+ //  database.ref("state/").update(
+ //   {"gameState": state},
+ //   (errorObject) => {
+ //     console.log("Errors handled: " + JSON.stringify(errorObject));
+ //   }
+ // );
 // }
