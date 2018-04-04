@@ -254,10 +254,11 @@ function setGameState(state) {
   );
 }
 
-  // Show player name in box
+  // ------------------------------------------------------------------------------------------
+  // When a player is added to the game, display that player's initial information:
+  // Name, Number of wins (0), Number of losses (0)
   database.ref("players/").on("child_added", (childSnapshot) => {
     var childsv = childSnapshot.val(),
-        // numPlayer = childSnapshot.ref.key,
         numPlayer = childSnapshot.key,
         scoreText = "";
 
@@ -265,9 +266,6 @@ function setGameState(state) {
     $("#player" + numPlayer.toString()).html(childsv.playerName);
     scoreText = "Wins: " + childsv.wins + "  Losses: " + childsv.losses;
     $("#score" + numPlayer.toString()).html(scoreText);
-
-    // childsv.playerName;
-
   });
 
 
