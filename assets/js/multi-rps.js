@@ -146,14 +146,6 @@ var rpsGame = {
   }
 };
 
-// Create a variable to reference the database
-database = firebase.database();
-
-// cancel player events and remove player on disconnect
-// rpsPlayersRef.onDisconnect.cancel();
-// rpsPlayersRef.onDisconnect.remove();
-
-
 // ------------------------------------------------------------------------------------------
 // PlayerConsole() is a prototype to assist in dynamically changing a player's html elements.
 //
@@ -233,6 +225,16 @@ function PlayerConsole(name, num) {
           console.log("Errors handled: " + JSON.stringify(errorObject));
     }
   );
+
+  // Create a variable to reference the database
+  database = firebase.database();
+
+  // remove turn from database on disconnect
+  database.ref("turn/").onDisconnect.remove();
+
+  // cancel player events and remove player on disconnect
+  // rpsPlayersRef.onDisconnect.cancel();
+  // rpsPlayersRef.onDisconnect.remove();
 
   // Main Game Loop
   // initGame();
