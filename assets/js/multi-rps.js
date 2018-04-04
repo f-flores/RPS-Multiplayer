@@ -258,9 +258,16 @@ function setGameState(state) {
   database.ref("players/").on("child_added", (childSnapshot) => {
     var childsv = childSnapshot.val(),
         // numPlayer = childSnapshot.ref.key,
-        parent = childSnapshot.key;
+        numPlayer = childSnapshot.key,
+        scoreText = "";
 
-    console.log("on players child added, childsv, parent" + JSON.stringify(childsv), parent);
+    console.log("on players child added, childsv, parent" + JSON.stringify(childsv), numPlayer);
+    $("#player" + numPlayer.toString()).html(childsv.playerName);
+    scoreText = "Wins: " + childsv.wins + "  Losses: " + childsv.losses;
+    $("#score" + numPlayer.toString()).html(scoreText);
+
+    // childsv.playerName;
+
   });
 
 
