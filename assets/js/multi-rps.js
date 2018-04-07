@@ -61,7 +61,7 @@ var rpsGame = {
           msg = "Game condition of two players is already fulfilled. Sorry, please try later.";
           $("#player-welcome-message").html("<p class=\"text-center\">" + msg + "</p>");
         } else if (numPlayers === 1 && player2Exists) {
-          // reassign player1 and do NOT rewrite player 2
+          // reassign player1 (do NOT rewrite player 2)
           this.assignPlayer(1, name);
           this.setTurn(1);
           currentPlayer = 1;
@@ -134,6 +134,10 @@ var rpsGame = {
 
         // empty both player's game consoles
         emptyConsole();
+
+        console.log("in turnHandler(): turn: " + nTurn + " player1: " + JSON.stringify(player1));
+        console.log("in turnHandler(): turn: " + nTurn + " player2: " + JSON.stringify(player2));
+        
         otherPlayer = currentPlayer === 1
         ? 2
         : 1;

@@ -20,5 +20,10 @@ html {
     #send-chat {
       width: 60%;
     }
+
+    #score-1, #score-2 {
+      position: absolute;
+      bottom: 10px;
+    }
   }
 }
