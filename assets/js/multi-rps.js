@@ -151,7 +151,7 @@ var rpsGame = {
           currPlayerObj.otherShowChoices();
         } else if (nTurn === otherPlayer) {
           currPlayerObj.otherEventMsg("Waiting for " + currPlayerObj.otherPlayerName() + " player to choose.");
-          currPlayerObj.otherShowChoices();
+          // currPlayerObj.otherShowChoices();
         } else {
           $("#player-state-message").html("");
         }
