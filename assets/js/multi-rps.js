@@ -102,6 +102,7 @@ var rpsGame = {
     // disconnects player if player reloads page
     database.ref(playerPath).onDisconnect().
                         remove();
+
     // setup html player greeting and name using PlayerConsole prototype
     if (numPlayer === 1) {
       player1 = new PlayerConsole(pName, 1);
@@ -121,7 +122,33 @@ var rpsGame = {
 
     // remove turn from database on disconnect
     // database.ref("turn/").onDisconnect.remove();
-  }
+  },
+  // ------------------------------------------------------------------------------------------
+  // turnHandler(nTurn) takes in the rps turn number (either 1, 2 or 3) and performs an
+  //  active player/opponenent routine based on that turn
+  //
+  turnHandler(nTurn) {
+    var otherPlayer,
+        currPlayerObj,
+        otherPlayerObj;
+
+        // empty both player's game consoles
+        emptyConsole();
+        otherPlayer = currentPlayer === 1
+        ? 2
+        : 1;
+        console.log("in ref 'turn', turn value: , currentPlayer, otherPlayer:  " + nTurn, currentPlayer, otherPlayer);
+        // messages on turn1;
+        if (nTurn === currentPlayer) {
+          $("#player-state-message").html("It is your turn to choose.");
+          // show choices
+        } else if (nTurn === otherPlayer) {
+          $("#player-state-message").html("Waiting for other player to choose.");
+        } else {
+          $("#player-state-message").html("");
+        }
+        // Show choices to player1, show wait for player2
+      }
 };
 
 function emptyConsole() {
@@ -194,6 +221,7 @@ function PlayerConsole(name, num) {
   database = firebase.database();
 
   // ------------------------------------------------------------------------------------------
+  // "Add Player" listener
   // When a player is added to the game, display that player's initial information:
   // Name, Number of wins (0), Number of losses (0)
   //
@@ -214,41 +242,38 @@ function PlayerConsole(name, num) {
   );
 
   // ------------------------------------------------------------------------------------------
+  // "Turn" listener
   // When turn is set, determine which player's turn it is and wait for that players choice
   //
   database.ref("turn/").on(
     "value", (snapshot) => {
-    var numberTurn = snapshot.val(),
-        otherPlayer,
-        currPlayerObj,
-        otherPlayerObj;
+    var numberTurn = snapshot.val();
 
     console.log("player1: " + JSON.stringify(player1));
     console.log("player2: " + JSON.stringify(player2));
 
-    if (numberTurn === 1) {
-      // empty both player's game consoles
-      emptyConsole();
-      otherPlayer = currentPlayer === 1
-      ? 2
-      : 1;
-      console.log("in ref 'turn', turn value: , currentPlayer, otherPlayer:  " + numberTurn, currentPlayer, otherPlayer);
-      // messages on turn1;
-      if (numberTurn === currentPlayer) {
-        $("#player-state-message").html("It is your turn to choose.");
-        // show choices
-      } else if (numberTurn === otherPlayer) {
-        $("#player-state-message").html("Waiting for other player to choose.");
-      } else {
-        $("#player-state-message").html("");
-      }
-      // Show choices to player1, show wait for player2
+    switch (numberTurn) {
+      case 1:
+        rpsGame.turnHandler(1);
+        break;
+      case 2:
+        console.log("case turn 2");
+        // rpsGame.turnHandler(2);
+        break;
+      case 3:
+        console.log("case turn 3");
+        // rpsGame.turnHander(3);
+        break;
+      default:
+        console.log("Turn not understood.");
+        break;
     }
     // else if (numberTurn === 2) {
      //  handle secondPlayerTurn
    // } else if (numberTurn === 3){
       // handle outcome;
     // }
+
   },
     (errorObject) => {
           console.log("Errors handled: " + JSON.stringify(errorObject));
