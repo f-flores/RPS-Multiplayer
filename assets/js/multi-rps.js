@@ -108,13 +108,10 @@ var rpsGame = {
       player1 = new PlayerConsole(pName, 1);
       player1.welcomeMsg("Hi, " + pName + "! You are player " + numPlayer + ".");
       console.log("player1: " + JSON.stringify(player1));
-      // console.log("assignPlayer case 1: currentPlayer: " + currentPlayer);
     } else if (numPlayer === 2) {
       player2 = new PlayerConsole(pName, 2);
       player2.welcomeMsg("Hi, " + pName + "! You are player " + numPlayer + ".");
-      // currentPlayer = parseInt(player2.playerNum, 10);
       console.log("player2: " + JSON.stringify(player2));
-      // console.log("assignPlayer case 2: currentPlayer: " + currentPlayer);
     }
   },
   setTurn(turn) {
@@ -129,18 +126,21 @@ var rpsGame = {
   //
   turnHandler(nTurn) {
     var otherPlayer,
-        currPlayerObj,
-        otherPlayerObj;
+        currPlayerObj;
 
         // empty both player's game consoles
         emptyConsole();
 
-        console.log("in turnHandler(): turn: " + nTurn + " player1: " + JSON.stringify(player1));
-        console.log("in turnHandler(): turn: " + nTurn + " player2: " + JSON.stringify(player2));
+        if (currentPlayer === 1) {
+          currPlayerObj = player1;
+          otherPlayer = 2;
+        } else {
+          currPlayerObj = player2;
+          otherPlayer = 1;
+        }
+        console.log("in turnHandler(): turn: " + nTurn + " currentPlayer: " + JSON.stringify(currPlayerObj));
+        // console.log("in turnHandler(): turn: " + nTurn + " player2: " + JSON.stringify(player2));
 
-        otherPlayer = currentPlayer === 1
-        ? 2
-        : 1;
         console.log("in ref 'turn', turn value: , currentPlayer, otherPlayer:  " + nTurn, currentPlayer, otherPlayer);
         // messages on turn1;
         if (nTurn === currentPlayer) {
