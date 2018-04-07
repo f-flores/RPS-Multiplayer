@@ -148,10 +148,10 @@ var rpsGame = {
         // messages on turn1;
         if (nTurn === currentPlayer) {
           // $("#player-state-message").html("It is your turn to choose.");
-          currPlayerObj.playerEventMsg(currPlayerObj.displayName() + ", it is your turn to choose.");
+          currPlayerObj.playerEventMsg(currPlayerObj.name + ", it is your turn to choose.");
           // show choices
         } else if (nTurn === otherPlayer) {
-          currPlayerObj.otherEventMsg("Waiting for " + currPlayerObj.showOpponentName() + " player to choose.");
+          currPlayerObj.otherEventMsg("Waiting for " + currPlayerObj.otherPlayerName() + " player to choose.");
         } else {
           $("#player-state-message").html("");
         }
