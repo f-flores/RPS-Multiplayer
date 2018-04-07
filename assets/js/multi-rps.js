@@ -147,10 +147,11 @@ var rpsGame = {
         console.log("in ref 'turn', turn value: , currentPlayer, otherPlayer:  " + nTurn, currentPlayer, otherPlayer);
         // messages on turn1;
         if (nTurn === currentPlayer) {
-          $("#player-state-message").html("It is your turn to choose.");
+          // $("#player-state-message").html("It is your turn to choose.");
+          currPlayerObj.playerEventMsg(currPlayerObj.displayName() + ", it is your turn to choose.");
           // show choices
         } else if (nTurn === otherPlayer) {
-          $("#player-state-message").html("Waiting for other player to choose.");
+          currPlayerObj.otherEventMsg("Waiting for " + currPlayerObj.showOpponentName() + " player to choose.");
         } else {
           $("#player-state-message").html("");
         }
@@ -217,6 +218,9 @@ function PlayerConsole(name, num) {
     $("#player-welcome-message").html("<p class=\"text-center\">" + msg + "</p>");
   };
   this.playerEventMsg = (msg) => {
+    $("#player-state-message").html(msg);
+  };
+  this.otherEventMsg = (msg) => {
     $("#player-state-message").html(msg);
   };
   this.hideNameBtn = () => {
