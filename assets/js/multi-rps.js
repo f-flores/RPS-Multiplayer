@@ -218,8 +218,8 @@ function PlayerConsole(name, num) {
     var currentChoice,
         listChoices = $("<div>");
 
-    console.log("in showChoices()");
-    $(".rps-card-1").css("border", "5px solid yellow");
+    console.log("in showChoices() this.playerNum: " + this.playerNum);
+    $(".rps-card-" + this.playerNum.toString()).css("border", "5px solid yellow");
     for (const choice of this.choices) {
       currentChoice = $("<p>");
       currentChoice.attr("data-name", choice);
