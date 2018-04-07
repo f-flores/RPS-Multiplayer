@@ -141,7 +141,7 @@ var rpsGame = {
     // messages on turn1;
     switch (nTurn) {
       case 1:
-        currPlayerObj.outlineBox();
+        currPlayerObj.outlineBox(nTurn);
         // empty both player's game consoles
         emptyConsole();
         if (nTurn === currentPlayer) {
@@ -215,9 +215,9 @@ function PlayerConsole(name, num) {
   this.showNameBtn = () => {
     $("#player-form").show();
   };
-  this.outlineBox = () => {
+  this.outlineBox = (cnum) => {
     console.log("in this.outlineBox() this.playerNum: " + this.playerNum);
-    $(".rps-card-" + this.playerNum.toString()).css("border", "5px solid yellow");
+    $(".rps-card-" + cnum.toString()).css("border", "5px solid yellow");
   };
   this.showChoices = () => {
     var currentChoice,
