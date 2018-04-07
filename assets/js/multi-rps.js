@@ -142,7 +142,7 @@ var rpsGame = {
           otherPlayer = 1;
         }
         console.log("in turnHandler(): turn: " + nTurn + " currentPlayer: " + JSON.stringify(currPlayerObj));
-        // console.log("in turnHandler(): turn: " + nTurn + " player2: " + JSON.stringify(player2));
+        console.log("in turnHandler(): turn: " + nTurn + " players: " + JSON.stringify(players));
 
         console.log("in ref 'turn', turn value: , currentPlayer, otherPlayer:  " + nTurn, currentPlayer, otherPlayer);
         // messages on turn1;
