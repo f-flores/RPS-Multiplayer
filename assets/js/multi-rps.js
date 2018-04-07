@@ -29,8 +29,7 @@ $(document).ready(() => {
 // ---------------------------------------------------------------------------------------------
 // VARIABLES
 //
-var players = [],
-    player1, player2, currentPlayer;
+var player1, player2, currentPlayer;
 var database;
 
 // a game object for rock, paper scissors game
@@ -107,12 +106,10 @@ var rpsGame = {
     // setup html player greeting and name using PlayerConsole prototype
     if (numPlayer === 1) {
       player1 = new PlayerConsole(pName, 1);
-      players.push(player1);
       player1.welcomeMsg("Hi, " + pName + "! You are player " + numPlayer + ".");
       console.log("player1: " + JSON.stringify(player1));
     } else if (numPlayer === 2) {
       player2 = new PlayerConsole(pName, 2);
-      players.push(player2);
       player2.welcomeMsg("Hi, " + pName + "! You are player " + numPlayer + ".");
       console.log("player2: " + JSON.stringify(player2));
     }
@@ -131,32 +128,37 @@ var rpsGame = {
     var otherPlayer,
         currPlayerObj;
 
+    if (currentPlayer === 1) {
+      currPlayerObj = player1;
+      otherPlayer = 2;
+    } else {
+      currPlayerObj = player2;
+      otherPlayer = 1;
+    }
+    console.log("in turnHandler(): turn: " + nTurn + " currentPlayer: " + JSON.stringify(currPlayerObj));
+
+    console.log("in ref 'turn', turn value: , currentPlayer, otherPlayer:  " + nTurn, currentPlayer, otherPlayer);
+    // messages on turn1;
+    switch (nTurn) {
+      case 1:
         // empty both player's game consoles
         emptyConsole();
-
-        if (currentPlayer === 1) {
-          currPlayerObj = player1;
-          otherPlayer = 2;
-        } else {
-          currPlayerObj = player2;
-          otherPlayer = 1;
-        }
-        console.log("in turnHandler(): turn: " + nTurn + " currentPlayer: " + JSON.stringify(currPlayerObj));
-        console.log("in turnHandler(): turn: " + nTurn + " players: " + JSON.stringify(players));
-
-        console.log("in ref 'turn', turn value: , currentPlayer, otherPlayer:  " + nTurn, currentPlayer, otherPlayer);
-        // messages on turn1;
         if (nTurn === currentPlayer) {
           // $("#player-state-message").html("It is your turn to choose.");
           currPlayerObj.playerEventMsg(currPlayerObj.displayName() + ", it is your turn to choose.");
           // show choices
+          currPlayerObj.showChoices();
         } else if (nTurn === otherPlayer) {
           currPlayerObj.otherEventMsg("Waiting for " + currPlayerObj.otherPlayerName() + " player to choose.");
         } else {
           $("#player-state-message").html("");
         }
         // Show choices to player1, show wait for player2
-      }
+        break;
+      default:
+        break;
+    }
+  }
 };
 
 function emptyConsole() {
@@ -174,16 +176,12 @@ function PlayerConsole(name, num) {
   this.playerNum = num;
   this.losses = 0;
   this.wins = 0;
+  this.choices = ["Rock", "Paper", "Scissors"];
 
   // determine opponent 'num' by choosing 'other' number
   this.otherPlayer = this.playerNum === 1
                     ? 2
                     : 1;
-  // if (this.playerNum === 1) {
-  //  this.otherPlayer = 2;
-  // } else {
-  //  this.otherPlayer = 1;
-  // }
 
   this.otherPlayerName = () => {
     var otherName = "",
@@ -198,17 +196,9 @@ function PlayerConsole(name, num) {
 
     return otherName;
   };
-  console.log("this.otherPlayerName: " + this.otherPlayerName());
 
   this.displayName = () => this.name;
 
-  this.showOpponentName = () => {
-    if (this.name === "undefined") {
-      $("#player" + this.otherPlayer).text("Waiting for player " + this.otherPlayer + "...");
-    } else {
-      $("#player" + this.otherPlayer).text(this.otherPlayerName);
-    }
-  };
   this.welcomeMsg = (msg) => {
     $("#player-welcome-message").html("<p class=\"text-center\">" + msg + "</p>");
   };
@@ -223,6 +213,18 @@ function PlayerConsole(name, num) {
   };
   this.showNameBtn = () => {
     $("#player-form").show();
+  };
+  this.showChoices = () => {
+    var currentChoice,
+        listChoices = $("<div>");
+
+    for (const choice of this.choices) {
+      currentChoice = $("<p>");
+
+      currentChoice.html(choice);
+      listChoices.append(currentChoice);
+    }
+    $("#choice" + this.playerNum.toString()).append(listChoices);
   };
 }
 
