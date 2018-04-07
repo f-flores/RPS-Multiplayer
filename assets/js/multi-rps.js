@@ -218,9 +218,10 @@ function PlayerConsole(name, num) {
     var currentChoice,
         listChoices = $("<div>");
 
+    $("rps-card-" + this.playerNum.toString()).css("outline-color", "yellow");
     for (const choice of this.choices) {
       currentChoice = $("<p>");
-
+      currentChoice.attr("data-name", choice);
       currentChoice.html(choice);
       listChoices.append(currentChoice);
     }
