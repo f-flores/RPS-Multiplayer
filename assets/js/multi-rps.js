@@ -150,6 +150,7 @@ var rpsGame = {
           currPlayerObj.showChoices();
         } else if (nTurn === otherPlayer) {
           currPlayerObj.otherEventMsg("Waiting for " + currPlayerObj.otherPlayerName() + " player to choose.");
+          currPlayerObj.otherShowChoices();
         } else {
           $("#player-state-message").html("");
         }
@@ -227,6 +228,9 @@ function PlayerConsole(name, num) {
       listChoices.append(currentChoice);
     }
     $("#choice" + this.playerNum.toString()).append(listChoices);
+  };
+  this.otherShowChoices = () => {
+    $(".rps-card-" + this.otherPlayer.toString()).css("border", "5px solid yellow");
   };
 }
 
