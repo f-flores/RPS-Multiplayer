@@ -137,7 +137,7 @@ var rpsGame = {
 
         console.log("in turnHandler(): turn: " + nTurn + " player1: " + JSON.stringify(player1));
         console.log("in turnHandler(): turn: " + nTurn + " player2: " + JSON.stringify(player2));
-        
+
         otherPlayer = currentPlayer === 1
         ? 2
         : 1;
@@ -172,11 +172,14 @@ function PlayerConsole(name, num) {
   this.wins = 0;
 
   // determine opponent 'num' by choosing 'other' number
-  if (this.playerNum === 1) {
-    this.otherPlayer = 2;
-  } else {
-    this.otherPlayer = 1;
-  }
+  this.otherPlayer = this.playerNum === 1
+                    ? 2
+                    : 1;
+  // if (this.playerNum === 1) {
+  //  this.otherPlayer = 2;
+  // } else {
+  //  this.otherPlayer = 1;
+  // }
 
   this.otherPlayerName = () => {
     var otherName = "",
