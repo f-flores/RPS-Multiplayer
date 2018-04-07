@@ -29,7 +29,8 @@ $(document).ready(() => {
 // ---------------------------------------------------------------------------------------------
 // VARIABLES
 //
-var player1, player2, currentPlayer;
+var players = [],
+    player1, player2, currentPlayer;
 var database;
 
 // a game object for rock, paper scissors game
@@ -106,10 +107,12 @@ var rpsGame = {
     // setup html player greeting and name using PlayerConsole prototype
     if (numPlayer === 1) {
       player1 = new PlayerConsole(pName, 1);
+      players.push(player1);
       player1.welcomeMsg("Hi, " + pName + "! You are player " + numPlayer + ".");
       console.log("player1: " + JSON.stringify(player1));
     } else if (numPlayer === 2) {
       player2 = new PlayerConsole(pName, 2);
+      players.push(player2);
       player2.welcomeMsg("Hi, " + pName + "! You are player " + numPlayer + ".");
       console.log("player2: " + JSON.stringify(player2));
     }
