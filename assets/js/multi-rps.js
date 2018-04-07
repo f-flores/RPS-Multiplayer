@@ -62,16 +62,16 @@ var rpsGame = {
           $("#player-welcome-message").html("<p class=\"text-center\">" + msg + "</p>");
         } else if (numPlayers === 1 && player2Exists) {
           // reassign player1 (do NOT rewrite player 2)
+          currentPlayer = 1;
           this.assignPlayer(1, name);
           this.setTurn(1);
-          currentPlayer = 1;
         } else if (numPlayers === 1) {
+          currentPlayer = 2;
           this.assignPlayer(2, name);
           this.setTurn(1);
-          currentPlayer = 2;
         } else if (numPlayers === 0) {
-          this.assignPlayer(1, name);
           currentPlayer = 1;
+          this.assignPlayer(1, name);
         }
       },
       (errorObject) => {
@@ -108,13 +108,13 @@ var rpsGame = {
       player1 = new PlayerConsole(pName, 1);
       player1.welcomeMsg("Hi, " + pName + "! You are player " + numPlayer + ".");
       console.log("player1: " + JSON.stringify(player1));
-      console.log("assignPlayer case 1: currentPlayer: " + currentPlayer);
+      // console.log("assignPlayer case 1: currentPlayer: " + currentPlayer);
     } else if (numPlayer === 2) {
       player2 = new PlayerConsole(pName, 2);
       player2.welcomeMsg("Hi, " + pName + "! You are player " + numPlayer + ".");
       // currentPlayer = parseInt(player2.playerNum, 10);
       console.log("player2: " + JSON.stringify(player2));
-      console.log("assignPlayer case 2: currentPlayer: " + currentPlayer);
+      // console.log("assignPlayer case 2: currentPlayer: " + currentPlayer);
     }
   },
   setTurn(turn) {

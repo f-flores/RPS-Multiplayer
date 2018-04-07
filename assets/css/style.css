@@ -12,5 +12,4 @@ html body {
   html body #send-chat {
     width: 60%; }
   html body #score-1, html body #score-2 {
-    position: absolute;
     bottom: 10px; }
