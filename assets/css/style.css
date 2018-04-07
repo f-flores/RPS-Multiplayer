@@ -11,5 +11,6 @@ html body {
     height: 300px; }
   html body #send-chat {
     width: 60%; }
-  html body #score-1, html body #score-2 {
+  html body #score1, html body #score2 {
+    position: absolute;
     bottom: 10px; }
