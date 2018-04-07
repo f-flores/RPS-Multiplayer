@@ -141,6 +141,7 @@ var rpsGame = {
     // messages on turn1;
     switch (nTurn) {
       case 1:
+        currPlayerObj.outlineBox();
         // empty both player's game consoles
         emptyConsole();
         if (nTurn === currentPlayer) {
@@ -148,10 +149,8 @@ var rpsGame = {
           currPlayerObj.playerEventMsg(currPlayerObj.displayName() + ", it is your turn to choose.");
           // show choices
           currPlayerObj.showChoices();
-          currPlayerObj.otherShowChoices();
         } else if (nTurn === otherPlayer) {
           currPlayerObj.otherEventMsg("Waiting for " + currPlayerObj.otherPlayerName() + " player to choose.");
-          // currPlayerObj.otherShowChoices();
         } else {
           $("#player-state-message").html("");
         }
@@ -216,12 +215,14 @@ function PlayerConsole(name, num) {
   this.showNameBtn = () => {
     $("#player-form").show();
   };
+  this.outlineBox = () => {
+    console.log("in this.outlineBox() this.playerNum: " + this.playerNum);
+    $(".rps-card-" + this.playerNum.toString()).css("border", "5px solid yellow");
+  };
   this.showChoices = () => {
     var currentChoice,
         listChoices = $("<div>");
 
-    console.log("in showChoices() this.playerNum: " + this.playerNum);
-    $(".rps-card-" + this.playerNum.toString()).css("border", "5px solid yellow");
     for (const choice of this.choices) {
       currentChoice = $("<p>");
       currentChoice.attr("data-name", choice);
@@ -229,10 +230,6 @@ function PlayerConsole(name, num) {
       listChoices.append(currentChoice);
     }
     $("#choice" + this.playerNum.toString()).append(listChoices);
-  };
-  this.otherShowChoices = () => {
-    console.log("in otherShowChoices() this.playerNum: " + this.playerNum);
-    $(".rps-card-" + this.playerNum.toString()).css("border", "5px solid yellow");
   };
 }
 
