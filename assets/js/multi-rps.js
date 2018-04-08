@@ -154,6 +154,7 @@ var rpsGame = {
       case 2:
         determineActivePlayerBasedOnTurn(2);
         console.log("case " + activeTurn.toString() + ". In turnHandler(). currPlayerObj: " + JSON.stringify(currPlayerObj));
+        console.log("case " + activeTurn.toString() + ". In turnHandler(). otherPlayerObj: " + JSON.stringify(otherPlayerObj));
         console.log("currentPlayer: " + currentPlayer);
         console.log("otherPlayer: " + otherPlayer);
         // otherPlayerObj.outlineBox(1, "darkgray");
