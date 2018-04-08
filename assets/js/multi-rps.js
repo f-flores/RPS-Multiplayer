@@ -155,11 +155,16 @@ var rpsGame = {
         console.log("case " + activeTurn.toString() + ". In turnHandler(). currPlayerObj: " + JSON.stringify(currPlayerObj));
         console.log("currentPlayer: " + currentPlayer);
         console.log("otherPlayer: " + otherPlayer);
-        otherPlayerObj.outlineBox(1, "darkgray");
-        otherPlayerObj.outlineBox(2, "green");
+        // otherPlayerObj.outlineBox(1, "darkgray");
+
         this.activeTurnHeaderMessages(activeTurn);
         if (currentPlayer === 2) {
+          currPlayerObj.outlineBox(1, "darkgray");
+          currPlayerObj.outlineBox(2, "green");
           currPlayerObj.showChoices();
+        } else {
+          otherPlayerObj.outlineBox(1, "darkgray");
+          otherPlayerObj.outlineBox(2, "green");
         }
         break;
       default:
