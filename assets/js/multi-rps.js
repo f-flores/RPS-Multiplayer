@@ -160,11 +160,14 @@ var rpsGame = {
     }
   },
   // --------------------------------------------------------------------------------------------
-  // getChoice() processes the rps choice selected by the player by updating the current
+  // setPlayerChoice() processes the rps choice selected by the player by updating the current
   // player's choice in the database
   //
-  getChoice() {
+  setPlayerChoice() {
+    var pChoice = $(this).attr("data-name");
+
     console.log("in getChoice() --- currPlayerObj: " + JSON.stringify(currPlayerObj));
+    console.log("player choice: " + pChoice);
   }
 };
 
@@ -330,7 +333,7 @@ function PlayerConsole(name, num) {
   );
 
   // On player selected choice
-  $(document).on("click", ".rps-button", rpsGame.getChoice);
+  $(document).on("click", ".rps-button", rpsGame.setPlayerChoice);
 
   // cancel player events and remove player on disconnect
   // rpsPlayersRef.onDisconnect.cancel();
