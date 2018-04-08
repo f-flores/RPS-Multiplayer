@@ -144,15 +144,9 @@ var rpsGame = {
         currPlayerObj.outlineBox(1, "green");
         // empty both player's game consoles
         emptyConsole();
-        if (activeTurn === currentPlayer) {
-          currPlayerObj.playerEventMsg(currPlayerObj.displayName() + ", it is your turn to choose.");
-          // show choices to player
+        this.activeTurnHeaderMessages(activeTurn);
+        if (currentPlayer === 1) {
           currPlayerObj.showChoices();
-          // wait for player to select choice
-        } else if (activeTurn === otherPlayer) {
-          currPlayerObj.otherEventMsg("Waiting for " + currPlayerObj.otherPlayerName() + " player to choose.");
-        } else {
-          $("#player-state-message").html("");
         }
         break;
       case 2:
@@ -184,16 +178,28 @@ var rpsGame = {
     var pChoice = $(this).attr("data-name"),
         pNum = parseInt($(this).attr("player-num"), 10);
 
-    console.log("in getChoice() --- currPlayerObj: " + JSON.stringify(currPlayerObj));
-    console.log("player choice: " + pChoice + " player num: " + pNum);
     currPlayerObj.setChoice(pChoice);
 
     // set current rpsGame turn to 2
     if (pNum === 1) {
-      console.log("in setPlayerChoice turning setTurn to 2");
       currentPlayer = 2;
       otherPlayer = 1;
       rpsGame.setTurn(2);
+    }
+  },
+  // --------------------------------------------------------------------------------------------
+  // activeTurnMessages(nTurn) takes in the current turn as a parameter and deterimines the
+  //  console header messages to display
+  //
+  activeTurnHeaderMessages(nTurn) {
+    console.log("in activeTurnMessages");
+    if (nTurn === currentPlayer) {
+      currPlayerObj.playerEventMsg(currPlayerObj.displayName() + ", it is your turn to choose.");
+      // show choices to player
+    } else if (nTurn === otherPlayer) {
+      currPlayerObj.otherEventMsg("Waiting for " + currPlayerObj.otherPlayerName() + " player to choose.");
+    } else {
+      $("#player-state-message").html("");
     }
   }
 };
