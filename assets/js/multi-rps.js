@@ -230,7 +230,7 @@ function PlayerConsole(name, num) {
   };
   this.outlineBox = (cnum) => {
     console.log("in this.outlineBox() this.playerNum: " + this.playerNum);
-    $(".rps-card-" + cnum.toString()).css("border", "5px solid yellow");
+    $(".rps-card-" + cnum.toString()).css("border", "5px solid green");
   };
   this.showChoices = () => {
     var currentChoice,
