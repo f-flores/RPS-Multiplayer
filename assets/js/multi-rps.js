@@ -269,8 +269,13 @@ function PlayerConsole(name, num) {
     $("#choice" + this.playerNum.toString()).append(listChoices);
   };
   this.setChoice = (ch) => {
+    var cImg = $("<img>"),
+        htmlText = "<strong>" + ch + "</strong>";
+
     console.log("in this.setChoice() -- playerNum: " + this.playerNum);
     database.ref("players/" + this.playerNum.toString()).update({"choice": ch});
+    $("#choice" + this.playerNum.toString()).empty();
+    $("#choice" + this.playerNum.toString()).append(htmlText);
   };
 }
 
