@@ -196,13 +196,10 @@ var rpsGame = {
   activeTurnHeaderMessages(nTurn) {
     console.log("in activeTurnMessages");
     if (nTurn === currentPlayer) {
-      currPlayerObj.playerEventMsg(currPlayerObj.displayName() + ", it is your turn to choose.");
+      $("#player-state-message").text("It is your turn to choose.");
       // show choices to player
-    } else if (nTurn === otherPlayer && nTurn === 1) {
-      currPlayerObj.otherEventMsg("Waiting for " + currPlayerObj.otherPlayerName() + " to choose.");
-    } else if (nTurn === otherPlayer && nTurn === 2) {
-      console.log("in ActiveTurnHeaderMessages() otherPlayerObj: " + JSON.stringify(otherPlayerObj));
-      otherPlayerObj.otherEventMsg("Waiting for " + currPlayerObj.otherPlayerName() + " to choose.");
+    } else if (nTurn === otherPlayer) {
+      $("#player-state-message").text("Waiting for other player to choose.");
     } else {
       $("#player-state-message").html("");
     }
