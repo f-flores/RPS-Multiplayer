@@ -188,18 +188,9 @@ function PlayerConsole(name, num) {
   this.losses = 0;
   this.wins = 0;
   this.choices = [
-                  {
-                    "name": "Rock",
-                    "image": "./assets/images/rock.png"
-                  },
-                  {
-                    "name": "Paper",
-                    "image": "./assets/images/paper.png"
-                  },
-                  {
-                    "name": "Scissors",
-                    "image": "./assets/images/scissors.png"
-                  }
+                  {"Rock": "./assets/images/rock.png"},
+                  {"Paper": "./assets/images/paper.png"},
+                  {"Scissors": "./assets/images/scissors.png"}
                 ];
 
   // determine opponent 'num' by choosing 'other' number
@@ -250,19 +241,14 @@ function PlayerConsole(name, num) {
     for (const choice of this.choices) {
       currentChoice = $("<button>");
       cImg = $("<img>");
-      console.log("in this.showChoices: choice: " + JSON.stringify(choice));
-      for (const key in choice) {
-        if (key === "name") {
-          currentChoice.attr("data-name", choice.name).
-                        addClass("rps-button mb-2").
-                        html("<strong>" + choice.name + "</strong>");
-          cImg.attr("alt", choice.name).
-               attr("data-img", choice.name);
-        } else if (key === "image") {
-          cImg.attr("src", choice.image).
-               addClass("img-fluid rps-img");
-        }
-      }
+      console.log("in this.showChoices: choice: " + choice);
+      currentChoice.attr("data-name", choice).
+                    addClass("rps-button mb-2").
+                    html("<strong>" + choice + "</strong>");
+      cImg.attr("alt", choice).
+           attr("data-img", choice).
+           attr("src", this.choices[choice]).
+           addClass("img-fluid rps-img");
       currentChoice.append(cImg);
       listChoices.append(currentChoice);
     }
@@ -270,12 +256,16 @@ function PlayerConsole(name, num) {
   };
   this.setChoice = (ch) => {
     var cImg = $("<img>"),
-        htmlText = "<strong>" + ch + "</strong>";
+        htmlText = "<p class=\"text-center\"<strong>You chose " + ch + ".</strong></p>";
 
     console.log("in this.setChoice() -- playerNum: " + this.playerNum);
     database.ref("players/" + this.playerNum.toString()).update({"choice": ch});
+    cImg.attr("alt", ch).
+         attr("data-img", ch).
+         attr("src", this.choices[ch]).
+         addClass("img-fluid rps-img");
     $("#choice" + this.playerNum.toString()).empty();
-    $("#choice" + this.playerNum.toString()).append(htmlText);
+    $("#choice" + this.playerNum.toString()).append(htmlText, cImg);
   };
 }
 
