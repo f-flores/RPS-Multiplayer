@@ -26,7 +26,7 @@ $(document).ready(() => {
 // ---------------------------------------------------------------------------------------------
 // VARIABLES
 //
-var player1, player2, currentPlayer, currPlayerObj;
+var player1, player2, currentPlayer, otherPlayer, currPlayerObj;
 var database;
 
 // a game object for rock, paper scissors game
@@ -127,8 +127,10 @@ var rpsGame = {
   //  active player/opponent routine based on that turn
   //
   turnHandler(nTurn) {
-    var otherPlayer;
+    console.log("in turnHandler(): turn: " + nTurn + " currentPlayer: " + JSON.stringify(currPlayerObj));
 
+    console.log("in ref 'turn', turn value: , currentPlayer, otherPlayer:  " + nTurn, currentPlayer, otherPlayer);
+    // messages on turn1;
     if (currentPlayer === 1) {
       currPlayerObj = player1;
       otherPlayer = 2;
@@ -136,12 +138,9 @@ var rpsGame = {
       currPlayerObj = player2;
       otherPlayer = 1;
     }
-    console.log("in turnHandler(): turn: " + nTurn + " currentPlayer: " + JSON.stringify(currPlayerObj));
-
-    console.log("in ref 'turn', turn value: , currentPlayer, otherPlayer:  " + nTurn, currentPlayer, otherPlayer);
-    // messages on turn1;
     switch (nTurn) {
       case 1:
+        // determineActivePlayerBasedOnTurn(1);
         currPlayerObj.outlineBox(nTurn);
         // empty both player's game consoles
         emptyConsole();
@@ -157,7 +156,9 @@ var rpsGame = {
         }
         break;
       case 2:
-        console.log("case " + nTurn.toString() + ". In turnHandler");
+        console.log("case " + nTurn.toString() + ". In turnHandler(). currPlayerObj: " + JSON.stringify(currPlayerObj));
+        console.log("currentPlayer: " + currentPlayer);
+        console.log("otherPlayer: " + otherPlayer);
         break;
       default:
         break;
@@ -165,7 +166,8 @@ var rpsGame = {
   },
   // --------------------------------------------------------------------------------------------
   // setPlayerChoice() processes the rps choice selected by the player by updating the current
-  // player's choice in the database
+  // player's choice in the database. Note that in this function 'this' refers to the rock,
+  // paper, scissor button that was pressed.
   //
   setPlayerChoice() {
     var pChoice = $(this).attr("data-name"),
@@ -178,15 +180,32 @@ var rpsGame = {
     // set current rpsGame turn to 2
     if (pNum === 1) {
       console.log("in setPlayerChoice turning setTurn to 2");
+      currentPlayer = 2;
       rpsGame.setTurn(2);
     }
   }
 };
 
+// -----------------------------------------------------------------------------------------
+// emptyConsole() empties out rps game console for both players
+//
 function emptyConsole() {
   console.log("in emptyConsole()");
   $("#choices1, #game-results, #choices-2").empty();
   console.log("end emptyConsole()");
+}
+
+// ------------------------------------------------------------------------------------------
+// determineActivePlayerBasedOnTurn() sets the currPlayerObj to the active screen player
+//
+function determineActivePlayerBasedOnTurn(presentTurn) {
+  if (currentPlayer === 1) {
+    currPlayerObj = player1;
+    otherPlayer = 2;
+  } else {
+    currPlayerObj = player2;
+    otherPlayer = 1;
+  }
 }
 
 // ------------------------------------------------------------------------------------------
