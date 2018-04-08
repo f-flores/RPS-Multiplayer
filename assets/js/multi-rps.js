@@ -157,17 +157,11 @@ var rpsGame = {
         console.log("case " + activeTurn.toString() + ". In turnHandler(). otherPlayerObj: " + JSON.stringify(otherPlayerObj));
         console.log("currentPlayer: " + currentPlayer);
         console.log("otherPlayer: " + otherPlayer);
-        // otherPlayerObj.outlineBox(1, "darkgray");
         currPlayerObj.outlineBox(1, "darkgray");
         currPlayerObj.outlineBox(2, "green");
 
         this.activeTurnHeaderMessages(activeTurn);
-        if (otherPlayer === 1) {
-      //    otherPlayerObj.outlineBox(1, "darkgray");
-      //    otherPlayerObj.outlineBox(2, "green");
-        } else if (currentPlayer === 2) {
-      //    currPlayerObj.outlineBox(1, "darkgray");
-      //    currPlayerObj.outlineBox(2, "green");
+        if (currentPlayer === 2) {
           currPlayerObj.showChoices();
         }
         break;
@@ -203,7 +197,7 @@ var rpsGame = {
       $("#player-state-message").text("It is your turn to choose.");
       // show choices to player
     } else if (nTurn === otherPlayer) {
-      $("#player-state-message").text("Waiting for other player to choose.");
+      $("#player-state-message").text("Waiting for " + currPlayerObj.otherPlayerName() + " to choose.");
     } else {
       $("#player-state-message").html("");
     }
