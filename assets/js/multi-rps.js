@@ -194,7 +194,7 @@ var rpsGame = {
   activeTurnHeaderMessages(nTurn) {
     console.log("in activeTurnMessages");
     if (nTurn === currentPlayer) {
-      $("#player-state-message").text("It is your turn to choose.");
+      $("#player-state-message").text("It is your turn to choose, " + currPlayerObj.displayName());
       // show choices to player
     } else if (nTurn === otherPlayer) {
       $("#player-state-message").text("Waiting for " + currPlayerObj.otherPlayerName() + " to choose.");
