@@ -169,7 +169,7 @@ var rpsGame = {
   //
   setPlayerChoice() {
     var pChoice = $(this).attr("data-name"),
-        pNum = $(this).attr("player-num");
+        pNum = parseInt($(this).attr("player-num"), 10);
 
     console.log("in getChoice() --- currPlayerObj: " + JSON.stringify(currPlayerObj));
     console.log("player choice: " + pChoice + " player num: " + pNum);
