@@ -131,18 +131,18 @@ var rpsGame = {
 
     console.log("turn value, currentPlayer, otherPlayer:  " + activeTurn, currentPlayer, otherPlayer);
     // messages on turn1;
-    if (currentPlayer === 1) {
-      currPlayerObj = player1;
-      otherPlayer = 2;
-      otherPlayerObj = player2;
-    } else {
-      currPlayerObj = player2;
-      otherPlayer = 1;
-      otherPlayerObj = player1;
-    }
+    // if (currentPlayer === 1) {
+    //  currPlayerObj = player1;
+    //  otherPlayer = 2;
+    //  otherPlayerObj = player2;
+    // } else {
+    //  currPlayerObj = player2;
+    //  otherPlayer = 1;
+    //  otherPlayerObj = player1;
+    // }
     switch (activeTurn) {
       case 1:
-        // determineActivePlayerBasedOnTurn(1);
+        determineActivePlayerBasedOnTurn(1);
         currPlayerObj.outlineBox(1, "green");
         // empty both player's game consoles
         emptyConsole();
@@ -152,6 +152,7 @@ var rpsGame = {
         }
         break;
       case 2:
+        determineActivePlayerBasedOnTurn(2);
         console.log("case " + activeTurn.toString() + ". In turnHandler(). currPlayerObj: " + JSON.stringify(currPlayerObj));
         console.log("currentPlayer: " + currentPlayer);
         console.log("otherPlayer: " + otherPlayer);
@@ -190,8 +191,8 @@ var rpsGame = {
     }
   },
   // --------------------------------------------------------------------------------------------
-  // activeTurnMessages(nTurn) takes in the current turn as a parameter and deterimines the
-  //  console header messages to display
+  // activeTurnMessages(nTurn) takes in the current turn as a parameter and determines the
+  //  player's console header messages to display
   //
   activeTurnHeaderMessages(nTurn) {
     console.log("in activeTurnMessages");
@@ -219,14 +220,31 @@ function emptyConsole() {
 // determineActivePlayerBasedOnTurn() sets the currPlayerObj to the active screen player
 //
 function determineActivePlayerBasedOnTurn(presentTurn) {
-  if (currentPlayer === 1) {
-    currPlayerObj = player1;
-    otherPlayer = 2;
-    otherPlayerObj = player2;
-  } else {
-    currPlayerObj = player2;
-    otherPlayer = 1;
-    otherPlayerObj = player1;
+  switch (presentTurn) {
+    case 1:
+      if (currentPlayer === 1) {
+        currPlayerObj = player1;
+        otherPlayer = 2;
+        otherPlayerObj = player2;
+      } else {
+        currPlayerObj = player2;
+        otherPlayer = 1;
+        otherPlayerObj = player1;
+      }
+      break;
+    case 2:
+      if (currentPlayer === 2) {
+        currPlayerObj = player2;
+        otherPlayer = 1;
+        otherPlayerObj = player1;
+      } else {
+        currPlayerObj = player1;
+        otherPlayer = 2;
+        otherPlayerObj = player2;
+      }
+      break;
+    default:
+      break;
   }
 }
 
