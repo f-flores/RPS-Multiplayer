@@ -158,13 +158,13 @@ var rpsGame = {
         // otherPlayerObj.outlineBox(1, "darkgray");
 
         this.activeTurnHeaderMessages(activeTurn);
-        if (currentPlayer === 2) {
+        if (otherPlayer === 1) {
+          otherPlayerObj.outlineBox(1, "darkgray");
+          otherPlayerObj.outlineBox(2, "green");
+        } else if (currentPlayer === 2) {
           currPlayerObj.outlineBox(1, "darkgray");
           currPlayerObj.outlineBox(2, "green");
           currPlayerObj.showChoices();
-        } else {
-          otherPlayerObj.outlineBox(1, "darkgray");
-          otherPlayerObj.outlineBox(2, "green");
         }
         break;
       default:
