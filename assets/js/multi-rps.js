@@ -26,7 +26,7 @@ $(document).ready(() => {
 // ---------------------------------------------------------------------------------------------
 // VARIABLES
 //
-var player1, player2, currentPlayer, otherPlayer, currPlayerObj;
+var player1, player2, currentPlayer, otherPlayer, currPlayerObj, otherPlayerObj;
 var database;
 
 // a game object for rock, paper scissors game
@@ -191,7 +191,7 @@ var rpsGame = {
       currPlayerObj.playerEventMsg(currPlayerObj.displayName() + ", it is your turn to choose.");
       // show choices to player
     } else if (nTurn === otherPlayer) {
-      currPlayerObj.otherEventMsg("Waiting for " + currPlayerObj.otherPlayerName() + " player to choose.");
+      otherPlayerObj.otherEventMsg("Waiting for " + currPlayerObj.otherPlayerName() + " to choose.");
     } else {
       $("#player-state-message").html("");
     }
@@ -214,9 +214,11 @@ function determineActivePlayerBasedOnTurn(presentTurn) {
   if (currentPlayer === 1) {
     currPlayerObj = player1;
     otherPlayer = 2;
+    otherPlayerObj = player2;
   } else {
     currPlayerObj = player2;
     otherPlayer = 1;
+    otherPlayerObj = player1;
   }
 }
 
