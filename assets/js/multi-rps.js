@@ -141,7 +141,7 @@ var rpsGame = {
     switch (nTurn) {
       case 1:
         // determineActivePlayerBasedOnTurn(1);
-        currPlayerObj.outlineBox(nTurn);
+        currPlayerObj.outlineBox(1, "green");
         // empty both player's game consoles
         emptyConsole();
         if (nTurn === currentPlayer) {
@@ -159,12 +159,12 @@ var rpsGame = {
         console.log("case " + nTurn.toString() + ". In turnHandler(). currPlayerObj: " + JSON.stringify(currPlayerObj));
         console.log("currentPlayer: " + currentPlayer);
         console.log("otherPlayer: " + otherPlayer);
-        currPlayerObj.outlineBox(nTurn);
+        currPlayerObj.outlineBox(1, "brown");
+        currPlayerObj.outlineBox(2, "green");
         if (nTurn === currentPlayer) {
           currPlayerObj.playerEventMsg(currPlayerObj.displayName() + ", it is your turn to choose.");
           // show choices to player
           currPlayerObj.showChoices();
-          // wait for player to select choice
         } else if (nTurn === otherPlayer) {
           currPlayerObj.otherEventMsg("Waiting for " + currPlayerObj.otherPlayerName() + " player to choose.");
         } else {
@@ -280,9 +280,9 @@ function PlayerConsole(name, num) {
   this.showNameBtn = () => {
     $("#player-form").show();
   };
-  this.outlineBox = (cnum) => {
+  this.outlineBox = (cnum, color) => {
     console.log("in this.outlineBox() this.playerNum: " + this.playerNum);
-    $(".rps-card-" + cnum.toString()).css("outline", "green solid 2px");
+    $(".rps-card-" + cnum.toString()).css("outline", color + " solid 2px");
   };
   this.showChoices = () => {
     var currentChoice,
