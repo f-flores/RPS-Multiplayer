@@ -331,7 +331,7 @@ function PlayerConsole(name, num) {
     console.log("player2: " + JSON.stringify(player2));
 
     // call rpsGame.turnHandler
-    rpsGame.turnHander(numberTurn);
+    rpsGame.turnHandler(numberTurn);
     // switch (numberTurn) {
     //  case 1:
     //    rpsGame.turnHandler(1);
