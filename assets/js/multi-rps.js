@@ -240,6 +240,7 @@ function PlayerConsole(name, num) {
     for (const choice of this.choices) {
       currentChoice = $("<button>");
       cImg = $("<img>");
+      console.log("in this.showChoices: choice: " + JSON.stringify(choice));
       for (const key in choice) {
         if (key === "name") {
           currentChoice.attr("data-name", choice.name).
