@@ -177,6 +177,7 @@ var rpsGame = {
 
     // set current rpsGame turn to 2
     if (pNum === 1) {
+      console.log("in setPlayerChoice turning setTurn to 2");
       this.setTurn(2);
     }
   }
