@@ -195,6 +195,7 @@ var rpsGame = {
     } else if (nTurn === otherPlayer && nTurn === 1) {
       currPlayerObj.otherEventMsg("Waiting for " + currPlayerObj.otherPlayerName() + " to choose.");
     } else if (nTurn === otherPlayer && nTurn === 2) {
+      console.log("in ActiveTurnHeaderMessages() otherPlayerObj: " + JSON.stringify(otherPlayerObj));
       otherPlayerObj.otherEventMsg("Waiting for " + currPlayerObj.otherPlayerName() + " to choose.");
     } else {
       $("#player-state-message").html("");
