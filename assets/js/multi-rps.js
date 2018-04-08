@@ -240,11 +240,11 @@ function PlayerConsole(name, num) {
     for (const choice of this.choices) {
       currentChoice = $("<button>");
       cImg = $("<img>");
-      for (const key of choice) {
+      for (const key in choice) {
         if (key === "name") {
           currentChoice.attr("data-name", choice.name).
                         addClass("rps-button").
-                        html("<strong>" + choice + "</strong>");
+                        html("<strong>" + choice.name + "</strong>");
           cImg.attr("alt", choice.name).
                attr("data-img", choice.name);
         } else if (key === "image") {
