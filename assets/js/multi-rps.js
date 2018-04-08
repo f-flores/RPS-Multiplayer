@@ -192,8 +192,10 @@ var rpsGame = {
     if (nTurn === currentPlayer) {
       currPlayerObj.playerEventMsg(currPlayerObj.displayName() + ", it is your turn to choose.");
       // show choices to player
-    } else if (nTurn === otherPlayer) {
-      otherPlayerObj.otherEventMsg("Waiting for " + currPlayerObj.otherPlayerName() + " to choose.");
+    } else if (nTurn === otherPlayer && nTurn === 1) {
+      currPlayerObj.otherEventMsg("Waiting for " + currPlayerObj.otherPlayerName() + " to choose.");
+    } else if (nTurn === otherPlayer && nTurn === 2) {
+      currPlayerObj.otherEventMsg("Waiting for " + currPlayerObj.otherPlayerName() + " to choose.");
     } else {
       $("#player-state-message").html("");
     }
