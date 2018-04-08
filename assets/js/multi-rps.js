@@ -244,13 +244,13 @@ function PlayerConsole(name, num) {
       for (const key in choice) {
         if (key === "name") {
           currentChoice.attr("data-name", choice.name).
-                        addClass("rps-button").
+                        addClass("rps-button mb-2").
                         html("<strong>" + choice.name + "</strong>");
           cImg.attr("alt", choice.name).
                attr("data-img", choice.name);
         } else if (key === "image") {
           cImg.attr("src", choice.image).
-               addClass("img-fluid");
+               addClass("img-fluid rps-img");
         }
       }
       currentChoice.append(cImg);

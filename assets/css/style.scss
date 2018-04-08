@@ -21,7 +21,7 @@ html {
 
     .rps-card, .rps-card-1, .rps-card-2 {
       height: 300px;
-      background-color: blanchedalmond;
+      background-color: #f1ede7;
     }
 
     .rps-button {
@@ -37,6 +37,11 @@ html {
 
     .rps-button:hover {
       background: linear-gradient(to right, #c5bb83, #a29752);
+    }
+
+    .rps-img {
+      width: 50%;
+      height: 50%;
     }
 
     #send-chat {
