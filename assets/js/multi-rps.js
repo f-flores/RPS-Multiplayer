@@ -147,7 +147,7 @@ var rpsGame = {
         emptyConsole();
         if (nTurn === currentPlayer) {
           currPlayerObj.playerEventMsg(currPlayerObj.displayName() + ", it is your turn to choose.");
-          // show choices
+          // show choices to player
           currPlayerObj.showChoices();
           // wait for player to select choice
         } else if (nTurn === otherPlayer) {
@@ -155,7 +155,9 @@ var rpsGame = {
         } else {
           $("#player-state-message").html("");
         }
-        // Show choices to player1, show wait for player2
+        break;
+      case 2:
+        console.log("case " + nTurn.toString() + ". In turnHandler");
         break;
       default:
         break;
@@ -173,10 +175,10 @@ var rpsGame = {
     console.log("player choice: " + pChoice + " player num: " + pNum);
     currPlayerObj.setChoice(pChoice);
 
-    // set turn handler to 2
-    // if (pNum === 1) {
-    //  this.setTurn(2);
-    // }
+    // set current rpsGame turn to 2
+    if (pNum === 1) {
+      this.setTurn(2);
+    }
   }
 };
 
@@ -328,22 +330,24 @@ function PlayerConsole(name, num) {
     console.log("player1: " + JSON.stringify(player1));
     console.log("player2: " + JSON.stringify(player2));
 
-    switch (numberTurn) {
-      case 1:
-        rpsGame.turnHandler(1);
-        break;
-      case 2:
-        console.log("case turn 2");
-        // rpsGame.turnHandler(2);
-        break;
-      case 3:
-        console.log("case turn 3");
+    // call rpsGame.turnHandler
+    rpsGame.turnHander(numberTurn);
+    // switch (numberTurn) {
+    //  case 1:
+    //    rpsGame.turnHandler(1);
+    //    break;
+    //  case 2:
+    //    console.log("case turn 2");
+    // rpsGame.turnHandler(2);
+    //    break;
+    //  case 3:
+    //    console.log("case turn 3");
         // rpsGame.turnHander(3);
-        break;
-      default:
-        console.log("Turn not understood.");
-        break;
-    }
+    //    break;
+    //  default:
+    //    console.log("Turn not understood.");
+    //    break;
+    // }
     // else if (numberTurn === 2) {
      //  handle secondPlayerTurn
    // } else if (numberTurn === 3){
