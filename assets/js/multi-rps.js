@@ -195,7 +195,7 @@ var rpsGame = {
     } else if (nTurn === otherPlayer && nTurn === 1) {
       currPlayerObj.otherEventMsg("Waiting for " + currPlayerObj.otherPlayerName() + " to choose.");
     } else if (nTurn === otherPlayer && nTurn === 2) {
-      currPlayerObj.otherEventMsg("Waiting for " + currPlayerObj.otherPlayerName() + " to choose.");
+      otherPlayerObj.otherEventMsg("Waiting for " + currPlayerObj.otherPlayerName() + " to choose.");
     } else {
       $("#player-state-message").html("");
     }
