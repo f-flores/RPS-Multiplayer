@@ -1,5 +1,11 @@
 /* stylesheet */
 
+$game-color-1: #300C22;
+$game-color-2: #BDC4C4;
+$game-color-3: #8E9DA1;
+$game-color-4: #384C4F;
+$game-color-5: #B7D4BC;
+
 * {
   box-sizing: border-box;
 }
@@ -7,7 +13,7 @@
 html {
 
   body {
-    background-color: lightcyan;
+    background-color: $game-color-5;
     // background: $giphy-color-3 url("../images/rainbow-1418706_960_720.png") no-repeat;
     margin: 5px 20px;
     height: 100%;
@@ -15,6 +21,22 @@ html {
 
     .rps-card, .rps-card-1, .rps-card-2 {
       height: 300px;
+      background-color: $game-color-2;
+    }
+
+    .rps-button {
+      background: linear-gradient(to right, #d5cea6, #b7ad70);
+      display: block;
+      width: 90%;
+      margin: 0 auto;
+      padding: 4px;
+      border-radius: 15px;
+
+      font-weight: bold;
+    }
+
+    .rps-button:hover {
+      background: linear-gradient(to right, #c5bb83, #a29752);
     }
 
     #send-chat {

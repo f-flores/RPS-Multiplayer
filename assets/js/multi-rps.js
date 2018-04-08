@@ -177,7 +177,20 @@ function PlayerConsole(name, num) {
   this.playerNum = num;
   this.losses = 0;
   this.wins = 0;
-  this.choices = ["Rock", "Paper", "Scissors"];
+  this.choices = [
+                  {
+                    "name": "Rock",
+                    "image": "../images/rock.png"
+                  },
+                  {
+                    "name": "Paper",
+                    "image": "../images/paper.png"
+                  },
+                  {
+                    "name": "Scissors",
+                    "image": "../images/scissors.png"
+                  }
+                ];
 
   // determine opponent 'num' by choosing 'other' number
   this.otherPlayer = this.playerNum === 1
@@ -221,12 +234,25 @@ function PlayerConsole(name, num) {
   };
   this.showChoices = () => {
     var currentChoice,
+        cImg,
         listChoices = $("<div>");
 
     for (const choice of this.choices) {
-      currentChoice = $("<p>");
-      currentChoice.attr("data-name", choice);
-      currentChoice.html(choice);
+      currentChoice = $("<button>");
+      cImg = $("<img>");
+      for (const key of choice) {
+        if (key === "name") {
+          currentChoice.attr("data-name", choice.name).
+                        addClass("rps-button").
+                        html("<strong>" + choice + "</strong>");
+          cImg.attr("alt", choice.name).
+               attr("data-img", choice.name);
+        } else if (key === "image") {
+          cImg.attr("src", choice.image).
+               addClass("img-fluid");
+        }
+      }
+      currentChoice.append(cImg);
       listChoices.append(currentChoice);
     }
     $("#choice" + this.playerNum.toString()).append(listChoices);
