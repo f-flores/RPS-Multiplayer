@@ -159,9 +159,9 @@ var rpsGame = {
         console.log("case " + nTurn.toString() + ". In turnHandler(). currPlayerObj: " + JSON.stringify(currPlayerObj));
         console.log("currentPlayer: " + currentPlayer);
         console.log("otherPlayer: " + otherPlayer);
-        currPlayerObj.outlineBox(1, "brown");
-        currPlayerObj.outlineBox(2, "green");
+        currPlayerObj.outlineBox(1, "darkgray");
         if (nTurn === currentPlayer) {
+          currPlayerObj.outlineBox(2, "green");
           currPlayerObj.playerEventMsg(currPlayerObj.displayName() + ", it is your turn to choose.");
           // show choices to player
           currPlayerObj.showChoices();
@@ -192,6 +192,7 @@ var rpsGame = {
     if (pNum === 1) {
       console.log("in setPlayerChoice turning setTurn to 2");
       currentPlayer = 2;
+      otherPlayer = 1;
       rpsGame.setTurn(2);
     }
   }
