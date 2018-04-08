@@ -158,14 +158,16 @@ var rpsGame = {
         console.log("currentPlayer: " + currentPlayer);
         console.log("otherPlayer: " + otherPlayer);
         // otherPlayerObj.outlineBox(1, "darkgray");
+        currPlayerObj.outlineBox(1, "darkgray");
+        currPlayerObj.outlineBox(2, "green");
 
         this.activeTurnHeaderMessages(activeTurn);
         if (otherPlayer === 1) {
       //    otherPlayerObj.outlineBox(1, "darkgray");
       //    otherPlayerObj.outlineBox(2, "green");
         } else if (currentPlayer === 2) {
-          currPlayerObj.outlineBox(1, "darkgray");
-          currPlayerObj.outlineBox(2, "green");
+      //    currPlayerObj.outlineBox(1, "darkgray");
+      //    currPlayerObj.outlineBox(2, "green");
           currPlayerObj.showChoices();
         }
         break;
