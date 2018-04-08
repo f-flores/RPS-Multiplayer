@@ -126,10 +126,10 @@ var rpsGame = {
   // turnHandler(nTurn) takes in the rps turn number (either 1, 2 or 3) and performs an
   //  active player/opponent routine based on that turn
   //
-  turnHandler(nTurn) {
-    console.log("in turnHandler(): turn: " + nTurn + " currentPlayer: " + JSON.stringify(currPlayerObj));
+  turnHandler(activeTurn) {
+    console.log("in turnHandler(): turn: " + activeTurn + " currentPlayer: " + JSON.stringify(currPlayerObj));
 
-    console.log("in ref 'turn', turn value: , currentPlayer, otherPlayer:  " + nTurn, currentPlayer, otherPlayer);
+    console.log("turn value, currentPlayer, otherPlayer:  " + activeTurn, currentPlayer, otherPlayer);
     // messages on turn1;
     if (currentPlayer === 1) {
       currPlayerObj = player1;
@@ -138,34 +138,34 @@ var rpsGame = {
       currPlayerObj = player2;
       otherPlayer = 1;
     }
-    switch (nTurn) {
+    switch (activeTurn) {
       case 1:
         // determineActivePlayerBasedOnTurn(1);
         currPlayerObj.outlineBox(1, "green");
         // empty both player's game consoles
         emptyConsole();
-        if (nTurn === currentPlayer) {
+        if (activeTurn === currentPlayer) {
           currPlayerObj.playerEventMsg(currPlayerObj.displayName() + ", it is your turn to choose.");
           // show choices to player
           currPlayerObj.showChoices();
           // wait for player to select choice
-        } else if (nTurn === otherPlayer) {
+        } else if (activeTurn === otherPlayer) {
           currPlayerObj.otherEventMsg("Waiting for " + currPlayerObj.otherPlayerName() + " player to choose.");
         } else {
           $("#player-state-message").html("");
         }
         break;
       case 2:
-        console.log("case " + nTurn.toString() + ". In turnHandler(). currPlayerObj: " + JSON.stringify(currPlayerObj));
+        console.log("case " + activeTurn.toString() + ". In turnHandler(). currPlayerObj: " + JSON.stringify(currPlayerObj));
         console.log("currentPlayer: " + currentPlayer);
         console.log("otherPlayer: " + otherPlayer);
         currPlayerObj.outlineBox(1, "darkgray");
-        if (nTurn === currentPlayer) {
+        if (activeTurn === otherPlayer) {
           currPlayerObj.outlineBox(2, "green");
           currPlayerObj.playerEventMsg(currPlayerObj.displayName() + ", it is your turn to choose.");
           // show choices to player
           currPlayerObj.showChoices();
-        } else if (nTurn === otherPlayer) {
+        } else if (activeTurn === currentPlayer) {
           currPlayerObj.otherEventMsg("Waiting for " + currPlayerObj.otherPlayerName() + " player to choose.");
         } else {
           $("#player-state-message").html("");
