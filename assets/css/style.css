@@ -21,10 +21,9 @@ html body {
   html body .rps-button:hover {
     background: linear-gradient(to right, #c5bb83, #a29752); }
   html body .rps-img {
-    width: 50%;
-    height: 50%; }
+    width: 23%; }
   html body #send-chat {
     width: 60%; }
   html body #score1, html body #score2 {
     position: absolute;
-    bottom: 10px; }
+    bottom: 5px; }
