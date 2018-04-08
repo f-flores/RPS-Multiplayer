@@ -238,7 +238,7 @@ function PlayerConsole(name, num) {
         cImg,
         listChoices = $("<div>");
 
-    for (const choice of this.choices) {
+    for (const choice in this.choices) {
       currentChoice = $("<button>");
       cImg = $("<img>");
       console.log("in this.showChoices: choice: " + choice);
