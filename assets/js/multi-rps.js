@@ -23,13 +23,10 @@ var config = {
 firebase.initializeApp(config);
 
 $(document).ready(() => {
-// -----------------------------------------------------------------------------------------
-// initializes rpsGame
-
 // ---------------------------------------------------------------------------------------------
 // VARIABLES
 //
-var player1, player2, currentPlayer;
+var player1, player2, currentPlayer, currPlayerObj;
 var database;
 
 // a game object for rock, paper scissors game
@@ -114,6 +111,9 @@ var rpsGame = {
       console.log("player2: " + JSON.stringify(player2));
     }
   },
+  // ------------------------------------------------------------------------------------------
+  // setTurn(turn) sets the turn number in the rps game database
+  //
   setTurn(turn) {
     database.ref("turn/").set(turn);
 
@@ -122,11 +122,10 @@ var rpsGame = {
   },
   // ------------------------------------------------------------------------------------------
   // turnHandler(nTurn) takes in the rps turn number (either 1, 2 or 3) and performs an
-  //  active player/opponenent routine based on that turn
+  //  active player/opponent routine based on that turn
   //
   turnHandler(nTurn) {
-    var otherPlayer,
-        currPlayerObj;
+    var otherPlayer;
 
     if (currentPlayer === 1) {
       currPlayerObj = player1;
@@ -145,10 +144,10 @@ var rpsGame = {
         // empty both player's game consoles
         emptyConsole();
         if (nTurn === currentPlayer) {
-          // $("#player-state-message").html("It is your turn to choose.");
           currPlayerObj.playerEventMsg(currPlayerObj.displayName() + ", it is your turn to choose.");
           // show choices
           currPlayerObj.showChoices();
+          // wait for player to select choice
         } else if (nTurn === otherPlayer) {
           currPlayerObj.otherEventMsg("Waiting for " + currPlayerObj.otherPlayerName() + " player to choose.");
         } else {
@@ -159,6 +158,13 @@ var rpsGame = {
       default:
         break;
     }
+  },
+  // --------------------------------------------------------------------------------------------
+  // getChoice() processes the rps choice selected by the player by updating the current
+  // player's choice in the database
+  //
+  getChoice() {
+    console.log("in getChoice() --- currPlayerObj: " + JSON.stringify(currPlayerObj));
   }
 };
 
@@ -323,6 +329,8 @@ function PlayerConsole(name, num) {
     }
   );
 
+  // On player selected choice
+  $(document).on("click", ".rps-button", rpsGame.getChoice);
 
   // cancel player events and remove player on disconnect
   // rpsPlayersRef.onDisconnect.cancel();
