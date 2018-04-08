@@ -37,6 +37,7 @@ var rpsGame = {
   "choiceVisible": false,
   "turn": 0,
   "losses": 0,
+  "ties": 0,
   "wins": 0,
   // ------------------------------------------------------------------------------------------
   // setupPlayer() takes in numPlayer as a parameter and adds the numPlayer leaf to the
@@ -89,6 +90,7 @@ var rpsGame = {
         "choice": "",
         "losses": 0,
         "playerName": pName,
+        "ties": 0,
         "wins": 0
       },
       (errorObject) => {
