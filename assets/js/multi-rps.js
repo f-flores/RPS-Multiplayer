@@ -164,11 +164,17 @@ var rpsGame = {
   // player's choice in the database
   //
   setPlayerChoice() {
-    var pChoice = $(this).attr("data-name");
+    var pChoice = $(this).attr("data-name"),
+        pNum = $(this).attr("player-num");
 
     console.log("in getChoice() --- currPlayerObj: " + JSON.stringify(currPlayerObj));
-    console.log("player choice: " + pChoice);
+    console.log("player choice: " + pChoice + " player num: " + pNum);
     currPlayerObj.setChoice(pChoice);
+
+    // set turn handler to 2
+    // if (pNum === 1) {
+    //  this.setTurn(2);
+    // }
   }
 };
 
@@ -187,6 +193,7 @@ function PlayerConsole(name, num) {
   this.playerNum = num;
   this.losses = 0;
   this.wins = 0;
+  this.ties = 0;
   this.choices = [
                   {
                     "name": "Rock",
@@ -250,10 +257,10 @@ function PlayerConsole(name, num) {
     for (const choice of this.choices) {
       currentChoice = $("<button>");
       cImg = $("<img>");
-      console.log("in this.showChoices: choice: " + JSON.stringify(choice));
       for (const key in choice) {
         if (key === "name") {
           currentChoice.attr("data-name", choice.name).
+                        attr("player-num", this.playerNum).
                         addClass("rps-button mb-2").
                         html("<strong>" + choice.name + "</strong>");
           cImg.attr("alt", choice.name).
@@ -273,7 +280,6 @@ function PlayerConsole(name, num) {
         htmlText = "<p class=\"text-center\"><strong>You chose " + ch + ".</strong></p>",
         selectedImgObj = this.choices.find((rpsObj) => rpsObj.name === ch);
 
-    console.log("in this.setChoice() -- playerNum: " + this.playerNum);
     database.ref("players/" + this.playerNum.toString()).update({"choice": ch});
     cImg.attr("alt", ch).
          attr("data-img", ch).
@@ -301,7 +307,7 @@ function PlayerConsole(name, num) {
 
       console.log("on players child added, childsv, parent" + JSON.stringify(childsv), numPlayer);
       $("#player" + numPlayer.toString()).html(childsv.playerName);
-      scoreText = "Wins: " + childsv.wins + "  Losses: " + childsv.losses;
+      scoreText = "Wins: " + childsv.wins + " Ties: " + childsv.ties + " Losses: " + childsv.losses;
       $("#score" + numPlayer.toString()).html(scoreText);
     },
     (errorObject) => {
