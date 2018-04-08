@@ -168,6 +168,7 @@ var rpsGame = {
 
     console.log("in getChoice() --- currPlayerObj: " + JSON.stringify(currPlayerObj));
     console.log("player choice: " + pChoice);
+    currPlayerObj.setChoice(pChoice);
   }
 };
 
@@ -266,6 +267,10 @@ function PlayerConsole(name, num) {
       listChoices.append(currentChoice);
     }
     $("#choice" + this.playerNum.toString()).append(listChoices);
+  };
+  this.setChoice = (ch) => {
+    console.log("in this.setChoice() -- playerNum: " + this.playerNum);
+    database.ref("players/" + this.playerNum.toString()).update({"choice": ch});
   };
 }
 
