@@ -154,15 +154,9 @@ var rpsGame = {
         console.log("currentPlayer: " + currentPlayer);
         console.log("otherPlayer: " + otherPlayer);
         currPlayerObj.outlineBox(1, "darkgray");
-        if (activeTurn === otherPlayer) {
-          currPlayerObj.outlineBox(2, "green");
-          currPlayerObj.playerEventMsg(currPlayerObj.displayName() + ", it is your turn to choose.");
-          // show choices to player
+        this.activeTurnHeaderMessages(activeTurn);
+        if (currentPlayer === 2) {
           currPlayerObj.showChoices();
-        } else if (activeTurn === currentPlayer) {
-          currPlayerObj.otherEventMsg("Waiting for " + currPlayerObj.otherPlayerName() + " player to choose.");
-        } else {
-          $("#player-state-message").html("");
         }
         break;
       default:
