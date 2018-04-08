@@ -186,8 +186,8 @@ var rpsGame = {
 
     // set current rpsGame turn to 2
     if (pNum === 1) {
-      currentPlayer = 2;
-      otherPlayer = 1;
+      // currentPlayer = 2;
+      // otherPlayer = 1;
       rpsGame.setTurn(2);
     }
   },
