@@ -330,6 +330,7 @@ function PlayerConsole(name, num) {
 
     console.log("player1: " + JSON.stringify(player1));
     console.log("player2: " + JSON.stringify(player2));
+    console.log("turn: " + numberTurn);
 
     // call rpsGame.turnHandler
     rpsGame.turnHandler(numberTurn);
