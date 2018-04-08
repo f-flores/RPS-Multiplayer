@@ -270,7 +270,7 @@ function PlayerConsole(name, num) {
   };
   this.setChoice = (ch) => {
     var cImg = $("<img>"),
-        htmlText = "<p class=\"text-center\"<strong>You chose " + ch + ".</strong></p>",
+        htmlText = "<p class=\"text-center\"><strong>You chose " + ch + ".</strong></p>",
         selectedImgObj = this.choices.find((rpsObj) => rpsObj.name === ch);
 
     console.log("in this.setChoice() -- playerNum: " + this.playerNum);
@@ -278,7 +278,7 @@ function PlayerConsole(name, num) {
     cImg.attr("alt", ch).
          attr("data-img", ch).
          attr("src", selectedImgObj.image).
-         addClass("img-fluid rps-img");
+         addClass("img-fluid rps-img-selected");
     $("#choice" + this.playerNum.toString()).empty();
     $("#choice" + this.playerNum.toString()).append(htmlText, cImg);
   };

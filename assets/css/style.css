@@ -22,6 +22,10 @@ html body {
     background: linear-gradient(to right, #c5bb83, #a29752); }
   html body .rps-img {
     width: 23%; }
+  html body .rps-img-selected {
+    width: 50%;
+    margin-left: auto;
+    margin-right: auto; }
   html body #send-chat {
     width: 60%; }
   html body #score1, html body #score2 {
