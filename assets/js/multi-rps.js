@@ -279,8 +279,9 @@ function PlayerConsole(name, num) {
          attr("data-img", ch).
          attr("src", selectedImgObj.image).
          addClass("img-fluid rps-img-selected");
-    $("#choice" + this.playerNum.toString()).empty();
-    $("#choice" + this.playerNum.toString()).append(htmlText, cImg);
+    $("#choice" + this.playerNum.toString()).empty().
+                                             addClass("text-center").
+                                             append(htmlText, cImg);
   };
 }
 
