@@ -134,9 +134,11 @@ var rpsGame = {
     if (currentPlayer === 1) {
       currPlayerObj = player1;
       otherPlayer = 2;
+      otherPlayerObj = player2;
     } else {
       currPlayerObj = player2;
       otherPlayer = 1;
+      otherPlayerObj = player1;
     }
     switch (activeTurn) {
       case 1:
