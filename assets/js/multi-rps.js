@@ -180,15 +180,15 @@ function PlayerConsole(name, num) {
   this.choices = [
                   {
                     "name": "Rock",
-                    "image": "../images/rock.png"
+                    "image": "../assets/images/rock.png"
                   },
                   {
                     "name": "Paper",
-                    "image": "../images/paper.png"
+                    "image": "../assets/images/paper.png"
                   },
                   {
                     "name": "Scissors",
-                    "image": "../images/scissors.png"
+                    "image": "../assets/images/scissors.png"
                   }
                 ];
 
