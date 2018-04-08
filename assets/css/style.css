@@ -9,7 +9,7 @@ html body {
   width: 99%; }
   html body .rps-card, html body .rps-card-1, html body .rps-card-2 {
     height: 300px;
-    background-color: #BDC4C4; }
+    background-color: blanchedalmond; }
   html body .rps-button {
     background: linear-gradient(to right, #d5cea6, #b7ad70);
     display: block;
