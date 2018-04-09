@@ -278,11 +278,11 @@ var rpsGame = {
     this.updatePlayerStats("2", rpsPlayer2);
     setTimeout(() => {
       // restart rps game by setting turn to 1, and clearing game results
-      this.setTurn(1);
       emptyConsole();
       $("#game-title").html("");
       $("#game-results").html("");
-     }, WaitForNewGame);
+      this.setTurn(1);
+    }, WaitForNewGame);
   },
   // ---------------------------------------------------------------------------------------
   // updatePlayerStats() updates stats for players in firebase database and on screen
@@ -310,7 +310,7 @@ var rpsGame = {
 //
 function emptyConsole() {
   console.log("in emptyConsole()");
-  $("#choices1, #game-results, #choices-2").empty();
+  $("#choice1, #game-results, #choice2").empty();
   console.log("end emptyConsole()");
 }
 
