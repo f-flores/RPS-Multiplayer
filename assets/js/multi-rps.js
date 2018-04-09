@@ -1,5 +1,6 @@
 // --------------------------------------------------------------------------------------------
 // File name: multi-rps.js
+//
 // Description: This is an implementation of a two player rock, paper, scissor game, using
 //  firebase. The rps game leverages firebase to store player information. 'Global' database
 //  listener functions are important components in controlling the gameflow. Each time a
@@ -7,10 +8,13 @@
 //  each time there is a 'turn' in the game, the turnHandler() function is called to handle
 //  game flow logic. I used a constructor function to represent player one's and player two's
 //  consoles.
+//
 //  There is also a chat feature. The 'rpsChat' object handles the exchange of messages
 //  between players, using the firebase database as the virtual chat server. The database
 //  listens for 'message' events.
+//
 // Date: April, 2018
+//
 // Author: Fabian Flores
 //
 // --------------------------------------------------------------------------------------------
@@ -187,7 +191,6 @@ var rpsGame = {
       if (currPlayerObj) {
         currPlayerObj.playerEventMsg("It is your turn to choose, " + currPlayerObj.displayName());
       }
-      // show choices to player
     } else if (nTurn === otherPlayer) {
       if (currPlayerObj) {
         currPlayerObj.otherEventMsg("Waiting for " + currPlayerObj.otherPlayerName() + " to choose.");
