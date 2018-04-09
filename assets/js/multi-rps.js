@@ -139,8 +139,7 @@ var rpsGame = {
         break;
       case 2:
         determineActivePlayerBasedOnTurn(2);
-        console.log("case " + activeTurn.toString() + ". In turnHandler(). currPlayerObj: " + JSON.stringify(currPlayerObj));
-         currPlayerObj.outlineBox(1, "darkgray");
+        currPlayerObj.outlineBox(1, "darkgray");
         currPlayerObj.outlineBox(2, "green");
         this.activeTurnHeaderMessages(activeTurn);
         if (currentPlayer === 2) {
@@ -224,7 +223,8 @@ function determineActivePlayerBasedOnTurn(presentTurn) {
 }
 
 // ------------------------------------------------------------------------------------------
-// PlayerConsole() is a prototype to assist in dynamically changing a player's html elements.
+// PlayerConsole() is a constructor to assist in dynamically changing a player's html
+// elements.
 //
 function PlayerConsole(name, num) {
 
@@ -268,12 +268,11 @@ function PlayerConsole(name, num) {
   };
 
   this.displayName = () => this.name;
-
   this.welcomeMsg = (msg) => {
     $("#player-welcome-message").html("<p class=\"text-center\">" + msg + "</p>");
   };
   this.playerEventMsg = (msg) => {
-    $("#player-state-message").html(msg);
+    $("#player-state-message").html("<span class=\"text-center\">" + msg + "</span>");
   };
   this.otherEventMsg = (msg) => {
     $("#player-state-message").html(msg);
