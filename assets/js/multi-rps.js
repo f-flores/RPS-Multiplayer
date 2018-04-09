@@ -373,7 +373,7 @@ var rpsChat = {
       htmlText += "<span style=\"color:" + msgColor + "\">: " + playerMessage + "</span>";
     }
     msgLine.html(htmlText);
-    out.appendChild(msgLine);
+    out.append(msgLine);
     if (isScrolledToBottom) {
       out.scrollTop = out.scrollHeight - out.clientHeight;
     }
