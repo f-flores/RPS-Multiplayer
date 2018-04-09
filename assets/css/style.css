@@ -15,6 +15,7 @@ html body {
     border: 5px solid black;
     padding: 10px;
     margin: 10px;
+    margin-left: 24%;
     color: #BDC4C4; }
   html body .rps-card, html body .rps-card-1, html body .rps-card-2 {
     height: 300px;
