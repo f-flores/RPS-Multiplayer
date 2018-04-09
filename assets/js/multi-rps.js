@@ -197,11 +197,12 @@ var rpsGame = {
     database.ref("players/").on(
       "value", (snapshot) => {
         var sv = snapshot.val(),
-            currGameArray = [],
             scoreText = "",
             winner = "";
 
         console.log("in determineGameResult" + JSON.stringify(sv));
+        console.log("player 1: " + sv[1]);
+        console.log("player 2: " + sv[2]);
 
       },
       (errorObject) => {
@@ -300,7 +301,7 @@ function PlayerConsole(name, num) {
     $("#player-state-message").html("<p class=\"text-center\">" + msg + "</p>");
   };
   this.otherEventMsg = (msg) => {
-    $("#player-state-message").html(msg);
+    $("#player-state-message").html("<p class=\"text-center\">" + msg + "</p>");
   };
   this.hideNameBtn = () => {
     $("#player-form").hide();
