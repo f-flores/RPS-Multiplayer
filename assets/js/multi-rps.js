@@ -190,19 +190,94 @@ var rpsGame = {
   // logic to determine result
   //
   determineGameResult() {
+    var rpsPlayer1, rpsPlayer2;
+
     database.ref("players/").on(
       "value", (snapshot) => {
         var sv = snapshot.val(),
             scoreText = "",
             winner = "",
-            rpsPlayer1 = sv["1"],
-            rpsPlayer2 = sv["2"];
+            result = "";
+
+        rpsPlayer1 = sv["1"];
+        rpsPlayer2 = sv["2"];
 
         console.log("in determineGameResult" + JSON.stringify(sv));
         console.log("player 1: " + JSON.stringify(rpsPlayer1));
         console.log("player 2: " + JSON.stringify(rpsPlayer2));
-
-
+        // rock paper scissors game logic
+        switch (rpsPlayer1.choice) {
+          case "Rock":
+            switch (rpsPlayer2.choice) {
+              case "Rock":
+                result = "tie";
+                break;
+              case "Paper":
+                result = "2";
+                break;
+              case "Scissors":
+                result = "1";
+                break;
+              default:
+                break;
+            }
+            break;
+          case "Paper":
+            switch (rpsPlayer2.choice) {
+              case "Rock":
+                result = "1";
+                break;
+              case "Paper":
+                result = "tie";
+                break;
+              case "Scissors":
+                result = "2";
+                break;
+              default:
+                break;
+            }
+            break;
+          case "Scissors":
+            switch (rpsPlayer2.choice) {
+              case "Rock":
+                result = "2";
+                break;
+              case "Paper":
+                result = "1";
+                break;
+              case "Scissors":
+                result = "tie";
+                break;
+              default:
+                break;
+            }
+            break;
+          default:
+            break;
+        }
+        switch (result) {
+          case "1":
+            $("#game-title").html(rpsPlayer1.name + " wins!");
+            $("#game-results").html(rpsPlayer1.choice + " beats " + rpsPlayer2.choice);
+            rpsPlayer1.wins++;
+            rpsPlayer2.losses++;
+            break;
+          case "2":
+            $("#game-title").html(rpsPlayer2.name + " wins!");
+            $("#game-results").html(rpsPlayer2.choice + " beats " + rpsPlayer1.choice);
+            rpsPlayer1.losses++;
+            rpsPlayer2.wins++;
+            break;
+          case "tie":
+            $("#game-title").html("Draw!");
+            $("#game-results").html("You both selected " + rpsPlayer1.choice);
+            rpsPlayer1.ties++;
+            rpsPlayer2.ties++;
+            break;
+          default:
+            break;
+        }
+        console.log("At end of game logic: player1, player2: " + JSON.stringify(rpsPlayer1) + JSON.stringify(rpsPlayer2));
       },
       (errorObject) => {
             console.log("Errors handled: " + JSON.stringify(errorObject));
