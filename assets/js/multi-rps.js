@@ -59,6 +59,7 @@ var rpsGame = {
         if (numPlayers === 2) {
           msg = "Game condition of two players is already fulfilled. Sorry, please try later.";
           $("#player-welcome-message").html("<p class=\"text-center\">" + msg + "</p>");
+          emptyConsole();
         } else if (numPlayers === 1 && player2Exists) {
           // reassign player1 (do NOT rewrite player 2)
           currentPlayer = 1;
