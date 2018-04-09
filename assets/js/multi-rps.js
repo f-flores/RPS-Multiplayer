@@ -182,7 +182,7 @@ var rpsGame = {
     } else if (nTurn === otherPlayer) {
       currPlayerObj.otherEventMsg("Waiting for " + currPlayerObj.otherPlayerName() + " to choose.");
     } else {
-      $("#player-state-message").html("");
+      $("#player-state-message").html("The winner is...");
     }
   },
   // --------------------------------------------------------------------------------------------
@@ -195,14 +195,12 @@ var rpsGame = {
         var sv = snapshot.val(),
             scoreText = "",
             winner = "",
-            rpsPlayer1,
-            rpsPlayer2;
+            rpsPlayer1 = sv["1"],
+            rpsPlayer2 = sv["2"];
 
         console.log("in determineGameResult" + JSON.stringify(sv));
-        console.log("player 1: " + JSON.stringify(sv[1]));
-        console.log("player 2: " + JSON.stringify(sv[2]));
-        rpsPlayer1 = sv["1"];
-        rpsPlayer2 = sv["2"];
+        console.log("player 1: " + JSON.stringify(rpsPlayer1));
+        console.log("player 2: " + JSON.stringify(rpsPlayer2));
 
 
       },
