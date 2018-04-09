@@ -262,7 +262,6 @@ function PlayerConsole(name, num) {
   this.otherPlayer = this.playerNum === 1
                     ? 2
                     : 1;
-
   this.otherPlayerName = () => {
     var otherName = "",
         sv;
