@@ -31,8 +31,6 @@ var database;
 
 // a game object for rock, paper scissors game
 var rpsGame = {
-  "activePlayer": "Waiting...",
-  "opponent": "Waiting...",
   "choice": ["r", "p", "s"],
   "choiceVisible": false,
   "turn": 0,
@@ -44,7 +42,6 @@ var rpsGame = {
   // players branch
   //
   setupPlayer(name) {
-    console.log("in setupPlayer(): " + name);
     $("#player-form").hide();
     $("#start-btn").hide();
     database.ref("players/").once(
@@ -106,11 +103,9 @@ var rpsGame = {
     if (numPlayer === 1) {
       player1 = new PlayerConsole(pName, 1);
       player1.welcomeMsg("Hi, " + pName + "! You are player " + numPlayer + ".");
-      console.log("player1: " + JSON.stringify(player1));
     } else if (numPlayer === 2) {
       player2 = new PlayerConsole(pName, 2);
       player2.welcomeMsg("Hi, " + pName + "! You are player " + numPlayer + ".");
-      console.log("player2: " + JSON.stringify(player2));
     }
   },
   // ------------------------------------------------------------------------------------------
@@ -182,9 +177,9 @@ var rpsGame = {
 
     // set current rpsGame turn to 2
     if (pNum === 1) {
-      // currentPlayer = 2;
-      // otherPlayer = 1;
       rpsGame.setTurn(2);
+    } else if (pNum === 2) {
+      rpsGame.setTurn(3);
     }
   },
   // --------------------------------------------------------------------------------------------
@@ -194,10 +189,12 @@ var rpsGame = {
   activeTurnHeaderMessages(nTurn) {
     console.log("in activeTurnMessages");
     if (nTurn === currentPlayer) {
-      $("#player-state-message").text("It is your turn to choose, " + currPlayerObj.displayName());
+      // $("#player-state-message").text("It is your turn to choose, " + currPlayerObj.displayName());
+      currPlayerObj.playerEventMsg("It is your turn to choose, " + currPlayerObj.displayName());
       // show choices to player
     } else if (nTurn === otherPlayer) {
-      $("#player-state-message").text("Waiting for " + currPlayerObj.otherPlayerName() + " to choose.");
+      // $("#player-state-message").text("Waiting for " + currPlayerObj.otherPlayerName() + " to choose.");
+      currPlayerObj.otherEventMsg("It is your turn to choose, " + currPlayerObj.displayName());
     } else {
       $("#player-state-message").html("");
     }
