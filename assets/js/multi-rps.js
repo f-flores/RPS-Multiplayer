@@ -320,6 +320,7 @@ var rpsChat = {
   displayMessage(playerName, playerMessage) {
     var htmlText = "",
         msgLine = $("<p>"),
+        sHeight = 0,
         nameColor, msgColor;
 
     if (playerName === currPlayerObj.displayName()) {
@@ -335,6 +336,13 @@ var rpsChat = {
     htmlText += "<span style=\"color:" + msgColor + "\">" + playerMessage + "</span>";
     msgLine.html(htmlText);
     $("#chat-section").append(msgLine);
+
+    $("#chat-section p").each((index, value) => {
+      sHeight += parseInt($(this).height(), 10);
+    });
+
+    sHeight = String(sHeight);
+    $("#chat-section").animate({"scrollTop": sHeight});
   }
 };
 
