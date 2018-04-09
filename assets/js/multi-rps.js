@@ -278,7 +278,8 @@ var rpsGame = {
     this.updatePlayerStats("2", rpsPlayer2);
     setTimeout(() => {
       // restart rps game by setting turn to 1, and clearing game results
-     this.setTurn(1);
+      this.setTurn(1);
+      emptyConsole();
       $("#game-title").html("");
       $("#game-results").html("");
      }, WaitForNewGame);
