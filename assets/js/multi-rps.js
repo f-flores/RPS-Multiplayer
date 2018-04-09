@@ -346,7 +346,8 @@ var rpsChat = {
 
     htmlText = "<span style=\"color:" + nameColor + ";font-weight:bold\">" + playerName + "</span>";
     if (playerMessage === " has disconnected.") {
-      htmlText += "<span style=\"color:" + msgColor + "\">" + playerMessage + "</span>";
+      msgColor = nameColor;
+      htmlText += "<span style=\"color:" + msgColor + ";font-weight:bold\">" + playerMessage.toUpperCase() + "</span>";
     } else {
       htmlText += "<span style=\"color:" + msgColor + "\">: " + playerMessage + "</span>";
     }
