@@ -320,7 +320,12 @@ var rpsChat = {
   displayMessage(playerName, playerMessage) {
     var htmlText = "",
         msgLine = $("<p>"),
+        out = $("#chat-box"),
+        isScrolledToBottom,
         nameColor, msgColor;
+
+    // scroll bottom code: http://jsfiddle.net/dotnetCarpenter/KpM5j/
+    isScrolledToBottom = out.scrollHeight - out.clientHeight <= out.scrollTop + 1;
 
     if (playerName === currPlayerObj.displayName()) {
       console.log("in rpsChat.displayMessage() -- currentPlayer: " + currentPlayer);
@@ -339,6 +344,9 @@ var rpsChat = {
     }
     msgLine.html(htmlText);
     $("#chat-section").append(msgLine);
+    if (isScrolledToBottom) {
+      out.scrollTop = out.scrollHeight - out.clientHeight;
+    }
   },
   sendDisconnect(playerKey, name) {
     var msgObj = {};
@@ -541,12 +549,12 @@ function PlayerConsole(name, num) {
     rpsChat.sendDisconnect(numPlayer, csv.playerName);
 
     // empty game and removed player's stats
-    // $("#choice1, #game-results, #choice2").empty();
+    $("#choice1, #game-results, #choice2").empty();
     $("#score" + numPlayer.toString(), "#player-state-message").html("");
     $("#player" + numPlayer.toString()).html("Waiting for Player " + numPlayer + "...");
 
     // restart game
-    rpsGame.setTurn(1);
+    // rpsGame.setTurn(1);
   },
     (errorObject) => {
           console.log("Errors handled: " + JSON.stringify(errorObject));
