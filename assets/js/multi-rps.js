@@ -194,7 +194,7 @@ var rpsGame = {
       // show choices to player
     } else if (nTurn === otherPlayer) {
       // $("#player-state-message").text("Waiting for " + currPlayerObj.otherPlayerName() + " to choose.");
-      currPlayerObj.otherEventMsg("It is your turn to choose, " + currPlayerObj.displayName());
+      currPlayerObj.otherEventMsg("Waiting for " + currPlayerObj.otherPlayerName() + " to choose.");
     } else {
       $("#player-state-message").html("");
     }

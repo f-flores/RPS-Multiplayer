@@ -49,6 +49,12 @@ html {
       margin-right: auto;
     }
 
+    #player-state-message, #player-welcome-message {
+      font-weight: bold;
+      font-size: 115%;
+      font-style: italic;
+    }
+
     #send-chat {
       width: 60%;
     }
