@@ -1,0 +1,4 @@
+# .gitignore files 
+gulpfile.js
+./assets/css/style.scss
+./assets/js/.eslintrc.json
