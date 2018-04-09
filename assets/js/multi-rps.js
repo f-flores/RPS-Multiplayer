@@ -319,14 +319,16 @@ var rpsChat = {
   },
   displayMessage(playerName, playerMessage) {
     var htmlText = "",
-        nameColor = "blue",
-        msgColor = "brown",
-        msgLine = $("<p>");
+        msgLine = $("<p>"),
+        nameColor, msgColor;
 
-    if (currentPlayer === 2) {
+    if (playerName === currPlayerObj.displayName()) {
       console.log("in rpsChat.displayMessage() -- currentPlayer: " + currentPlayer);
       nameColor = "red";
       msgColor = "green";
+    } else {
+      nameColor = "blue";
+      msgColor = "brown";
     }
 
     htmlText = "<span style=\"color:" + nameColor + ";font-weight:bold\">" + playerName + "</span>: ";
