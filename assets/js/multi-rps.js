@@ -325,7 +325,7 @@ var rpsGame = {
     $(".rps-card, .rps-card-2").css("outline", "none");
     $("#game-title").html("");
     $("#game-results").html("");
-    this.setTurn(1);
+    rpsGame.setTurn(1);
   }
 };
 
