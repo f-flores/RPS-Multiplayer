@@ -1,0 +1,74 @@
+/* stylesheet */
+
+$game-color-1: #300C22;
+$game-color-2: #BDC4C4;
+$game-color-3: #8E9DA1;
+$game-color-4: #384C4F;
+$game-color-5: #B7D4BC;
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+
+  body {
+    background-color: $game-color-5;
+    // background: $giphy-color-3 url("../images/rainbow-1418706_960_720.png") no-repeat;
+    margin: 5px 20px;
+    height: 100%;
+    width: 99%;
+
+    p {
+      line-height: 85%;
+    }
+
+    .rps-card, .rps-card-1, .rps-card-2 {
+      height: 300px;
+      background-color: #f1ede7;
+    }
+
+    .rps-button {
+      background: linear-gradient(to right, #d5cea6, #b7ad70);
+      display: block;
+      width: 80%;
+      margin: 0 auto;
+      padding: 4px;
+      border-radius: 15px;
+
+      font-weight: bold;
+    }
+
+    .rps-button:hover {
+      background: linear-gradient(to right, #c5bb83, #a29752);
+    }
+
+    .rps-img {
+      width: 23%;
+    }
+
+    .rps-img-selected {
+      width: 50%;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    #player-state-message, #player-welcome-message {
+      font-weight: bold;
+      font-size: 115%;
+      font-style: italic;
+      text-align: center;
+    }
+
+    #send-chat {
+      width: 60%;
+    }
+
+    #score1, #score2 {
+      position: absolute;
+      bottom: 5px;
+      font-weight: bold;
+      font-size: 110%;
+    }
+  }
+}
