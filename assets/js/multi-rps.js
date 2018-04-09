@@ -177,10 +177,16 @@ var rpsGame = {
   activeTurnHeaderMessages(nTurn) {
     console.log("in activeTurnMessages");
     if (nTurn === currentPlayer) {
-      currPlayerObj.playerEventMsg("It is your turn to choose, " + currPlayerObj.displayName());
+      if (currPlayerObj) {
+        currPlayerObj.playerEventMsg("It is your turn to choose, " + currPlayerObj.displayName());
+      }
       // show choices to player
     } else if (nTurn === otherPlayer) {
-      currPlayerObj.otherEventMsg("Waiting for " + currPlayerObj.otherPlayerName() + " to choose.");
+      if (currPlayerObj) {
+        currPlayerObj.otherEventMsg("Waiting for " + currPlayerObj.otherPlayerName() + " to choose.");
+      } else {
+        $("#player-state-message").html("<p class=\"text-center\">Waiting for other player to choose.</p>");
+      }
     } else {
       $("#player-state-message").html("<p class=\"text-center\">The winner is...</p>");
     }
