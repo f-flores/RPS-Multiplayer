@@ -123,7 +123,9 @@ var rpsGame = {
         // empty both player's game consoles
         emptyConsole();
         determineActivePlayerBasedOnTurn(1);
-        currPlayerObj.outlineBox(1, "green");
+        if (currPlayerObj) {
+          currPlayerObj.outlineBox(1, "green");
+        }
         this.activeTurnHeaderMessages(activeTurn);
         if (currentPlayer === 1) {
           currPlayerObj.showChoices();
@@ -131,8 +133,10 @@ var rpsGame = {
         break;
       case 2:
         determineActivePlayerBasedOnTurn(2);
-        currPlayerObj.outlineBox(1, "darkgray");
-        currPlayerObj.outlineBox(2, "green");
+        if (currPlayerObj) {
+          currPlayerObj.outlineBox(1, "darkgray");
+          currPlayerObj.outlineBox(2, "green");
+        }
         this.activeTurnHeaderMessages(activeTurn);
         if (currentPlayer === 2) {
           currPlayerObj.showChoices();
