@@ -182,7 +182,7 @@ var rpsGame = {
     } else if (nTurn === otherPlayer) {
       currPlayerObj.otherEventMsg("Waiting for " + currPlayerObj.otherPlayerName() + " to choose.");
     } else {
-      $("#player-state-message").html("The winner is...");
+      $("#player-state-message").html("<p class=\"text-center\">The winner is...</p>");
     }
   },
   // --------------------------------------------------------------------------------------------
@@ -396,22 +396,20 @@ function PlayerConsole(name, num) {
   // On player selected choice
   $(document).on("click", ".rps-button", rpsGame.setPlayerChoice);
 
-  // cancel player events and remove player on disconnect
-  // rpsPlayersRef.onDisconnect.cancel();
-  // rpsPlayersRef.onDisconnect.remove();
+  // cancel turn events and remove player on disconnect
+  // database.ref("turn/").onDisconnect.remove();
 
-  // Main Game Loop
-  // initGame();
+  // RPS Game begins when the 'Start' button is pressed
   $("#start-btn").on("click", (event) => {
-    var playerName;
+    var playerName = $("#player-name").val().
+                                       trim();
 
     console.log("in #start-btn");
     event.preventDefault();
-    playerName = $("#player-name").val().
-                                    trim();
-    rpsGame.setupPlayer(playerName);
-
-    $("#player-name").val("");
+    if (playerName !== "") {
+      rpsGame.setupPlayer(playerName);
+      $("#player-name").val("");
+    }
   });
 
   // End of document.ready(function)
