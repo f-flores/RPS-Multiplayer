@@ -180,7 +180,6 @@ var rpsGame = {
   //  player's console header messages to display
   //
   activeTurnHeaderMessages(nTurn) {
-    console.log("in activeTurnMessages");
     if (nTurn === currentPlayer) {
       if (currPlayerObj) {
         currPlayerObj.playerEventMsg("It is your turn to choose, " + currPlayerObj.displayName());
@@ -343,7 +342,6 @@ var rpsChat = {
   sendMessage() {
     var msgObj = {};
 
-    console.log("in sendMessage()");
     msgObj.name = currPlayerObj.displayName();
     msgObj.message = this.msg;
     database.ref("chat/").push(msgObj);
@@ -357,7 +355,6 @@ var rpsChat = {
 
     if (currPlayerObj) {
       if (playerName === currPlayerObj.displayName()) {
-        console.log("in rpsChat.displayMessage() -- currentPlayer: " + currentPlayer);
         nameColor = "red";
         msgColor = "green";
       } else {
@@ -381,7 +378,6 @@ var rpsChat = {
   sendDisconnect(playerKey, name) {
     var msgObj = {};
 
-    console.log("in sendDisconnect()");
     msgObj.name = name;
     msgObj.message = " has disconnected.";
     database.ref("chat/").push(msgObj);
@@ -620,7 +616,6 @@ function PlayerConsole(name, num) {
     var playerName = $("#player-name").val().
                                        trim();
 
-    console.log("in #start-btn");
     event.preventDefault();
     if (playerName !== "") {
       rpsGame.setupPlayer(playerName);
