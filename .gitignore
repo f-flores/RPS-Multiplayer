@@ -1,5 +1,5 @@
 # .gitignore files 
 gulpfile.js
-./assets/css/style.scss
-./assets/js/.eslintrc.json
+style.scss
+.eslintrc.json
 .vscode
