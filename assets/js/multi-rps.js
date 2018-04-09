@@ -185,7 +185,7 @@ var rpsGame = {
       if (currPlayerObj) {
         currPlayerObj.otherEventMsg("Waiting for " + currPlayerObj.otherPlayerName() + " to choose.");
       } else {
-        $("#player-state-message").html("<p class=\"text-center\">WAITING...</p>");
+        $("#player-state-message").html("<p class=\"text-center\">Waiting for other player to choose...</p>");
       }
     } else {
       $("#player-state-message").html("<p class=\"text-center\">The winner is...</p>");
@@ -290,13 +290,7 @@ var rpsGame = {
     this.updatePlayerStats("2", rpsPlayer2);
     this.resetChoice("1");
     this.resetChoice("2");
-    setTimeout(() => {
-      // restart rps game by setting turn to 1, and clearing game results
-      $(".rps-card, .rps-card-2").css("outline", "none");
-      $("#game-title").html("");
-      $("#game-results").html("");
-      this.setTurn(1);
-    }, WaitForNewGame);
+    setTimeout(this.restartMatch, WaitForNewGame);
   },
   // ---------------------------------------------------------------------------------------
   // updatePlayerStats() updates stats for players in firebase database and on screen
@@ -322,6 +316,16 @@ var rpsGame = {
   //
   resetChoice(pNum) {
     database.ref("players/" + pNum.toString()).update({"choice": ""});
+  },
+  // ---------------------------------------------------------------------------------------
+  // restartMatch() restarts current match
+  //
+  restartMatch() {
+    // restart rps match by setting turn to 1, and clearing game results
+    $(".rps-card, .rps-card-2").css("outline", "none");
+    $("#game-title").html("");
+    $("#game-results").html("");
+    this.setTurn(1);
   }
 };
 
