@@ -318,11 +318,21 @@ var rpsChat = {
     database.ref("chat/").push(msgObj);
   },
   displayMessage(playerName, playerMessage) {
-    var htmlText = "";
+    var htmlText = "",
+        nameColor = "blue",
+        msgColor = "brown",
+        msgLine = $("<p>");
 
-    htmlText = "<span style=\"color:blue;font-weight:bold\">" + playerName + "</span>: ";
-    htmlText += "<span style=\"color:green\">" + playerMessage + "</span>";
-    $("#chat-section").html(htmlText);
+    if (currentPlayer === 2) {
+      console.log("in rpsChat.displayMessage() -- currentPlayer: " + currentPlayer);
+      nameColor = "red";
+      msgColor = "green";
+    }
+
+    htmlText = "<span style=\"color:" + nameColor + ";font-weight:bold\">" + playerName + "</span>: ";
+    htmlText += "<span style=\"color:" + msgColor + "\">" + playerMessage + "</span>";
+    msgLine.html(htmlText);
+    $("#chat-section").append(msgLine);
   }
 };
 
@@ -524,6 +534,7 @@ function PlayerConsole(name, num) {
   // remove turn on disconnect
   database.ref("turn/").onDisconnect().
                         remove();
+
   // remove chat on disconnect
   database.ref("chat/").onDisconnect().
                         remove();
