@@ -320,7 +320,6 @@ var rpsChat = {
   displayMessage(playerName, playerMessage) {
     var htmlText = "",
         msgLine = $("<p>"),
-        sHeight = 0,
         nameColor, msgColor;
 
     if (playerName === currPlayerObj.displayName()) {
@@ -336,13 +335,14 @@ var rpsChat = {
     htmlText += "<span style=\"color:" + msgColor + "\">" + playerMessage + "</span>";
     msgLine.html(htmlText);
     $("#chat-section").append(msgLine);
+  },
+  sendDisconnect(playerKey, name) {
+    var msgObj = {};
 
-    $("#chat-section p").each((index, value) => {
-      sHeight += parseInt($(this).height(), 10);
-    });
-
-    sHeight = String(sHeight);
-    $("#chat-section").animate({"scrollTop": sHeight});
+    console.log("in sendDisconnect()");
+    msgObj.name = name;
+    msgObj.message = " has disconnected.";
+    database.ref("chat/").push(msgObj);
   }
 };
 
@@ -517,6 +517,23 @@ function PlayerConsole(name, num) {
 
     // call rpsGame.turnHandler
     rpsGame.turnHandler(numberTurn);
+  },
+    (errorObject) => {
+          console.log("Errors handled: " + JSON.stringify(errorObject));
+    }
+  );
+
+  // ------------------------------------------------------------------------------------------
+  // "Turn" global listener
+  // When turn is set, determine which player's turn it is and wait for that players choice
+  //
+  database.ref("players/").on(
+    "child_removed", (childSnapshot) => {
+    var numPlayer = childSnapshot.key,
+        csv = childSnapshot.val();
+
+    // sends disconnect to chat module
+    rpsChat.sendDisconnect(numPlayer, csv.playerName);
   },
     (errorObject) => {
           console.log("Errors handled: " + JSON.stringify(errorObject));
