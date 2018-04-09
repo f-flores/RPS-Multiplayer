@@ -574,13 +574,13 @@ function PlayerConsole(name, num) {
     rpsChat.sendDisconnect(numPlayer, csv.playerName);
 
     // empty game and removed player's stats
-    // $("#choice1, #game-results, #choice2").empty();
-    $("#score" + numPlayer.toString(), "#player-state-message").html("");
+    $("#choice1, #game-results, #choice2, #score2").empty();
+    $("#score" + numPlayer.toString()).html("");
     $("#player" + numPlayer.toString()).html("Waiting for Player " + numPlayer + "...");
     $("#player-state-message").html("<p class=\"text-center\">Waiting for another player to join.</p>");
 
     // restart game
-    rpsGame.restartMatch();
+    // rpsGame.restartMatch();
   },
     (errorObject) => {
           console.log("Errors handled: " + JSON.stringify(errorObject));
