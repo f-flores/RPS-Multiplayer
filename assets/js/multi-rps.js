@@ -378,7 +378,7 @@ var rpsChat = {
     // scroll bottom code: https://stackoverflow.com/questions/10503606/scroll-to-bottom-of-div-on-page-load-jquery
     chatBox.animate({"scrollTop": chatBox[0].scrollHeight - chatBox[0].clientHeight}, ScrollDownInterval);
   },
-  sendDisconnect(playerKey, name) {
+  sendDisconnect(name) {
     var msgObj = {};
 
     msgObj.name = name;
@@ -575,7 +575,7 @@ function PlayerConsole(name, num) {
           csv = childSnapshot.val();
 
       // sends disconnect to chat module
-      rpsChat.sendDisconnect(numPlayer, csv.playerName);
+      rpsChat.sendDisconnect(csv.playerName);
 
       // empty game and removed player's stats
       $("#choice1, #game-results, #choice2, #score2").empty();
