@@ -580,7 +580,7 @@ function PlayerConsole(name, num) {
     $("#player-state-message").html("<p class=\"text-center\">Waiting for another player to join.</p>");
 
     // restart game
-    rpsGame.setTurn(1);
+    rpsGame.restartMatch();
   },
     (errorObject) => {
           console.log("Errors handled: " + JSON.stringify(errorObject));
