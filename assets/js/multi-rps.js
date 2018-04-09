@@ -284,6 +284,8 @@ var rpsGame = {
     );
     console.log("At end of game logic: player1, player2: " + JSON.stringify(rpsPlayer1) + JSON.stringify(rpsPlayer2));
     // update players "1" and "2" branch in firebase with wins, losses and ties stats
+    this.updateDatabase("1", rpsPlayer1);
+    this.updateDatabase("2", rpsPlayer2);
     database.ref("players/1").update(
       {
         "wins": rpsPlayer1.wins,
@@ -299,6 +301,21 @@ var rpsGame = {
         "wins": rpsPlayer2.wins,
         "losses": rpsPlayer2.losses,
         "ties": rpsPlayer2.ties
+      },
+      (errorObject) => {
+        console.log("Errors handled: " + JSON.stringify(errorObject));
+      }
+    );
+  },
+  // ---------------------------------------------------------------------------------------
+  // updateDatabase() updates stats for players
+  //
+  updateDatabase(pNum, playerObj) {
+    database.ref("players/" + pNum.toString()).update(
+      {
+        "wins": playerObj.wins,
+        "losses": playerObj.losses,
+        "ties": playerObj.ties
       },
       (errorObject) => {
         console.log("Errors handled: " + JSON.stringify(errorObject));
