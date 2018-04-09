@@ -64,6 +64,11 @@ html {
       width: 60%;
     }
 
+    #chat-box {
+      height: 200px;
+      overflow-y: auto;
+    }
+
     #score1, #score2 {
       position: absolute;
       bottom: 5px;

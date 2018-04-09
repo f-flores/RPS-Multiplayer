@@ -35,6 +35,9 @@ html body {
     text-align: center; }
   html body #send-chat {
     width: 60%; }
+  html body #chat-box {
+    height: 200px;
+    overflow-y: auto; }
   html body #score1, html body #score2 {
     position: absolute;
     bottom: 5px;
