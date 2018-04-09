@@ -573,7 +573,7 @@ function PlayerConsole(name, num) {
     // $("#choice1, #game-results, #choice2").empty();
     $("#score" + numPlayer.toString(), "#player-state-message").html("");
     $("#player" + numPlayer.toString()).html("Waiting for Player " + numPlayer + "...");
-    $("#player-state-message").html("<p class=\"text-center\">Waiting for other player to choose.</p>");
+    $("#player-state-message").html("<p class=\"text-center\">Waiting for another player to join.</p>");
 
     // restart game
     rpsGame.setTurn(1);
