@@ -307,6 +307,18 @@ var rpsGame = {
   }
 };
 
+var rpsChat = {
+  "msg": "",
+  sendMessage() {
+    var msgObj = {};
+
+    console.log("in sendMessage()");
+    msgObj.name = currPlayerObj.displayName();
+    msgObj.message = this.msg;
+    database.ref("chat/").push(msgObj);
+  }
+};
+
 // -----------------------------------------------------------------------------------------
 // emptyConsole() empties out rps game console for both players
 //
@@ -502,6 +514,23 @@ function PlayerConsole(name, num) {
       rpsGame.setupPlayer(playerName);
       $("#player-name").val("");
     }
+  });
+
+  // send chat button handler
+  $("#send-chat-btn").on("click", (event) => {
+    var chatMessage = $("#send-chat").val();
+
+    event.preventDefault();
+    // Get message then clear it
+    if (chatMessage !== "") {
+      rpsChat.msg = chatMessage;
+      $("#send-chat").val("");
+    }
+
+    if (currPlayerObj.displayName() !== "") {
+      rpsChat.sendMessage();
+    }
+
   });
 
   // End of document.ready(function)
