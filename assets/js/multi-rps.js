@@ -346,7 +346,7 @@ var rpsChat = {
   displayMessage(playerName, playerMessage) {
     var htmlText = "",
         msgLine = $("<div>"),
-        out = $("#chat-box"),
+        out = document.getElementById("chat-box"),
         isScrolledToBottom,
         nameColor, msgColor;
 
@@ -373,7 +373,7 @@ var rpsChat = {
       htmlText += "<span style=\"color:" + msgColor + "\">: " + playerMessage + "</span>";
     }
     msgLine.html(htmlText);
-    out.append(msgLine);
+    out.appendChild(msgLine);
     if (isScrolledToBottom) {
       out.scrollTop = out.scrollHeight - out.clientHeight;
     }
