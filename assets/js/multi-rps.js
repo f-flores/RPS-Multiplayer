@@ -194,11 +194,16 @@ var rpsGame = {
       "value", (snapshot) => {
         var sv = snapshot.val(),
             scoreText = "",
-            winner = "";
+            winner = "",
+            rpsPlayer1,
+            rpsPlayer2;
 
         console.log("in determineGameResult" + JSON.stringify(sv));
         console.log("player 1: " + JSON.stringify(sv[1]));
         console.log("player 2: " + JSON.stringify(sv[2]));
+        rpsPlayer1 = sv["1"];
+        rpsPlayer2 = sv["2"];
+
 
       },
       (errorObject) => {
