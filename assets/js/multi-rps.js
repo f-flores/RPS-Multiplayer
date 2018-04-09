@@ -345,13 +345,14 @@ var rpsChat = {
   },
   displayMessage(playerName, playerMessage) {
     var htmlText = "",
-        msgLine = $("<p>"),
+        msgLine = $("<div>"),
         out = $("#chat-box"),
         isScrolledToBottom,
         nameColor, msgColor;
 
     // scroll bottom code: http://jsfiddle.net/dotnetCarpenter/KpM5j/
     isScrolledToBottom = out.scrollHeight - out.clientHeight <= out.scrollTop + 1;
+    console.log(out.scrollHeight - out.clientHeight, out.scrollTop + 1);
 
     if (currPlayerObj) {
       if (playerName === currPlayerObj.displayName()) {
