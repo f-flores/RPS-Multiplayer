@@ -122,10 +122,6 @@ var rpsGame = {
   //  active player/opponent routine based on that turn
   //
   turnHandler(activeTurn) {
-    console.log("in turnHandler(): turn: " + activeTurn + " currentPlayer: " + JSON.stringify(currPlayerObj));
-
-    console.log("turn value, currentPlayer, otherPlayer:  " + activeTurn, currentPlayer, otherPlayer);
-
     switch (activeTurn) {
       case 1:
         determineActivePlayerBasedOnTurn(1);
@@ -201,8 +197,8 @@ var rpsGame = {
             winner = "";
 
         console.log("in determineGameResult" + JSON.stringify(sv));
-        console.log("player 1: " + sv[1]);
-        console.log("player 2: " + sv[2]);
+        console.log("player 1: " + JSON.stringify(sv[1]));
+        console.log("player 2: " + JSON.stringify(sv[2]));
 
       },
       (errorObject) => {
