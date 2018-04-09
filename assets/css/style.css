@@ -23,7 +23,7 @@ html body {
   html body .rps-button {
     background: linear-gradient(to right, #d5cea6, #b7ad70);
     display: block;
-    width: 80%;
+    width: 70%;
     margin: 0 auto;
     padding: 4px;
     border-radius: 15px;

@@ -312,7 +312,7 @@ var rpsGame = {
         console.log("Errors handled: " + JSON.stringify(errorObject));
       }
     );
-    scoreText = "Wins: " + playerObj.wins + " Draws: " + playerObj.ties + " Losses: " + playerObj.losses;
+    scoreText = "Wins: " + playerObj.wins + " Ties: " + playerObj.ties + " Losses: " + playerObj.losses;
     $("#score" + pNum.toString()).html(scoreText);
   },
   // ---------------------------------------------------------------------------------------
@@ -346,13 +346,13 @@ var rpsChat = {
   displayMessage(playerName, playerMessage) {
     var htmlText = "",
         msgLine = $("<div>"),
-        out = $("#chat-box"),
+        chatBox = $("#chat-box"),
         isScrolledToBottom,
         nameColor, msgColor;
 
     // scroll bottom code: http://jsfiddle.net/dotnetCarpenter/KpM5j/
-    isScrolledToBottom = out.scrollHeight - out.clientHeight <= out.scrollTop + 1;
-    console.log(out.scrollHeight - out.clientHeight, out.scrollTop + 1);
+    isScrolledToBottom = chatBox.prop("scrollHeight") - chatBox.prop("clientHeight") <= chatBox.prop("scrollTop") + 1;
+    console.log(chatBox.prop("scrollHeight") - chatBox.prop("clientHeight"), chatBox.prop("scrollTop") + 1);
 
     if (currPlayerObj) {
       if (playerName === currPlayerObj.displayName()) {
@@ -373,9 +373,9 @@ var rpsChat = {
       htmlText += "<span style=\"color:" + msgColor + "\">: " + playerMessage + "</span>";
     }
     msgLine.html(htmlText);
-    out.append(msgLine);
+    chatBox.append(msgLine);
     if (isScrolledToBottom) {
-      out.scrollTop = out.scrollHeight - out.clientHeight;
+      chatBox.attr("scrollTop", chatBox.prop("scrollHeight") - chatBox.prop("clientHeight"));
     }
   },
   sendDisconnect(playerKey, name) {
@@ -389,7 +389,7 @@ var rpsChat = {
 };
 
 // -----------------------------------------------------------------------------------------
-// emptyConsole() empties out rps game console for both players
+// emptyConsole() empties chatBox rps game console for both players
 //
 function emptyConsole() {
   $("#choice1, #game-results, #choice2").empty();
@@ -541,7 +541,7 @@ function PlayerConsole(name, num) {
           scoreText = "";
 
       $("#player" + numPlayer.toString()).html(childsv.playerName);
-      scoreText = "Wins: " + childsv.wins + " Draws: " + childsv.ties + " Losses: " + childsv.losses;
+      scoreText = "Wins: " + childsv.wins + " Ties: " + childsv.ties + " Losses: " + childsv.losses;
       $("#score" + numPlayer.toString()).html(scoreText);
     },
     (errorObject) => {
