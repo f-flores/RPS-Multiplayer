@@ -31,12 +31,6 @@ var database;
 
 // a game object for rock, paper scissors game
 var rpsGame = {
-  "choice": ["r", "p", "s"],
-  "choiceVisible": false,
-  "turn": 0,
-  "losses": 0,
-  "ties": 0,
-  "wins": 0,
   // ------------------------------------------------------------------------------------------
   // setupPlayer() takes in numPlayer as a parameter and adds the numPlayer leaf to the
   // players branch
@@ -109,13 +103,10 @@ var rpsGame = {
     }
   },
   // ------------------------------------------------------------------------------------------
-  // setTurn(turn) sets the turn number in the rps game database
+  // setTurn(turn) sets the turn number in the rps game firebase database
   //
   setTurn(turn) {
     database.ref("turn/").set(turn);
-
-    // remove turn from database on disconnect
-    // database.ref("turn/").onDisconnect.remove();
   },
   // ------------------------------------------------------------------------------------------
   // turnHandler(nTurn) takes in the rps turn number (either 1, 2 or 3) and performs an
@@ -285,8 +276,8 @@ var rpsGame = {
     // update players "1" and "2" branch in firebase with wins, losses and ties stats
     this.updatePlayerStats("1", rpsPlayer1);
     this.updatePlayerStats("2", rpsPlayer2);
-    window.setTimeout(() => {
-      // begin another game by setting turn to 1, and clearing game results
+    setTimeout(() => {
+      // restart rps game by setting turn to 1, and clearing game results
      this.setTurn(1);
       $("#game-title").html("");
       $("#game-results").html("");
