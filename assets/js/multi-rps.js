@@ -335,13 +335,15 @@ var rpsChat = {
     // scroll bottom code: http://jsfiddle.net/dotnetCarpenter/KpM5j/
     isScrolledToBottom = out.scrollHeight - out.clientHeight <= out.scrollTop + 1;
 
-    if (playerName === currPlayerObj.displayName()) {
-      console.log("in rpsChat.displayMessage() -- currentPlayer: " + currentPlayer);
-      nameColor = "red";
-      msgColor = "green";
-    } else {
-      nameColor = "blue";
-      msgColor = "brown";
+    if (currPlayerObj) {
+      if (playerName === currPlayerObj.displayName()) {
+        console.log("in rpsChat.displayMessage() -- currentPlayer: " + currentPlayer);
+        nameColor = "red";
+        msgColor = "green";
+      } else {
+        nameColor = "blue";
+        msgColor = "brown";
+      }
     }
 
     htmlText = "<span style=\"color:" + nameColor + ";font-weight:bold\">" + playerName + "</span>";
@@ -558,7 +560,7 @@ function PlayerConsole(name, num) {
     rpsChat.sendDisconnect(numPlayer, csv.playerName);
 
     // empty game and removed player's stats
-    $("#choice1, #game-results, #choice2").empty();
+    // $("#choice1, #game-results, #choice2").empty();
     $("#score" + numPlayer.toString(), "#player-state-message").html("");
     $("#player" + numPlayer.toString()).html("Waiting for Player " + numPlayer + "...");
 
