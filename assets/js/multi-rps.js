@@ -191,7 +191,20 @@ var rpsGame = {
   // logic to determine result
   //
   determineGameResult() {
-    console.log("in determineGameResult()");
+    database.ref("players/").on(
+      "value", (snapshot) => {
+        var sv = snapshot.val(),
+            currGameArray = [],
+            scoreText = "",
+            winner = "";
+
+        console.log("in determineGameResult" + JSON.stringify(sv));
+
+      },
+      (errorObject) => {
+            console.log("Errors handled: " + JSON.stringify(errorObject));
+      }
+    );
   }
 };
 
