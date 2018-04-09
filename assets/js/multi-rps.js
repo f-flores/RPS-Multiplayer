@@ -345,6 +345,9 @@ var rpsGame = {
 
 var rpsChat = {
   "msg": "",
+  // -----------------------------------------------------------------------------
+  // sendMessage() creates message object and pushes this object into the database
+  //
   sendMessage() {
     var msgObj = {};
 
@@ -352,11 +355,14 @@ var rpsChat = {
     msgObj.message = this.msg;
     database.ref("chat/").push(msgObj);
   },
+  // -----------------------------------------------------------------------------
+  // displayMessage() takes in a playerName and playerMessage and displays it in
+  // the chat window. The chat box incudes an auto scroll down feature.
+  //
   displayMessage(playerName, playerMessage) {
     var htmlText = "",
         msgLine = $("<div>"),
         chatBox = $("#chat-box"),
-        isScrolledToBottom,
         nameColor, msgColor;
 
     if (currPlayerObj) {
@@ -381,6 +387,10 @@ var rpsChat = {
     // scroll bottom code: https://stackoverflow.com/questions/10503606/scroll-to-bottom-of-div-on-page-load-jquery
     chatBox.animate({"scrollTop": chatBox[0].scrollHeight - chatBox[0].clientHeight}, ScrollDownInterval);
   },
+  // -----------------------------------------------------------------------------
+  // sendDisconnect() takes in a player's name (the player that was removed) and
+  //   pushes a "disconnect" message onto the database.
+  //
   sendDisconnect(name) {
     var msgObj = {};
 
