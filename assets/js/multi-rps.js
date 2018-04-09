@@ -542,7 +542,7 @@ function PlayerConsole(name, num) {
 
     // empty game and removed player's stats
     $("#choice1, #game-results, #choice2").empty();
-    $("#score" + numPlayer, "#player-state-message").html("");
+    $("#score" + numPlayer.toString(), "#player-state-message").html("");
     $("#player" + numPlayer.toString()).html("Waiting for Player " + numPlayer + "...");
   },
     (errorObject) => {
