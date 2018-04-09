@@ -350,9 +350,6 @@ var rpsChat = {
         isScrolledToBottom,
         nameColor, msgColor;
 
-    // scroll bottom code: http://jsfiddle.net/dotnetCarpenter/KpM5j/
-    chatBox.scrollTop(chatBox[0].scrollHeight - chatBox[0].clientHeight);
-
     if (currPlayerObj) {
       if (playerName === currPlayerObj.displayName()) {
         console.log("in rpsChat.displayMessage() -- currentPlayer: " + currentPlayer);
@@ -373,6 +370,8 @@ var rpsChat = {
     }
     msgLine.html(htmlText);
     chatBox.append(msgLine);
+    // scroll bottom code: https://stackoverflow.com/questions/10503606/scroll-to-bottom-of-div-on-page-load-jquery
+    chatBox.scrollTop(chatBox[0].scrollHeight - chatBox[0].clientHeight);
   },
   sendDisconnect(playerKey, name) {
     var msgObj = {};
