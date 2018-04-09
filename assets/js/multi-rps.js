@@ -535,8 +535,11 @@ function PlayerConsole(name, num) {
 
     // sends disconnect to chat module
     rpsChat.sendDisconnect(numPlayer, csv.playerName);
+
+    // empty game and removed player's stats
     $("#choice1, #game-results, #choice2").empty();
-    $("#player" + numPlayer.toString()).html("Waiting for player to join");
+    $("#score" + numPlayer).html("");
+    $("#player" + numPlayer.toString()).html("Waiting for Player " + numPlayer + "...");
   },
     (errorObject) => {
           console.log("Errors handled: " + JSON.stringify(errorObject));
