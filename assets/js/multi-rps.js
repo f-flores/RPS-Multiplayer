@@ -541,7 +541,7 @@ function PlayerConsole(name, num) {
     rpsChat.sendDisconnect(numPlayer, csv.playerName);
 
     // empty game and removed player's stats
-    $("#choice1, #game-results, #choice2").empty();
+    // $("#choice1, #game-results, #choice2").empty();
     $("#score" + numPlayer.toString(), "#player-state-message").html("");
     $("#player" + numPlayer.toString()).html("Waiting for Player " + numPlayer + "...");
 
