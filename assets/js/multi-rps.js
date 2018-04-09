@@ -571,23 +571,20 @@ function PlayerConsole(name, num) {
   //
    database.ref("players/").on(
     "child_removed", (childSnapshot) => {
-    var numPlayer = childSnapshot.key,
-        csv = childSnapshot.val();
+      var numPlayer = childSnapshot.key,
+          csv = childSnapshot.val();
 
-    // sends disconnect to chat module
-    rpsChat.sendDisconnect(numPlayer, csv.playerName);
+      // sends disconnect to chat module
+      rpsChat.sendDisconnect(numPlayer, csv.playerName);
 
-    // empty game and removed player's stats
-    $("#choice1, #game-results, #choice2, #score2").empty();
-    $("#score" + numPlayer.toString()).html("");
-    $("#player" + numPlayer.toString()).html("Waiting for Player " + numPlayer + "...");
-    $("#player-state-message").html("<p class=\"text-center\">Waiting for another player to join.</p>");
-
-    // restart game
-    // rpsGame.restartMatch();
-  },
+      // empty game and removed player's stats
+      $("#choice1, #game-results, #choice2, #score2").empty();
+      $("#score" + numPlayer.toString()).html("");
+      $("#player" + numPlayer.toString()).html("Waiting for Player " + numPlayer + "...");
+      $("#player-state-message").html("<p class=\"text-center\">Waiting for another player to join.</p>");
+    },
     (errorObject) => {
-          console.log("Errors handled: " + JSON.stringify(errorObject));
+      console.log("Errors handled: " + JSON.stringify(errorObject));
     }
   );
 
