@@ -331,8 +331,12 @@ var rpsChat = {
       msgColor = "brown";
     }
 
-    htmlText = "<span style=\"color:" + nameColor + ";font-weight:bold\">" + playerName + "</span>: ";
-    htmlText += "<span style=\"color:" + msgColor + "\">" + playerMessage + "</span>";
+    htmlText = "<span style=\"color:" + nameColor + ";font-weight:bold\">" + playerName + "</span>";
+    if (playerMessage === " has disconnected.") {
+      htmlText += "<span style=\"color:" + msgColor + "\">" + playerMessage + "</span>";
+    } else {
+      htmlText += "<span style=\"color:" + msgColor + "\">: " + playerMessage + "</span>";
+    }
     msgLine.html(htmlText);
     $("#chat-section").append(msgLine);
   },
