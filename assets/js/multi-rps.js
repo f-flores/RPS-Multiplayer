@@ -7,7 +7,7 @@
 //
 // --------------------------------------------------------------------------------------------
 
-// /* global firebase: true */
+const WaitForNewGame = 2000;
 var firebase;
 
 // Initialize Firebase
@@ -283,13 +283,21 @@ var rpsGame = {
       }
     );
     // update players "1" and "2" branch in firebase with wins, losses and ties stats
-    this.updateDatabase("1", rpsPlayer1);
-    this.updateDatabase("2", rpsPlayer2);
+    this.updatePlayerStats("1", rpsPlayer1);
+    this.updatePlayerStats("2", rpsPlayer2);
+    window.setTimeout(() => {
+      // begin another game by setting turn to 1, and clearing game results
+      this.setTurn(1);
+      $("#game-title").html("");
+      $("#game-results").html("");
+    }, WaitForNewGame);
   },
   // ---------------------------------------------------------------------------------------
-  // updateDatabase() updates stats for players
+  // updateDatabase() updates stats for players in firebase database and on screen
   //
   updateDatabase(pNum, playerObj) {
+    var scoreText = "";
+
     database.ref("players/" + pNum.toString()).update(
       {
         "wins": playerObj.wins,
@@ -300,6 +308,8 @@ var rpsGame = {
         console.log("Errors handled: " + JSON.stringify(errorObject));
       }
     );
+    scoreText = "Wins: " + playerObj.wins + " Ties: " + playerObj.ties + " Losses: " + playerObj.losses;
+    $("#score" + pNum.toString()).html(scoreText);
   }
 };
 
@@ -345,7 +355,6 @@ function determineActivePlayerBasedOnTurn(presentTurn) {
 // elements.
 //
 function PlayerConsole(name, num) {
-
   this.name = name;
   this.playerNum = num;
   this.losses = 0;
