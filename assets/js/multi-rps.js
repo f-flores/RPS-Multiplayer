@@ -200,15 +200,17 @@ var rpsGame = {
 
     database.ref("players/").on(
       "value", (snapshot) => {
-        var sv = snapshot.val(),
-            scoreText = "",
-            winner = "",
-            result = "";
+      var sv = snapshot.val(),
+          scoreText = "",
+          winner = "",
+          result = "";
 
-        rpsPlayer1 = sv["1"];
-        rpsPlayer2 = sv["2"];
+      rpsPlayer1 = sv["1"];
+      rpsPlayer2 = sv["2"];
 
-        // rock paper scissors game logic
+      // rock paper scissors game logic
+      // first make sure both players exist
+      if (rpsPlayer1 && rpsPlayer2) {
         switch (rpsPlayer1.choice) {
           case "Rock":
             switch (rpsPlayer2.choice) {
@@ -258,6 +260,7 @@ var rpsGame = {
           default:
             break;
         }
+      }
         switch (result) {
           case "1":
             $("#game-title").html(rpsPlayer1.playerName + " wins!");
@@ -278,6 +281,7 @@ var rpsGame = {
             rpsPlayer2.ties++;
             break;
           default:
+            console.log("No result.");
             break;
         }
       },
