@@ -147,6 +147,9 @@ var rpsGame = {
         }
         break;
       default:
+        this.activeTurnHeaderMessages(activeTurn);
+        $(".rps-card").css("outline", "red solid 4px");
+        this.determineGameResult();
         break;
     }
   },
@@ -182,6 +185,13 @@ var rpsGame = {
     } else {
       $("#player-state-message").html("");
     }
+  },
+  // --------------------------------------------------------------------------------------------
+  // determineGameResult(nTurn) reads the values of each player's choice and, runs through game
+  // logic to determine result
+  //
+  determineGameResult() {
+    console.log("in determineGameResult()");
   }
 };
 
@@ -272,7 +282,7 @@ function PlayerConsole(name, num) {
     $("#player-welcome-message").html("<p class=\"text-center\">" + msg + "</p>");
   };
   this.playerEventMsg = (msg) => {
-    $("#player-state-message").html("<span class=\"text-center\">" + msg + "</span>");
+    $("#player-state-message").html("<p class=\"text-center\">" + msg + "</p>");
   };
   this.otherEventMsg = (msg) => {
     $("#player-state-message").html(msg);
