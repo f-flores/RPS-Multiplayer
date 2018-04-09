@@ -297,6 +297,7 @@ var rpsGame = {
 
     database.ref("players/" + pNum.toString()).update(
       {
+        "choice": "",
         "wins": playerObj.wins,
         "losses": playerObj.losses,
         "ties": playerObj.ties
