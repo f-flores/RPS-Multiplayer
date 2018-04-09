@@ -29,7 +29,8 @@ html body {
   html body #player-state-message, html body #player-welcome-message {
     font-weight: bold;
     font-size: 115%;
-    font-style: italic; }
+    font-style: italic;
+    text-align: center; }
   html body #send-chat {
     width: 60%; }
   html body #score1, html body #score2 {

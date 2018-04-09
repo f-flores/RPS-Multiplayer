@@ -26,7 +26,7 @@ $(document).ready(() => {
 // ---------------------------------------------------------------------------------------------
 // VARIABLES
 //
-var player1, player2, currentPlayer, otherPlayer, currPlayerObj, otherPlayerObj;
+var player1, player2, currentPlayer, otherPlayer, currPlayerObj;
 var database;
 
 // a game object for rock, paper scissors game
@@ -125,16 +125,7 @@ var rpsGame = {
     console.log("in turnHandler(): turn: " + activeTurn + " currentPlayer: " + JSON.stringify(currPlayerObj));
 
     console.log("turn value, currentPlayer, otherPlayer:  " + activeTurn, currentPlayer, otherPlayer);
-    // messages on turn1;
-    // if (currentPlayer === 1) {
-    //  currPlayerObj = player1;
-    //  otherPlayer = 2;
-    //  otherPlayerObj = player2;
-    // } else {
-    //  currPlayerObj = player2;
-    //  otherPlayer = 1;
-    //  otherPlayerObj = player1;
-    // }
+
     switch (activeTurn) {
       case 1:
         determineActivePlayerBasedOnTurn(1);
@@ -149,12 +140,8 @@ var rpsGame = {
       case 2:
         determineActivePlayerBasedOnTurn(2);
         console.log("case " + activeTurn.toString() + ". In turnHandler(). currPlayerObj: " + JSON.stringify(currPlayerObj));
-        console.log("case " + activeTurn.toString() + ". In turnHandler(). otherPlayerObj: " + JSON.stringify(otherPlayerObj));
-        console.log("currentPlayer: " + currentPlayer);
-        console.log("otherPlayer: " + otherPlayer);
-        currPlayerObj.outlineBox(1, "darkgray");
+         currPlayerObj.outlineBox(1, "darkgray");
         currPlayerObj.outlineBox(2, "green");
-
         this.activeTurnHeaderMessages(activeTurn);
         if (currentPlayer === 2) {
           currPlayerObj.showChoices();
@@ -175,7 +162,7 @@ var rpsGame = {
 
     currPlayerObj.setChoice(pChoice);
 
-    // set current rpsGame turn to 2
+    // set current rpsGame turn
     if (pNum === 1) {
       rpsGame.setTurn(2);
     } else if (pNum === 2) {
@@ -189,11 +176,9 @@ var rpsGame = {
   activeTurnHeaderMessages(nTurn) {
     console.log("in activeTurnMessages");
     if (nTurn === currentPlayer) {
-      // $("#player-state-message").text("It is your turn to choose, " + currPlayerObj.displayName());
       currPlayerObj.playerEventMsg("It is your turn to choose, " + currPlayerObj.displayName());
       // show choices to player
     } else if (nTurn === otherPlayer) {
-      // $("#player-state-message").text("Waiting for " + currPlayerObj.otherPlayerName() + " to choose.");
       currPlayerObj.otherEventMsg("Waiting for " + currPlayerObj.otherPlayerName() + " to choose.");
     } else {
       $("#player-state-message").html("");
@@ -219,22 +204,18 @@ function determineActivePlayerBasedOnTurn(presentTurn) {
       if (currentPlayer === 1) {
         currPlayerObj = player1;
         otherPlayer = 2;
-        otherPlayerObj = player2;
       } else {
         currPlayerObj = player2;
         otherPlayer = 1;
-        otherPlayerObj = player1;
       }
       break;
     case 2:
       if (currentPlayer === 2) {
         currPlayerObj = player2;
         otherPlayer = 1;
-        otherPlayerObj = player1;
       } else {
         currPlayerObj = player1;
         otherPlayer = 2;
-        otherPlayerObj = player2;
       }
       break;
     default:
@@ -304,7 +285,6 @@ function PlayerConsole(name, num) {
     $("#player-form").show();
   };
   this.outlineBox = (cnum, color) => {
-    console.log("in this.outlineBox() this.playerNum: " + this.playerNum);
     $(".rps-card-" + cnum.toString()).css("outline", color + " solid 2px");
   };
   this.showChoices = () => {
@@ -355,7 +335,7 @@ function PlayerConsole(name, num) {
   // ------------------------------------------------------------------------------------------
   // "Add Player" listener
   // When a player is added to the game, display that player's initial information:
-  // Name, Number of wins (0), Number of losses (0)
+  // Name, Number of wins (0), Number of ties (0), Number of losses (0)
   //
   database.ref("players/").on(
     "child_added", (childSnapshot) => {
@@ -387,28 +367,6 @@ function PlayerConsole(name, num) {
 
     // call rpsGame.turnHandler
     rpsGame.turnHandler(numberTurn);
-    // switch (numberTurn) {
-    //  case 1:
-    //    rpsGame.turnHandler(1);
-    //    break;
-    //  case 2:
-    //    console.log("case turn 2");
-    // rpsGame.turnHandler(2);
-    //    break;
-    //  case 3:
-    //    console.log("case turn 3");
-        // rpsGame.turnHander(3);
-    //    break;
-    //  default:
-    //    console.log("Turn not understood.");
-    //    break;
-    // }
-    // else if (numberTurn === 2) {
-     //  handle secondPlayerTurn
-   // } else if (numberTurn === 3){
-      // handle outcome;
-    // }
-
   },
     (errorObject) => {
           console.log("Errors handled: " + JSON.stringify(errorObject));
