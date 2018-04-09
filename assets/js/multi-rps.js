@@ -316,6 +316,13 @@ var rpsChat = {
     msgObj.name = currPlayerObj.displayName();
     msgObj.message = this.msg;
     database.ref("chat/").push(msgObj);
+  },
+  displayMessage(playerName, playerMessage) {
+    var htmlText = "";
+
+    htmlText = "<span style=\"color:blue;font-weight:bold\">" + playerName + "</span>: ";
+    htmlText += "<span style=\"color:green\">" + playerMessage + "</span>";
+    $("#chat-section").html(htmlText);
   }
 };
 
@@ -494,6 +501,21 @@ function PlayerConsole(name, num) {
     (errorObject) => {
           console.log("Errors handled: " + JSON.stringify(errorObject));
     }
+  );
+
+  // ------------------------------------------------------------------------------------------
+  // "Chat" global listener - When a chat message is received by firebase, a function is
+  // called to display the message on screen.
+  //
+  database.ref("chat/").on(
+    "child_added", (childSnapshot) => {
+      var csv = childSnapshot.val();
+
+      rpsChat.displayMessage(csv.name, csv.message);
+    },
+      (errorObject) => {
+        console.log("Errors handled: " + JSON.stringify(errorObject));
+      }
   );
 
   // When player makes rps choice, setPlayerChoice is called
