@@ -540,7 +540,7 @@ function PlayerConsole(name, num) {
   // When player leaves game, disconnect player from chat and update html contents to reflect
   // the player has left
   //
-  database.ref("players/").on(
+/*   database.ref("players/").on(
     "child_removed", (childSnapshot) => {
     var numPlayer = childSnapshot.key,
         csv = childSnapshot.val();
@@ -559,7 +559,7 @@ function PlayerConsole(name, num) {
     (errorObject) => {
           console.log("Errors handled: " + JSON.stringify(errorObject));
     }
-  );
+  ); */
 
   // ------------------------------------------------------------------------------------------
   // "Chat" global listener - When a chat message is received by firebase, a function is
