@@ -279,7 +279,7 @@ var rpsGame = {
     setTimeout(() => {
       // restart rps game by setting turn to 1, and clearing game results
       this.setTurn(1);
-      $(".rps-card").css("outline", "0");
+      $(".rps-card, .rps-card-1, .rps-card-2").css("outline", "none");
       $("#game-title").html("");
       $("#game-results").html("");
     }, WaitForNewGame);
