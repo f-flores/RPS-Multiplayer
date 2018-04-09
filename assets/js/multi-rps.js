@@ -293,9 +293,9 @@ var rpsGame = {
     }, WaitForNewGame);
   },
   // ---------------------------------------------------------------------------------------
-  // updateDatabase() updates stats for players in firebase database and on screen
+  // updatePlayerStats() updates stats for players in firebase database and on screen
   //
-  updateDatabase(pNum, playerObj) {
+  updatePlayerStats(pNum, playerObj) {
     var scoreText = "";
 
     database.ref("players/" + pNum.toString()).update(
