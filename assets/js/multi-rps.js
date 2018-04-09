@@ -346,7 +346,7 @@ var rpsChat = {
   displayMessage(playerName, playerMessage) {
     var htmlText = "",
         msgLine = $("<div>"),
-        out = document.getElementById("chat-box"),
+        out = $("#chat-box"),
         isScrolledToBottom,
         nameColor, msgColor;
 
