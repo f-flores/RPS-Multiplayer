@@ -285,12 +285,12 @@ var rpsGame = {
     // update players "1" and "2" branch in firebase with wins, losses and ties stats
     this.updatePlayerStats("1", rpsPlayer1);
     this.updatePlayerStats("2", rpsPlayer2);
-    window.setTimeout(() => {
+    // window.setTimeout(() => {
       // begin another game by setting turn to 1, and clearing game results
-      this.setTurn(1);
-      $("#game-title").html("");
-      $("#game-results").html("");
-    }, WaitForNewGame);
+     // this.setTurn(1);
+     // $("#game-title").html("");
+     // $("#game-results").html("");
+    // }, WaitForNewGame);
   },
   // ---------------------------------------------------------------------------------------
   // updatePlayerStats() updates stats for players in firebase database and on screen
