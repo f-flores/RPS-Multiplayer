@@ -146,10 +146,13 @@ var rpsGame = {
           currPlayerObj.showChoices();
         }
         break;
-      default:
+      case 3:
         this.activeTurnHeaderMessages(activeTurn);
         $(".rps-card").css("outline", "red solid 4px");
         this.determineGameResult();
+        break;
+      default:
+        console.log("Turn does not exist.");
         break;
     }
   },
