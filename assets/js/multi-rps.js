@@ -257,13 +257,13 @@ var rpsGame = {
         }
         switch (result) {
           case "1":
-            $("#game-title").html(rpsPlayer1.name + " wins!");
+            $("#game-title").html(rpsPlayer1.playerName + " wins!");
             $("#game-results").html(rpsPlayer1.choice + " beats " + rpsPlayer2.choice);
             rpsPlayer1.wins++;
             rpsPlayer2.losses++;
             break;
           case "2":
-            $("#game-title").html(rpsPlayer2.name + " wins!");
+            $("#game-title").html(rpsPlayer2.playerName + " wins!");
             $("#game-results").html(rpsPlayer2.choice + " beats " + rpsPlayer1.choice);
             rpsPlayer1.losses++;
             rpsPlayer2.wins++;
@@ -277,12 +277,12 @@ var rpsGame = {
           default:
             break;
         }
-        console.log("At end of game logic: player1, player2: " + JSON.stringify(rpsPlayer1) + JSON.stringify(rpsPlayer2));
       },
       (errorObject) => {
             console.log("Errors handled: " + JSON.stringify(errorObject));
       }
     );
+    console.log("At end of game logic: player1, player2: " + JSON.stringify(rpsPlayer1) + JSON.stringify(rpsPlayer2));
   }
 };
 
