@@ -637,8 +637,9 @@ function PlayerConsole(name, num) {
       $("#send-chat").val("");
     }
 
-    if (currPlayerObj.displayName() !== "") {
+    if (currPlayerObj.displayName() !== "" && chatMessage !== "") {
       rpsChat.sendMessage();
+      $("#send-chat").val("");
     }
 
   });
