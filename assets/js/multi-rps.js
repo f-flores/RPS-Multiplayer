@@ -185,7 +185,7 @@ var rpsGame = {
       if (currPlayerObj) {
         currPlayerObj.otherEventMsg("Waiting for " + currPlayerObj.otherPlayerName() + " to choose.");
       } else {
-        $("#player-state-message").html("<p class=\"text-center\">Waiting for other player to choose...</p>");
+        $("#player-state-message").html("<p class=\"text-center\"></p>");
       }
     } else {
       $("#player-state-message").html("<p class=\"text-center\">The winner is...</p>");
