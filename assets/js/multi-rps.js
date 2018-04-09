@@ -1,7 +1,12 @@
 // --------------------------------------------------------------------------------------------
 // File name: multi-rps.js
 // Description: This is an implementation of a two player rock, paper, scissor game, using
-//  firebase.
+//  firebase. The rps game leverages firebase to store player information. 'Global' database
+//  listener functions are important components in controlling the gameflow. Each time a
+//  player signs up for the game, the "players/" child_added listener is triggered. Similarly,
+//  each time there is a 'turn' in the game, the turnHandler() function is called to handle
+//  game flow logic. I used a constructor function to represent player one's and player two's
+//  consoles.
 // Date: April, 2018
 // Author: Fabian Flores
 //
@@ -91,9 +96,9 @@ var rpsGame = {
 
     // disconnects player if player reloads page
     database.ref(playerPath).onDisconnect().
-                        remove();
+                             remove();
 
-    // setup html player greeting and name using PlayerConsole prototype
+    // setup html player greeting and name using PlayerConsole constructor
     if (numPlayer === 1) {
       player1 = new PlayerConsole(pName, 1);
       player1.welcomeMsg("Hi, " + pName + "! You are player " + numPlayer + ".");
@@ -193,9 +198,6 @@ var rpsGame = {
         rpsPlayer1 = sv["1"];
         rpsPlayer2 = sv["2"];
 
-        console.log("in determineGameResult" + JSON.stringify(sv));
-        console.log("player 1: " + JSON.stringify(rpsPlayer1));
-        console.log("player 2: " + JSON.stringify(rpsPlayer2));
         // rock paper scissors game logic
         switch (rpsPlayer1.choice) {
           case "Rock":
@@ -249,19 +251,19 @@ var rpsGame = {
         switch (result) {
           case "1":
             $("#game-title").html(rpsPlayer1.playerName + " wins!");
-            $("#game-results").html(rpsPlayer1.choice + " beats " + rpsPlayer2.choice);
+            $("#game-results").html(rpsPlayer1.choice + " beats " + rpsPlayer2.choice + ".");
             rpsPlayer1.wins++;
             rpsPlayer2.losses++;
             break;
           case "2":
             $("#game-title").html(rpsPlayer2.playerName + " wins!");
-            $("#game-results").html(rpsPlayer2.choice + " beats " + rpsPlayer1.choice);
+            $("#game-results").html(rpsPlayer2.choice + " beats " + rpsPlayer1.choice + ".");
             rpsPlayer1.losses++;
             rpsPlayer2.wins++;
             break;
           case "tie":
             $("#game-title").html("Draw!");
-            $("#game-results").html("You both selected " + rpsPlayer1.choice);
+            $("#game-results").html("You both selected " + rpsPlayer1.choice + ".");
             rpsPlayer1.ties++;
             rpsPlayer2.ties++;
             break;
@@ -300,7 +302,7 @@ var rpsGame = {
         console.log("Errors handled: " + JSON.stringify(errorObject));
       }
     );
-    scoreText = "Wins: " + playerObj.wins + " Ties: " + playerObj.ties + " Losses: " + playerObj.losses;
+    scoreText = "Wins: " + playerObj.wins + " Draws: " + playerObj.ties + " Losses: " + playerObj.losses;
     $("#score" + pNum.toString()).html(scoreText);
   }
 };
@@ -309,9 +311,7 @@ var rpsGame = {
 // emptyConsole() empties out rps game console for both players
 //
 function emptyConsole() {
-  console.log("in emptyConsole()");
   $("#choice1, #game-results, #choice2").empty();
-  console.log("end emptyConsole()");
 }
 
 // ------------------------------------------------------------------------------------------
@@ -343,8 +343,8 @@ function determineActivePlayerBasedOnTurn(presentTurn) {
 }
 
 // ------------------------------------------------------------------------------------------
-// PlayerConsole() is a constructor to assist in dynamically changing a player's html
-// elements.
+// PlayerConsole() is a constructor to assist in dynamically changing a player's "console"
+// elements, like 'state-message' or list of rps choices.
 //
 function PlayerConsole(name, num) {
   this.name = name;
@@ -384,7 +384,6 @@ function PlayerConsole(name, num) {
 
     return otherName;
   };
-
   this.displayName = () => this.name;
   this.welcomeMsg = (msg) => {
     $("#player-welcome-message").html("<p class=\"text-center\">" + msg + "</p>");
@@ -450,7 +449,7 @@ function PlayerConsole(name, num) {
   database = firebase.database();
 
   // ------------------------------------------------------------------------------------------
-  // "Add Player" listener
+  // "Add Player" global listener
   // When a player is added to the game, display that player's initial information:
   // Name, Number of wins (0), Number of ties (0), Number of losses (0)
   //
@@ -460,9 +459,8 @@ function PlayerConsole(name, num) {
           numPlayer = childSnapshot.key,
           scoreText = "";
 
-      console.log("on players child added, childsv, parent" + JSON.stringify(childsv), numPlayer);
       $("#player" + numPlayer.toString()).html(childsv.playerName);
-      scoreText = "Wins: " + childsv.wins + " Ties: " + childsv.ties + " Losses: " + childsv.losses;
+      scoreText = "Wins: " + childsv.wins + " Draws: " + childsv.ties + " Losses: " + childsv.losses;
       $("#score" + numPlayer.toString()).html(scoreText);
     },
     (errorObject) => {
@@ -471,7 +469,7 @@ function PlayerConsole(name, num) {
   );
 
   // ------------------------------------------------------------------------------------------
-  // "Turn" listener
+  // "Turn" global listener
   // When turn is set, determine which player's turn it is and wait for that players choice
   //
   database.ref("turn/").on(
@@ -486,10 +484,10 @@ function PlayerConsole(name, num) {
     }
   );
 
-  // On player selected choice
+  // When player makes rps choice, setPlayerChoice is called
   $(document).on("click", ".rps-button", rpsGame.setPlayerChoice);
 
-  // cancel turn events and remove player on disconnect
+  // remove turn on disconnect
   database.ref("turn/").onDisconnect().
                         remove();
 
