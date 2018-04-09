@@ -96,9 +96,9 @@ var rpsGame = {
 
     // disconnects player if player reloads page
     database.ref(playerPath).onDisconnect().
-                        remove();
+                             remove();
 
-    // setup html player greeting and name using PlayerConsole prototype
+    // setup html player greeting and name using PlayerConsole constructor
     if (numPlayer === 1) {
       player1 = new PlayerConsole(pName, 1);
       player1.welcomeMsg("Hi, " + pName + "! You are player " + numPlayer + ".");
@@ -198,9 +198,6 @@ var rpsGame = {
         rpsPlayer1 = sv["1"];
         rpsPlayer2 = sv["2"];
 
-        console.log("in determineGameResult" + JSON.stringify(sv));
-        console.log("player 1: " + JSON.stringify(rpsPlayer1));
-        console.log("player 2: " + JSON.stringify(rpsPlayer2));
         // rock paper scissors game logic
         switch (rpsPlayer1.choice) {
           case "Rock":
@@ -254,19 +251,19 @@ var rpsGame = {
         switch (result) {
           case "1":
             $("#game-title").html(rpsPlayer1.playerName + " wins!");
-            $("#game-results").html(rpsPlayer1.choice + " beats " + rpsPlayer2.choice);
+            $("#game-results").html(rpsPlayer1.choice + " beats " + rpsPlayer2.choice + ".");
             rpsPlayer1.wins++;
             rpsPlayer2.losses++;
             break;
           case "2":
             $("#game-title").html(rpsPlayer2.playerName + " wins!");
-            $("#game-results").html(rpsPlayer2.choice + " beats " + rpsPlayer1.choice);
+            $("#game-results").html(rpsPlayer2.choice + " beats " + rpsPlayer1.choice + ".");
             rpsPlayer1.losses++;
             rpsPlayer2.wins++;
             break;
           case "tie":
             $("#game-title").html("Draw!");
-            $("#game-results").html("You both selected " + rpsPlayer1.choice);
+            $("#game-results").html("You both selected " + rpsPlayer1.choice + ".");
             rpsPlayer1.ties++;
             rpsPlayer2.ties++;
             break;
@@ -290,7 +287,8 @@ var rpsGame = {
     }, WaitForNewGame);
   },
   // ---------------------------------------------------------------------------------------
-  // updatePlayerStats() updates stats for players in firebase database and on screen
+  // updatePlayerStats() resets choice updates stats for players in firebase database
+  // and on screen
   //
   updatePlayerStats(pNum, playerObj) {
     var scoreText = "";
@@ -306,8 +304,59 @@ var rpsGame = {
         console.log("Errors handled: " + JSON.stringify(errorObject));
       }
     );
-    scoreText = "Wins: " + playerObj.wins + " Ties: " + playerObj.ties + " Losses: " + playerObj.losses;
+    scoreText = "Wins: " + playerObj.wins + " Draws: " + playerObj.ties + " Losses: " + playerObj.losses;
     $("#score" + pNum.toString()).html(scoreText);
+  }
+};
+
+var rpsChat = {
+  "msg": "",
+  sendMessage() {
+    var msgObj = {};
+
+    console.log("in sendMessage()");
+    msgObj.name = currPlayerObj.displayName();
+    msgObj.message = this.msg;
+    database.ref("chat/").push(msgObj);
+  },
+  displayMessage(playerName, playerMessage) {
+    var htmlText = "",
+        msgLine = $("<p>"),
+        out = $("#chat-box"),
+        isScrolledToBottom,
+        nameColor, msgColor;
+
+    // scroll bottom code: http://jsfiddle.net/dotnetCarpenter/KpM5j/
+    isScrolledToBottom = out.scrollHeight - out.clientHeight <= out.scrollTop + 1;
+
+    if (playerName === currPlayerObj.displayName()) {
+      console.log("in rpsChat.displayMessage() -- currentPlayer: " + currentPlayer);
+      nameColor = "red";
+      msgColor = "green";
+    } else {
+      nameColor = "blue";
+      msgColor = "brown";
+    }
+
+    htmlText = "<span style=\"color:" + nameColor + ";font-weight:bold\">" + playerName + "</span>";
+    if (playerMessage === " has disconnected.") {
+      htmlText += "<span style=\"color:" + msgColor + "\">" + playerMessage + "</span>";
+    } else {
+      htmlText += "<span style=\"color:" + msgColor + "\">: " + playerMessage + "</span>";
+    }
+    msgLine.html(htmlText);
+    out.append(msgLine);
+    if (isScrolledToBottom) {
+      out.scrollTop = out.scrollHeight - out.clientHeight;
+    }
+  },
+  sendDisconnect(playerKey, name) {
+    var msgObj = {};
+
+    console.log("in sendDisconnect()");
+    msgObj.name = name;
+    msgObj.message = " has disconnected.";
+    database.ref("chat/").push(msgObj);
   }
 };
 
@@ -315,9 +364,7 @@ var rpsGame = {
 // emptyConsole() empties out rps game console for both players
 //
 function emptyConsole() {
-  console.log("in emptyConsole()");
   $("#choice1, #game-results, #choice2").empty();
-  console.log("end emptyConsole()");
 }
 
 // ------------------------------------------------------------------------------------------
@@ -349,8 +396,8 @@ function determineActivePlayerBasedOnTurn(presentTurn) {
 }
 
 // ------------------------------------------------------------------------------------------
-// PlayerConsole() is a constructor to assist in dynamically changing a player's html
-// elements.
+// PlayerConsole() is a constructor to assist in dynamically changing a player's "console"
+// elements, like 'state-message' or list of rps choices.
 //
 function PlayerConsole(name, num) {
   this.name = name;
@@ -390,7 +437,6 @@ function PlayerConsole(name, num) {
 
     return otherName;
   };
-
   this.displayName = () => this.name;
   this.welcomeMsg = (msg) => {
     $("#player-welcome-message").html("<p class=\"text-center\">" + msg + "</p>");
@@ -456,7 +502,7 @@ function PlayerConsole(name, num) {
   database = firebase.database();
 
   // ------------------------------------------------------------------------------------------
-  // "Add Player" listener
+  // "Add Player" global listener
   // When a player is added to the game, display that player's initial information:
   // Name, Number of wins (0), Number of ties (0), Number of losses (0)
   //
@@ -466,9 +512,8 @@ function PlayerConsole(name, num) {
           numPlayer = childSnapshot.key,
           scoreText = "";
 
-      console.log("on players child added, childsv, parent" + JSON.stringify(childsv), numPlayer);
       $("#player" + numPlayer.toString()).html(childsv.playerName);
-      scoreText = "Wins: " + childsv.wins + " Ties: " + childsv.ties + " Losses: " + childsv.losses;
+      scoreText = "Wins: " + childsv.wins + " Draws: " + childsv.ties + " Losses: " + childsv.losses;
       $("#score" + numPlayer.toString()).html(scoreText);
     },
     (errorObject) => {
@@ -477,7 +522,7 @@ function PlayerConsole(name, num) {
   );
 
   // ------------------------------------------------------------------------------------------
-  // "Turn" listener
+  // "Turn" global listener
   // When turn is set, determine which player's turn it is and wait for that players choice
   //
   database.ref("turn/").on(
@@ -492,11 +537,56 @@ function PlayerConsole(name, num) {
     }
   );
 
-  // On player selected choice
+  // ------------------------------------------------------------------------------------------
+  // "players/" child_removed global listener
+  // When player leaves game, disconnect player from chat and update html contents to reflect
+  // the player has left
+  //
+   database.ref("players/").on(
+    "child_removed", (childSnapshot) => {
+    var numPlayer = childSnapshot.key,
+        csv = childSnapshot.val();
+
+    // sends disconnect to chat module
+    rpsChat.sendDisconnect(numPlayer, csv.playerName);
+
+    // empty game and removed player's stats
+    $("#choice1, #game-results, #choice2").empty();
+    $("#score" + numPlayer.toString(), "#player-state-message").html("");
+    $("#player" + numPlayer.toString()).html("Waiting for Player " + numPlayer + "...");
+
+    // restart game
+    // rpsGame.setTurn(1);
+  },
+    (errorObject) => {
+          console.log("Errors handled: " + JSON.stringify(errorObject));
+    }
+  );
+
+  // ------------------------------------------------------------------------------------------
+  // "Chat" global listener - When a chat message is received by firebase, a function is
+  // called to display the message on screen.
+  //
+  database.ref("chat/").on(
+    "child_added", (childSnapshot) => {
+      var csv = childSnapshot.val();
+
+      rpsChat.displayMessage(csv.name, csv.message);
+    },
+      (errorObject) => {
+        console.log("Errors handled: " + JSON.stringify(errorObject));
+      }
+  );
+
+  // When player makes rps choice, setPlayerChoice is called
   $(document).on("click", ".rps-button", rpsGame.setPlayerChoice);
 
-  // cancel turn events and remove player on disconnect
+  // remove turn on disconnect
   database.ref("turn/").onDisconnect().
+                        remove();
+
+  // remove chat on disconnect
+  database.ref("chat/").onDisconnect().
                         remove();
 
   // RPS Game begins when the 'Start' button is pressed
@@ -510,6 +600,23 @@ function PlayerConsole(name, num) {
       rpsGame.setupPlayer(playerName);
       $("#player-name").val("");
     }
+  });
+
+  // send chat button handler
+  $("#send-chat-btn").on("click", (event) => {
+    var chatMessage = $("#send-chat").val();
+
+    event.preventDefault();
+    // Get message then clear it
+    if (chatMessage !== "") {
+      rpsChat.msg = chatMessage;
+      $("#send-chat").val("");
+    }
+
+    if (currPlayerObj.displayName() !== "") {
+      rpsChat.sendMessage();
+    }
+
   });
 
   // End of document.ready(function)
