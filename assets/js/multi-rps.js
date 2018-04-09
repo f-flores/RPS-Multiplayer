@@ -397,7 +397,8 @@ function PlayerConsole(name, num) {
   $(document).on("click", ".rps-button", rpsGame.setPlayerChoice);
 
   // cancel turn events and remove player on disconnect
-  // database.ref("turn/").onDisconnect.remove();
+  database.ref("turn/").onDisconnect().
+                        remove();
 
   // RPS Game begins when the 'Start' button is pressed
   $("#start-btn").on("click", (event) => {
