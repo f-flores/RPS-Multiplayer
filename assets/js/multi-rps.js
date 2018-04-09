@@ -81,8 +81,9 @@ var rpsGame = {
     );
   },
   // ------------------------------------------------------------------------------------------
-  // assignPlayer() takes in numPlayer as a parameter and adds the numPlayer leaf to the
-  // players branch
+  // assignPlayer() takes in numPlayer and the player's name as parameters and adds the
+  // numPlayer node to the player's branch. The player's name is set, and other player game
+  // properties are initialized.
   //
   assignPlayer(numPlayer, pName) {
     var playerPath = "players/" + numPlayer.toString();
