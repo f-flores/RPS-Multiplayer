@@ -524,8 +524,9 @@ function PlayerConsole(name, num) {
   );
 
   // ------------------------------------------------------------------------------------------
-  // "Turn" global listener
-  // When turn is set, determine which player's turn it is and wait for that players choice
+  // "players/" child_removed global listener
+  // When player leaves game, disconnect player from chat and update html contents to reflect
+  // the player has left
   //
   database.ref("players/").on(
     "child_removed", (childSnapshot) => {
@@ -534,6 +535,8 @@ function PlayerConsole(name, num) {
 
     // sends disconnect to chat module
     rpsChat.sendDisconnect(numPlayer, csv.playerName);
+    $("#choice1, #game-results, #choice2").empty();
+    $("#player" + numPlayer.toString()).html("Waiting for player to join");
   },
     (errorObject) => {
           console.log("Errors handled: " + JSON.stringify(errorObject));
