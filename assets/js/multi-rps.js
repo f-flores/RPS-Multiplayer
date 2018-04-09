@@ -279,10 +279,31 @@ var rpsGame = {
         }
       },
       (errorObject) => {
-            console.log("Errors handled: " + JSON.stringify(errorObject));
+        console.log("Errors handled: " + JSON.stringify(errorObject));
       }
     );
     console.log("At end of game logic: player1, player2: " + JSON.stringify(rpsPlayer1) + JSON.stringify(rpsPlayer2));
+    // update players "1" and "2" branch in firebase with wins, losses and ties stats
+    database.ref("players/1").update(
+      {
+        "wins": rpsPlayer1.wins,
+        "losses": rpsPlayer1.losses,
+        "ties": rpsPlayer1.ties
+      },
+      (errorObject) => {
+        console.log("Errors handled: " + JSON.stringify(errorObject));
+      }
+    );
+    database.ref("players/2").update(
+      {
+        "wins": rpsPlayer2.wins,
+        "losses": rpsPlayer2.losses,
+        "ties": rpsPlayer2.ties
+      },
+      (errorObject) => {
+        console.log("Errors handled: " + JSON.stringify(errorObject));
+      }
+    );
   }
 };
 

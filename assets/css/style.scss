@@ -19,6 +19,10 @@ html {
     height: 100%;
     width: 99%;
 
+    p {
+      line-height: normal;
+    }
+
     .rps-card, .rps-card-1, .rps-card-2 {
       height: 300px;
       background-color: #f1ede7;
