@@ -278,6 +278,8 @@ var rpsGame = {
     // update players "1" and "2" branch in firebase with wins, losses and ties stats
     this.updatePlayerStats("1", rpsPlayer1);
     this.updatePlayerStats("2", rpsPlayer2);
+    this.resetChoice("1");
+    this.resetChoice("2");
     setTimeout(() => {
       // restart rps game by setting turn to 1, and clearing game results
       $(".rps-card, .rps-card-2").css("outline", "none");
@@ -287,15 +289,13 @@ var rpsGame = {
     }, WaitForNewGame);
   },
   // ---------------------------------------------------------------------------------------
-  // updatePlayerStats() resets choice updates stats for players in firebase database
-  // and on screen
+  // updatePlayerStats() updates stats for players in firebase database and on screen
   //
   updatePlayerStats(pNum, playerObj) {
     var scoreText = "";
 
     database.ref("players/" + pNum.toString()).update(
       {
-        // "choice": "",
         "wins": playerObj.wins,
         "losses": playerObj.losses,
         "ties": playerObj.ties
@@ -306,6 +306,12 @@ var rpsGame = {
     );
     scoreText = "Wins: " + playerObj.wins + " Draws: " + playerObj.ties + " Losses: " + playerObj.losses;
     $("#score" + pNum.toString()).html(scoreText);
+  },
+  // ---------------------------------------------------------------------------------------
+  // resetChoice() resets rps choice to blank
+  //
+  resetChoice(pNum) {
+    database.ref("players/" + pNum.toString()).update({"choice": ""});
   }
 };
 
