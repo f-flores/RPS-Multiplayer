@@ -351,8 +351,7 @@ var rpsChat = {
         nameColor, msgColor;
 
     // scroll bottom code: http://jsfiddle.net/dotnetCarpenter/KpM5j/
-    isScrolledToBottom = chatBox.prop("scrollHeight") - chatBox.prop("clientHeight") <= chatBox.prop("scrollTop") + 1;
-    console.log(chatBox.prop("scrollHeight") - chatBox.prop("clientHeight"), chatBox.prop("scrollTop") + 1);
+    chatBox.scrollTop(chatBox[0].scrollHeight - chatBox[0].clientHeight);
 
     if (currPlayerObj) {
       if (playerName === currPlayerObj.displayName()) {
@@ -374,9 +373,6 @@ var rpsChat = {
     }
     msgLine.html(htmlText);
     chatBox.append(msgLine);
-    if (isScrolledToBottom) {
-      chatBox.attr("scrollTop", chatBox.prop("scrollHeight") - chatBox.prop("clientHeight"));
-    }
   },
   sendDisconnect(playerKey, name) {
     var msgObj = {};
