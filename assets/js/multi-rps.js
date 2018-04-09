@@ -524,6 +524,9 @@ function PlayerConsole(name, num) {
   // remove turn on disconnect
   database.ref("turn/").onDisconnect().
                         remove();
+  // remove chat on disconnect
+  database.ref("chat/").onDisconnect().
+                        remove();
 
   // RPS Game begins when the 'Start' button is pressed
   $("#start-btn").on("click", (event) => {
