@@ -381,7 +381,7 @@ var rpsChat = {
   sendDisconnect(name) {
     var msgObj = {};
 
-    msgObj.name = name;
+    msgObj.name = name.toUpperCase();
     msgObj.message = " has disconnected.";
     database.ref("chat/").push(msgObj);
   }
