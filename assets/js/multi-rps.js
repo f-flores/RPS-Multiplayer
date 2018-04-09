@@ -556,7 +556,7 @@ function PlayerConsole(name, num) {
     $("#player" + numPlayer.toString()).html("Waiting for Player " + numPlayer + "...");
 
     // restart game
-    // rpsGame.setTurn(1);
+    rpsGame.setTurn(1);
   },
     (errorObject) => {
           console.log("Errors handled: " + JSON.stringify(errorObject));
