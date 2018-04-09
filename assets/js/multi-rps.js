@@ -280,10 +280,10 @@ var rpsGame = {
     this.updatePlayerStats("2", rpsPlayer2);
     setTimeout(() => {
       // restart rps game by setting turn to 1, and clearing game results
-      this.setTurn(1);
       $(".rps-card, .rps-card-2").css("outline", "none");
       $("#game-title").html("");
       $("#game-results").html("");
+      this.setTurn(1);
     }, WaitForNewGame);
   },
   // ---------------------------------------------------------------------------------------
@@ -295,7 +295,7 @@ var rpsGame = {
 
     database.ref("players/" + pNum.toString()).update(
       {
-        "choice": "",
+        // "choice": "",
         "wins": playerObj.wins,
         "losses": playerObj.losses,
         "ties": playerObj.ties
