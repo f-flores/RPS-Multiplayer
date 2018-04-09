@@ -7,12 +7,17 @@
 //  each time there is a 'turn' in the game, the turnHandler() function is called to handle
 //  game flow logic. I used a constructor function to represent player one's and player two's
 //  consoles.
+//  There is also a chat feature. The 'rpsChat' object handles the exchange of messages
+//  between players, using the firebase database as the virtual chat server. The database
+//  listens for 'message' events.
 // Date: April, 2018
 // Author: Fabian Flores
 //
 // --------------------------------------------------------------------------------------------
 
 const WaitForNewGame = 3000;
+const ScrollDownInterval = 1000;
+
 var firebase;
 
 // Initialize Firebase
@@ -371,7 +376,8 @@ var rpsChat = {
     msgLine.html(htmlText);
     chatBox.append(msgLine);
     // scroll bottom code: https://stackoverflow.com/questions/10503606/scroll-to-bottom-of-div-on-page-load-jquery
-    chatBox.scrollTop(chatBox[0].scrollHeight - chatBox[0].clientHeight);
+    // chatBox.scrollTop(chatBox[0].scrollHeight - chatBox[0].clientHeight);
+    chatBox.animate({"scrollTop": chatBox[0].scrollHeight - chatBox[0].clientHeight}, ScrollDownInterval);
   },
   sendDisconnect(playerKey, name) {
     var msgObj = {};
